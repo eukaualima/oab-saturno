@@ -1,0 +1,7 @@
+{
+    "host_name": "LOCALHOST",
+    "database": "NOME_DO_BANCO",
+    "port": "PORTA_PADRÃO",
+    "user": "USUÁRIO",
+    "password": "SENHA"
+}

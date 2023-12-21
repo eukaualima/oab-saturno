@@ -1,0 +1,6 @@
+{
+    "discord_token": "TOKEN_DO_DISCORD",
+    "client_id": "CLIENT_APLICACAO_ID",
+    "guild_id": "GUILD_TESTES_ID",
+    "footer": "MENSAGEM DO FOOTER"
+}
