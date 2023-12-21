@@ -1,0 +1,28 @@
+{
+  "name": "oab_saturno_rp",
+  "version": "OABSRP-0.1",
+  "description": "Bot para o jurídico da cidade Saturno RP.",
+  "types": "./typings.d.ts",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "discord-js",
+    "saturno-rp",
+    "fivem",
+    "oab",
+    "juridico"
+  ],
+  "author": {
+    "name": "Kauã Lima",
+    "url": "https://github.com/eukaualima"
+  },
+  "dependencies": {
+    "@discordjs/rest": "^2.2.0",
+    "discord-api-types": "^0.37.66",
+    "discord.js": "^14.14.1",
+    "fs": "^0.0.1-security",
+    "mysql": "^2.18.1"
+  }
+}

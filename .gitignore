@@ -1,3 +1,5 @@
+/node_modules
+
 # Arquivos restritos
 config.json
 /conexao/conexao.json
