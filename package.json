@@ -3,7 +3,7 @@
   "version": "OABSRP-0.1",
   "description": "Bot para o jurídico da cidade Saturno RP.",
   "types": "./typings.d.ts",
-  "main": "bot.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },

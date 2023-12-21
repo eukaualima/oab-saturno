@@ -50,7 +50,7 @@ for (const arquivo of pasta_eventos)
         client.on(evento.name, async (...args) => await evento.execute(...args, client));
     }
 
-    console.log(`${vermelho}((${roxo}SISTEMA${vermelho})) =>${nenhuma} Evento ${amarelo}'${nenhuma}${file}${amarelo}'${nenhuma} carregado com ${verde}sucesso${nenhuma}!`);
+    console.log(`${vermelho}((${roxo}SISTEMA${vermelho})) =>${nenhuma} Evento ${amarelo}'${nenhuma}${evento.name}${amarelo}'${nenhuma} carregado com ${verde}sucesso${nenhuma}!`);
 }
 
 /**
