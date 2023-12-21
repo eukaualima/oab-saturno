@@ -1,5 +1,5 @@
 /**
- * @file Evento ativado enquanto o bot fica online.
+ * @file Evento ativado quando um usuário utiliza um comando slash.
  * @author Kauã Lima
  * @since OABSRP-0.1
  * @version OABSRP-0.1
