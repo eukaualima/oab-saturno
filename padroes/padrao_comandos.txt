@@ -1,0 +1,25 @@
+/**
+ * @file Descrição do arquivo.
+ * @author Kauã Lima
+ * @since OABSRP-0.1
+ * @version OABSRP-0.1
+ */
+
+// < Importação das bibliotecas necessárias >
+const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, EmbedBuilder, SlashCommandBuilder } = require("discord.js");
+const pool = require('../../../conexao/mysql.js');
+
+// < Inicia o comando >
+module.exports = 
+{
+        // < Definições do slash >
+	data: new SlashCommandBuilder()
+        .setName("?")
+        .setDescription("?"),
+
+        // < Executa o comando >
+	async execute(interaction) 
+        {
+                // código
+	},
+};

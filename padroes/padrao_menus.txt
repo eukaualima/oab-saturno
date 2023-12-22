@@ -1,0 +1,22 @@
+/**
+ * @file Descrição do arquivo.
+ * @author Kauã Lima
+ * @since OABSRP-0.1
+ * @version OABSRP-0.1
+ */
+
+// < Importação das bibliotecas necessárias >
+const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder } = require('discord.js');
+const pool = require('../../../conexao/mysql');
+
+// < Início do menu >
+module.exports = 
+{
+    id: "",
+	
+    // < Executa o menu >
+    async execute(interaction) 
+    {
+        // Código
+	},	
+};
