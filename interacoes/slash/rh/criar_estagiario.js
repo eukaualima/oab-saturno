@@ -14,17 +14,17 @@ module.exports =
 {
     // < Definições do slash >
 	data: new SlashCommandBuilder()
-        .setName("cadv")
-        .setDescription("Cria um(a) novo(a) advogado(a).")
+        .setName("cestagiario")
+        .setDescription("Cria um(a) novo(a) estagiário(a).")
         .addUserOption(option =>
             option
             .setName("usuario")
-            .setDescription("Marque a pessoa que irá receber o cargo de advogado(a).")
+            .setDescription("Marque a pessoa que irá receber o cargo de estagiário(a).")
             .setRequired(true))
         .addIntegerOption(option =>
             option
             .setName("passaporte")
-            .setDescription("Informe o passaporte da pessoa que irá receber o cargo de advogado(a).")
+            .setDescription("Informe o passaporte da pessoa que irá receber o cargo de Estagiário(a).")
             .setMinValue(0)
             .setRequired(true)),
 
@@ -47,10 +47,10 @@ module.exports =
             return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
         }
 
-        // < Verifica se o usuário já é um advogado >
-        if (membro.roles.cache.some(cargo => cargo.id == "1187866961770709165"))
+        // < Verifica se o usuário já é um estagiário >
+        if (membro.roles.cache.some(cargo => cargo.id == "1188223032217575454"))
         {
-            return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Advogado(a).`, ephemeral: true });
+            return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Estagiário(a).` });
         }
 
         // < Verifica se ele já possui dados no banco de dados >
@@ -58,19 +58,19 @@ module.exports =
         {
             if (servidores.length == 0)
             {
-                interaction.reply({ content: `<a:oab_update:1187885557766946946> **|** Criando os dados de **${usuario}**. Aguarde a finalização, **não** faça mais nenhuma ação.`, ephemeral: true }).then(() =>
+                interaction.reply({ content: `<a:oab_update:1187885557766946946> **|** Criando os dados de **${usuario}**. Aguarde a finalização, **não** faça mais nenhuma ação.` }).then(() =>
                 {
                     // < Insere o usuário no banco de dados >
                     pool.query(`INSERT INTO advertencias (motivo, duracao, responsavel, data) VALUES ("Não há advertências", 0, "Ninguém", 0)`);
-                    pool.query(`INSERT INTO servidores (discord_id, passaporte, cargo, registro, ferias, ferias_retorno) VALUES (${usuario.id}, ${passaporte}, "Advogado(a)", NOW(), 0, 0)`);
+                    pool.query(`INSERT INTO servidores (discord_id, passaporte, cargo, registro, ferias, ferias_retorno) VALUES (${usuario.id}, ${passaporte}, "Estagiário(a)", NOW(), 0, 0)`);
                     
                     // < Adiciona o cargo ao usuário >
-                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add('1187866961770709165');
+                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add('1188223032217575454');
                     
                     // < Informa a atualização depois de 5s >
                     setTimeout(() => {
-                        interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Finalizado! **${usuario}** foi registrado(a) e já possui o cargo de Advogado(a).` });
-                        usuario.send(`## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nSeja muito bem-vindo(a) ao nosso corpo jurídico, ${usuario.displayName}! Fico feliz em informar que agora você é um(a) **Advogado(a)**.`);
+                        interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Finalizado! **${usuario}** foi registrado(a) e já possui o cargo de Estagiário(a).` });
+                        usuario.send(`## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nSeja muito bem-vindo(a) ao nosso corpo jurídico, ${usuario.displayName}! Fico feliz em informar que agora você é um(a) **Estagiário(a)**.`);
                     }, 5000);
                 });
 
@@ -79,16 +79,16 @@ module.exports =
             {
                 interaction.reply({ content: `<a:oab_update:1187885557766946946> **|** ${usuario} já possui cadastro. Aguarde enquanto é finalizada a atualização do cargo.` }).then(() =>
                 {
-                    // < Atualiza o cargo do advogado >
-                    pool.query(`UPDATE servidores SET cargo = "Advogado(a)" WHERE discord_id = ${usuario.id}`);
+                    // < Atualiza o cargo do Estagiário >
+                    pool.query(`UPDATE servidores SET cargo = "Estagiário(a)" WHERE discord_id = ${usuario.id}`);
 
                     // < Adiciona o cargo >
-                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add('1187866961770709165');
+                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add('1188223032217575454');
 
                     // < Informa a finalização depois de 5s >
                     setTimeout(() => {
-                        interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Finalizado! **${usuario}** agora possui o cargo de Advogado(a).` });
-                        usuario.send(`## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nSeja muito bem-vindo(a) ao nosso corpo jurídico, ${usuario.displayName}! Fico feliz em informar que agora você é um(a) **Advogado(a)**.`);
+                        interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Finalizado! **${usuario}** agora possui o cargo de Estagiário(a).` });
+                        usuario.send(`## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nSeja muito bem-vindo(a) ao nosso corpo jurídico, ${usuario.displayName}! Fico feliz em informar que agora você é um(a) **Estagiário(a)**.`);
                     }, 5000);
                 });
             }
