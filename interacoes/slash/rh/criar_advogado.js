@@ -6,7 +6,7 @@
  */
 
 // < Importação das bibliotecas necessárias >
-const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, EmbedBuilder, SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 const pool = require('../../../conexao/mysql.js');
 
 // < Inicia o comando >
@@ -29,10 +29,10 @@ module.exports =
             .setRequired(true)),
 
     // < Executa o comando >
-	async execute(interaction) 
+	async execute(interaction, client) 
     {
         // < Declaração de variáveis locais >
-        let usuario, membro, passaporte, ja_possui;
+        let usuario, membro, passaporte;
 
         // < Coleta as informações passadas no comando >
         usuario = interaction.options.getUser("usuario");
@@ -40,6 +40,12 @@ module.exports =
 
         // < Coleta o cargo do usuário >
         membro = interaction.guild.members.cache.get(`${usuario.id}`);
+
+        // < Verifica se o usuário é juiz >
+        if (!interaction.member.roles.cache.some(cargo => cargo.id == "1187867084689002576"))
+        {
+            return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
+        }
 
         // < Verifica se o usuário já é um advogado >
         if (membro.roles.cache.some(cargo => cargo.id == "1187866961770709165"))

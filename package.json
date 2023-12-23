@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@discordjs/rest": "^2.2.0",
+    "@napi-rs/canvas": "^0.1.44",
     "discord-api-types": "^0.37.66",
     "discord.js": "^14.14.1",
     "fs": "^0.0.1-security",
