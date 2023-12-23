@@ -17,7 +17,7 @@ module.exports =
 
         let gatilhado = false;
 
-        message.client.tiggers.every((trigger) =>
+        message.client.triggers.every((trigger) =>
         {
             if (gatilhado) return false;
 
