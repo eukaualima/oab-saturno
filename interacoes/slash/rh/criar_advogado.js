@@ -70,6 +70,7 @@ module.exports =
                     // < Informa a atualização depois de 5s >
                     setTimeout(() => {
                         interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Finalizado! **${usuario}** foi registrado(a) e já possui o cargo de Advogado(a).` });
+                        usuario.send(`## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nSeja muito bem-vindo(a) ao nosso corpo jurídico, ${usuario.displayName}! Fico feliz em informar que agora você é um(a) **Advogado(a)**.`);
                     }, 5000);
                 });
 
@@ -87,6 +88,7 @@ module.exports =
                     // < Informa a finalização depois de 5s >
                     setTimeout(() => {
                         interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Finalizado! **${usuario}** agora possui o cargo de Advogado(a).` });
+                        usuario.send(`## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nSeja muito bem-vindo(a) ao nosso corpo jurídico, ${usuario.displayName}! Fico feliz em informar que agora você é um(a) **Advogado(a)**.`);
                     }, 5000);
                 });
             }
