@@ -19,7 +19,7 @@ module.exports =
 	async execute(interaction, client) 
     {
         // < Coleta os dados do processo >
-        const natureza = interaction.channel.name.replace(/[^a-zA-Z]/g,'') + 's';
+        let natureza = interaction.channel.name.replace(/[^a-zA-Z]/g,'') + 's';
         const codigo = interaction.channel.name.replace(/[^0-9]/g,'');
 
         // < Verifica se o usuário é um juiz >
@@ -28,6 +28,10 @@ module.exports =
             return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem avaliar e dar o veredito sobre o caso.`, ephemeral: true })
         }
 
+        if (natureza == "certidaos")
+        {
+            natureza = "certidoes";
+        }
         pool.query(`SELECT * FROM ${natureza} WHERE codigo = ${codigo}`, async function (erro, processo)
         {
             if (processo[0].juiz == "Ninguém")

@@ -35,8 +35,13 @@ module.exports =
         // < Coleta as informações passadas no modal >
         const motivo = interaction.fields.getTextInputValue('motivo_rejeicao')
         const codigo = interaction.fields.getTextInputValue('codigo_processo')
-        const natureza = interaction.fields.getTextInputValue('natureza_processo')
+        let natureza = interaction.fields.getTextInputValue('natureza_processo')
 
+        if (natureza == "certidaos")
+        {
+            natureza = "certidoes";
+        }
+        
         // < Busca o processo marcado >
         pool.query(`SELECT * FROM ${natureza} WHERE codigo = ${codigo}`, async function (erro, processo)
         {
