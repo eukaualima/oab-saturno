@@ -24,7 +24,7 @@ module.exports =
 
         try
         {
-            await botao.execute(interaction);
+            await botao.execute(interaction, client);
         }
         catch (err)
         {

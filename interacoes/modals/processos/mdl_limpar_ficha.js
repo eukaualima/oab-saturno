@@ -48,6 +48,10 @@ module.exports =
         {
             pool.query(`SELECT * FROM servidores WHERE discord_id = ${interaction.user.id}`, async function (erro, servidores)
             {
+                if (servidores.length == 0)
+                {
+                    return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Você não faz parte do corpo jurídico.`, ephemeral: true })
+                }
                 // < Coleta o total de processos do tipo Limpezas de Ficha >
                 let total_registros = limpezas[0].total_registros;
                 
@@ -87,9 +91,34 @@ module.exports =
                         .setThumbnail(interaction.user.avatarURL())
                         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
 
-                        canal.send({ embeds: [embed] })
+                        // < Cria os dados no banco de dados >
+                        pool.query(`INSERT INTO limpezas (advogado, juiz, reu, reu_id, meses, orcamento, data, status, observacoes) VALUES ("${interaction.user.id}", "Ninguém", "${reu_nome}", ${reu_id}, ${meses}, ${honorarios_totais}, NOW(), "Aberto", "Nenhuma")`);
+
+                        // < Cria os botões >
+                        const btn_processo_aprovado = new ButtonBuilder()
+                        .setCustomId('btn_processo_aprovado')
+                        .setLabel(`Aprovar processo`)
+                        .setStyle(ButtonStyle.Success)
+                        .setEmoji(`1187577594472837171`);
+
+                        const btn_processo_rejeitado = new ButtonBuilder()
+                        .setCustomId('btn_processo_rejeitado')
+                        .setLabel(`Rejeitar processo`)
+                        .setStyle(ButtonStyle.Danger)
+                        .setEmoji(`1187577594472837171`);
+
+                        const btn_processo_assumir = new ButtonBuilder()
+                        .setCustomId('btn_processo_assumir')
+                        .setLabel(`Assumir processo`)
+                        .setStyle(ButtonStyle.Danger)
+                        .setEmoji(`1187577598776193136`);
+
+                        const botao = new ActionRowBuilder()
+                        .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
+
+                        canal.send({ embeds: [embed], components: [botao] })
+                        interaction.reply({ content: `<:oab_check:1187428122988126348> **|** Processo de Limpeza de Ficha Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
                     })
-                await interaction.reply({ content: `<:oab_check:1187428122988126348> **|** Processo de Limpeza de Ficha Nº${total_registros+1} aberto com sucesso.`, ephemeral: true });
             })
         })
     },
