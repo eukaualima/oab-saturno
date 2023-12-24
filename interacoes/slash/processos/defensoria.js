@@ -9,7 +9,7 @@
 const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 const pool = require('../../../conexao/mysql.js');
 const moment = require('moment');
-const { footer, casos_dp } = require("../../../config.json");
+const { footer, casos_dp, cor_embed } = require("../../../config.json");
 
 moment.locale('pt-BR');
 
@@ -82,13 +82,14 @@ module.exports =
                 .setTitle(`<:oab_policia:1188266116770975744> Registro de caso no Departamento de Polícia`)
                 .setDescription(`Um novo caso no Departamento de Polícia acabou de ser registrado. Detalhes abaixo.`)
                 .addFields([
-                    { name: `<:oab_adv:1188267318875271168> | ${servidores[0].cargo} responsável`, value: `${interaction.user.displayName}` },
+                    { name: `<:oab_adv:1188267318875271168> | ${servidores[0].cargo} responsável`, value: `${interaction.user}` },
                     { name: `<:oab_data:1188268177063424050> | Data`, value: `${moment().format('LLLL')}` },
                     { name: `<:oab_policial:1187577592388272238> | Policial`, value: `${policial}` },
                     { name: `<:oab_reu:1187577589448060989> | Réu`, value: `${reu_nome} (Passaporte: ${reu_passaporte})` },
                     { name: `<:oab_algemas:1188269430388559892> | Prisão (motivo)`, value: `${prisao}` },
                     { name: `<:oab_veredito:1187577594472837171> | Veredito`, value: `${veredito}` }
                 ])
+                .setColor(cor_embed)
                 .setThumbnail(interaction.user.avatarURL({ dynamic: true }))
                 .setFooter({ text: footer, iconURL: client.user.avatarURL() });
                 
