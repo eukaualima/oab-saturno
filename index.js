@@ -28,7 +28,7 @@ let roxo = '\x1b[0;35m';
 /**
  * Declaração das intents necessárias para o funcionamento do bot e instanciamento do client Discord.
  */
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.DirectMessages, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent ], partials: [ Partials.Channel ] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.DirectMessages, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent ] });
 
 /**
  * Carrega os eventos handler.

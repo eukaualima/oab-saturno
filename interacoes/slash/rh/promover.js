@@ -30,7 +30,8 @@ module.exports =
                 { name: "Advogado(a)", value: 'advogado_promocao' },
                 { name: "Promotor(a)", value: 'promotor_promocao' },
                 { name: "Juiz(a)", value: 'juiz_promocao' },
-            )),
+            )
+            .setRequired(true)),
 
     // < Executa o comando >
 	async execute(interaction, client) 

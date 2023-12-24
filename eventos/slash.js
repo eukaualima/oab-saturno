@@ -21,7 +21,7 @@ module.exports =
 
         try
         {
-            await comando.execute(interaction);
+            await comando.execute(interaction, client);
         }
         catch (err)
         {
