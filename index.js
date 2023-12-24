@@ -112,7 +112,7 @@ for (const modulo of pasta_modals)
     for (const arquivo_modal of arquivos_modals)
     {
         const modal = require(`./interacoes/modals/${modulo}/${arquivo_modal}`);
-        client.buttonCommands.set(modal.id, modal);
+        client.modalCommands.set(modal.id, modal);
     }
 }
 

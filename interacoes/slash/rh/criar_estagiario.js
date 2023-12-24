@@ -62,8 +62,8 @@ module.exports =
                 interaction.reply({ content: `<a:oab_update:1187885557766946946> **|** Criando os dados de **${usuario}**. Aguarde a finalização, **não** faça mais nenhuma ação.` }).then(() =>
                 {
                     // < Insere o usuário no banco de dados >
-                    pool.query(`INSERT INTO advertencias (motivo, duracao, responsavel, data) VALUES ("Não há advertências", 0, "Ninguém", 0)`);
-                    pool.query(`INSERT INTO servidores (discord_id, passaporte, cargo, registro, ferias, ferias_retorno) VALUES (${usuario.id}, ${passaporte}, "Estagiário(a)", NOW(), 0, 0)`);
+                    pool.query(`INSERT INTO advertencias (motivo, duracao, responsavel, data, advogado) VALUES ("Não há advertências", 0, "Ninguém", 0, ${usuario.id})`);
+                    pool.query(`INSERT INTO servidores (discord_id, passaporte, cargo, registro, ferias, ferias_retorno, processos, casos) VALUES (${usuario.id}, ${passaporte}, "Estagiário(a)", NOW(), 0, 0, 0, 0)`);
                     
                     // < Adiciona o cargo ao usuário >
                     interaction.guild.members.cache.get(`${usuario.id}`).roles.add(cargo_estagiario);

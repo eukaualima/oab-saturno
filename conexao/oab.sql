@@ -2,9 +2,9 @@ CREATE TABLE IF NOT EXISTS oab_saturno;
 
 USE oab_saturno;
 
-CREATE TABLE advertencias (codigo INT PRIMARY KEY AUTO_INCREMENT, motivo VARCHAR(255), duracao DATE, responsavel VARCHAR(255), data DATETIME);
+CREATE TABLE advertencias (codigo INT PRIMARY KEY AUTO_INCREMENT, advogado VARCHAR(255), motivo VARCHAR(255), duracao DATE, responsavel VARCHAR(255), data DATETIME);
 
-CREATE TABLE servidores (codigo INT AUTO_INCREMENT, discord_id VARCHAR(100), passaporte INT, cargo VARCHAR(255), registro DATETIME, ferias BOOLEAN, ferias_retorno DATETIME, codadv INT, PRIMARY KEY (codigo, discord_id, passaporte), FOREIGN KEY (codadv) REFERENCES advertencias(codigo));
+CREATE TABLE servidores (codigo INT AUTO_INCREMENT, discord_id VARCHAR(100), passaporte INT, cargo VARCHAR(255), registro DATETIME, ferias BOOLEAN, ferias_retorno DATETIME, processos INT NOT NULL DEFAULT 0, casos INT NOT NULL DEFAULT 0, PRIMARY KEY (codigo, discord_id, passaporte));
 
 CREATE TABLE audiencias (codigo INT PRIMARY KEY AUTO_INCREMENT, advogado VARCHAR(255), juiz VARCHAR(255), assunto MEDIUMTEXT, partes MEDIUMTEXT, testemunhas MEDIUMTEXT, data DATETIME, data_audiencia DATETIME);
 

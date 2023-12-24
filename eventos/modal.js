@@ -25,7 +25,7 @@ module.exports =
 
         try
         {
-            await modal.execute(interaction);
+            await modal.execute(interaction, client);
             return;
         }
         catch (err)

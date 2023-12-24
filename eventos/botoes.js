@@ -15,7 +15,7 @@ module.exports =
 
         if (!interaction.isButton()) return;
 
-        const botao = client.selectCommands.get(interaction.customId);
+        const botao = client.buttonCommands.get(interaction.customId);
 
         if (!botao)
         {
