@@ -9,25 +9,13 @@
 const { EmbedBuilder, PermissionFlagsBits, PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, ChannelType } = require('discord.js');
 const pool = require('../../../conexao/mysql');
 const moment = require('moment');
-const { cargo_juiz, cargo_everyone, categoria_limpezas, footer, cor_embed } = require('../../../config.json');
+const { cargo_juiz, cargo_everyone, categoria_trocas, footer, cor_embed } = require('../../../config.json');
 moment.locale('pt-BR');
-
-function honorarios(meses)
-{
-    if (meses <= 12)
-    {
-        return 50000;
-    }
-    else
-    {
-        return meses * 4000;
-    }
-}
 
 // < Inicia o botão >
 module.exports = 
 {
-	id: "mdl_limpar_ficha",
+	id: "mdl_mudar_nome",
 
     // < Executa o código do botão >
 	async execute(interaction, client) 
@@ -36,15 +24,13 @@ module.exports =
         const { ViewChannel, SendMessages } = PermissionFlagsBits;
 
         // < Coleta as informações passadas no modal >
-        const reu_nome = interaction.fields.getTextInputValue('limpar_ficha_reu_nome')
-        const reu_id = interaction.fields.getTextInputValue('limpar_ficha_reu_id')
-        const meses = interaction.fields.getTextInputValue('limpar_ficha_meses')
-
-        // < Calcula os honorários >
-        const honorarios_totais = honorarios(meses);
+        const nome_antigo = interaction.fields.getTextInputValue('mudar_nome_antigo')
+        const nome_novo = interaction.fields.getTextInputValue('mudar_nome_novo')
+        const passaporte = interaction.fields.getTextInputValue('mudar_nome_passaporte')
+        const motivo = interaction.fields.getTextInputValue('mudar_nome_motivo')
 
         // < Cria o canal do processo >
-        pool.query(`SELECT COUNT(*) AS total_registros FROM limpezas`, async function (erro, limpezas)
+        pool.query(`SELECT COUNT(*) AS total_registros FROM trocas`, async function (erro, trocas)
         {
             pool.query(`SELECT * FROM servidores WHERE discord_id = ${interaction.user.id}`, async function (erro, servidores)
             {
@@ -52,15 +38,15 @@ module.exports =
                 {
                     return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Você não faz parte do corpo jurídico.`, ephemeral: true })
                 }
-                // < Coleta o total de processos do tipo Limpezas de Ficha >
-                let total_registros = limpezas[0].total_registros;
+                // < Coleta o total de processos do tipo trocas >
+                let total_registros = trocas[0].total_registros;
                 
                 // < Cria um novo canal para o processo >
                 interaction.guild.channels.create(
                     { 
-                        name: `limpeza-${total_registros+1}`,
+                        name: `troca-${total_registros+1}`,
                         type: ChannelType.GuildText,
-                        parent: categoria_limpezas,
+                        parent: categoria_trocas,
                         permissionOverwrites: 
                         [
                             {
@@ -80,21 +66,21 @@ module.exports =
                     {
                         const embed = new EmbedBuilder()
                         .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
-                        .setDescription(`Processo de Limpeza de Ficha Nº${total_registros+1} aberto com sucesso.\n* Dr(a). ${interaction.user} (Passaporte: ${servidores[0].passaporte})`)
+                        .setDescription(`Processo de Troca de Nome Nº${total_registros+1} aberto com sucesso.\n* Dr(a). ${interaction.user} (Passaporte: ${servidores[0].passaporte})`)
                         .setColor(cor_embed)
                         .addFields([
-                            { name: `<:oab_reu:1187577589448060989> | Réu`, value: `${reu_nome}`, inline: true },
-                            { name: `<:oab_passaporte:1188496362334072882> | Passaporte`, value: `${reu_id}`, inline: true },
+                            { name: `<:oab_cliente:1188541685572051054> | Cliente`, value: `${nome_antigo}`, inline: true },
+                            { name: `<:oab_passaporte:1188496362334072882> | Passaporte`, value: `${nome_novo}`, inline: true },
                             { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
-                            { name: `<:oab_algemas:1188269430388559892> | Meses`, value: `${meses}`, inline: true },
-                            { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ ${honorarios_totais.toLocaleString('pt-BR')},00`, inline: true },
+                            { name: `<:oab_escrita:1188542389179133992> | Motivo`, value: `${motivo}`, inline: true },
+                            { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 500.000,00`, inline: true },
                         ])
                         .setThumbnail(interaction.user.avatarURL())
                         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
 
                         // < Cria os dados no banco de dados >
-                        pool.query(`INSERT INTO limpezas (advogado, juiz, reu, reu_id, meses, orcamento, data, status, observacoes) VALUES ("${interaction.user.id}", "Ninguém", "${reu_nome}", ${reu_id}, ${meses}, ${honorarios_totais}, NOW(), "Aberto", "Nenhuma")`);
-
+                        pool.query(`INSERT INTO trocas (advogado, juiz, cliente_nome, cliente_id, novo_nome, motivo, data, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", "${nome_antigo}", ${passaporte}, "${nome_novo}", "${motivo}", NOW(), "Aberto", "Nenhuma")`);
+                        
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()
                         .setCustomId('btn_processo_aprovado')
@@ -118,7 +104,7 @@ module.exports =
                         .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
 
                         canal.send({ embeds: [embed], components: [botao] })
-                        interaction.reply({ content: `<:oab_check:1187428122988126348> **|** Processo de Limpeza de Ficha Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        interaction.reply({ content: `<:oab_check:1187428122988126348> **|** Processo de Troca de Nome Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
                     })
             })
         })

@@ -34,6 +34,8 @@ module.exports =
             {
                 pool.query(`UPDATE ${natureza} SET juiz = ${interaction.user.id} WHERE codigo = ${codigo}`);
 
+                client.users.cache.get(processo[0].advogado).send({ content: `## <:oab_juiz:1187577598776193136> Status do processo\nO(a) excelentíssimo(a) Juiz(a) ${interaction.user} acabou de assumir seu processo.` })
+
                 return interaction.reply({ content: `<:oab_juiz:1187577598776193136> **|** O(a) Juiz(a) ${interaction.user} acabou de assumir o processo.` });
             }
             else

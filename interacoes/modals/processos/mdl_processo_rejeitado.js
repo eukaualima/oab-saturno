@@ -67,7 +67,7 @@ module.exports =
             interaction.channel.permissionOverwrites.edit(processo[0].advogado, { ViewChannel: false });
             interaction.channel.setName(`fechado-${natureza}-${codigo}`);
             interaction.update({ components: [] });
-            interaction.channel.send({ content: `## <:oab_juiz:1187577598776193136> Processo rejeitado\nO(a) excelentíssimo(a) Juiz(a) ${client.users.cache.get(processo[0].juiz)} rejeitou o presente processo.\n\n### <:oab_veredito:1187577594472837171> Motivo da Reijeição\n${motivo}`})
+            interaction.channel.send({ content: `## <:oab_juiz:1187577598776193136> Processo rejeitado\nO(a) excelentíssimo(a) Juiz(a) ${client.users.cache.get(processo[0].juiz)} rejeitou o presente processo.\n\n### <:oab_veredito:1187577594472837171> Motivo da Rejeição\n${motivo}`})
         })
     },
 };
