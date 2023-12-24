@@ -8,6 +8,7 @@
 // < Importação das bibliotecas necessárias >
 const { AttachmentBuilder, SlashCommandBuilder } = require("discord.js");
 const Canvas = require('@napi-rs/canvas')
+const { cargo_juiz } = require('../../../config.json');
 
 // < Função para deixar o texto dentro da imagem >
 const redenizarTexto = (canvas, text, fonte, fonte_nome) => 
@@ -60,7 +61,7 @@ module.exports =
         pais = interaction.options.getString("pais");
 
         // < Verifica se o usuário é juiz >
-        if (!interaction.member.roles.cache.some(cargo => cargo.id == "1187867084689002576"))
+        if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz))
         {
             return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
         }

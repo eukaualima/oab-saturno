@@ -8,6 +8,7 @@
 // < Importação das bibliotecas necessárias >
 const { SlashCommandBuilder } = require("discord.js");
 const pool = require('../../../conexao/mysql.js');
+const { cargo_juiz, cargo_estagiario } = require('../../../config.json');
 
 // < Inicia o comando >
 module.exports = 
@@ -42,13 +43,13 @@ module.exports =
         membro = interaction.guild.members.cache.get(`${usuario.id}`);
 
         // < Verifica se o usuário é juiz >
-        if (!interaction.member.roles.cache.some(cargo => cargo.id == "1187867084689002576"))
+        if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz))
         {
             return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
         }
 
         // < Verifica se o usuário já é um estagiário >
-        if (membro.roles.cache.some(cargo => cargo.id == "1188223032217575454"))
+        if (membro.roles.cache.some(cargo => cargo.id == cargo_estagiario))
         {
             return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Estagiário(a).` });
         }
@@ -65,7 +66,7 @@ module.exports =
                     pool.query(`INSERT INTO servidores (discord_id, passaporte, cargo, registro, ferias, ferias_retorno) VALUES (${usuario.id}, ${passaporte}, "Estagiário(a)", NOW(), 0, 0)`);
                     
                     // < Adiciona o cargo ao usuário >
-                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add('1188223032217575454');
+                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add(cargo_estagiario);
                     
                     // < Informa a atualização depois de 5s >
                     setTimeout(() => {
@@ -83,7 +84,7 @@ module.exports =
                     pool.query(`UPDATE servidores SET cargo = "Estagiário(a)" WHERE discord_id = ${usuario.id}`);
 
                     // < Adiciona o cargo >
-                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add('1188223032217575454');
+                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add(cargo_estagiario);
 
                     // < Informa a finalização depois de 5s >
                     setTimeout(() => {

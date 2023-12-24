@@ -9,7 +9,7 @@
 const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 const pool = require('../../../conexao/mysql.js');
 const moment = require('moment');
-const { footer, casos_dp, cor_embed } = require("../../../config.json");
+const { footer, casos_dp, cor_embed, cargo_advogado, cargo_estagiario, cargo_juiz, cargo_promotor } = require("../../../config.json");
 
 moment.locale('pt-BR');
 
@@ -60,10 +60,10 @@ module.exports =
         veredito = interaction.options.getString("veredito");
 
         // < Atribuição dos cargos >
-        estagiario = interaction.member.roles.cache.some(cargo => cargo.id == '1188223032217575454');
-        advogado = interaction.member.roles.cache.some(cargo => cargo.id == '1187866961770709165');
-        promotor = interaction.member.roles.cache.some(cargo => cargo.id == '1187867220815122472');
-        juiz = interaction.member.roles.cache.some(cargo => cargo.id == '1187867084689002576');
+        estagiario = interaction.member.roles.cache.some(cargo => cargo.id == cargo_estagiario);
+        advogado = interaction.member.roles.cache.some(cargo => cargo.id == cargo_advogado);
+        promotor = interaction.member.roles.cache.some(cargo => cargo.id == cargo_promotor);
+        juiz = interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz);
 
         // < Verifica se o usuário é um Estagiário, Advogado, Promotor ou Juiz >
         if (estagiario || advogado || promotor || juiz)

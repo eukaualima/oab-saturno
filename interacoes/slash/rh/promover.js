@@ -8,6 +8,7 @@
 // < Importação das bibliotecas necessárias >
 const { SlashCommandBuilder } = require("discord.js");
 const pool = require('../../../conexao/mysql.js');
+const { cargo_advogado, cargo_juiz, cargo_promotor } = require("../../../config.json");
 
 // < Inicia o comando >
 module.exports = 
@@ -47,7 +48,7 @@ module.exports =
         membro = interaction.guild.members.cache.get(`${usuario.id}`);
 
         // < Verifica se o usuário é juiz >
-        if (!interaction.member.roles.cache.some(cargo => cargo.id == "1187867084689002576"))
+        if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz))
         {
             return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
         }
@@ -60,7 +61,7 @@ module.exports =
                 // < Verifica a opção que o usuário selecionou >
                 if (cargo == "advogado_promocao")
                 {
-                    if (membro.roles.cache.some(cargo => cargo.id == "1187866961770709165"))
+                    if (membro.roles.cache.some(cargo => cargo.id == cargo_advogado))
                     {
                         return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** **${usuario}** já é um(a) Advogado(a).` });
                     }
@@ -68,7 +69,7 @@ module.exports =
                     pool.query(`UPDATE servidores SET cargo = "Advogado(a)" WHERE discord_id = ${usuario.id}`);
     
                     // < Adiciona o cargo >
-                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add('1187866961770709165');
+                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add(cargo_advogado);
     
                     // < Informa a finalização depois de 5s >
                     setTimeout(() => {
@@ -78,7 +79,7 @@ module.exports =
                 }
                 else if (cargo == "promotor_promocao")
                 {
-                    if (membro.roles.cache.some(cargo => cargo.id == "1187867220815122472"))
+                    if (membro.roles.cache.some(cargo => cargo.id == cargo_promotor))
                     {
                         return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** **${usuario}** já é um(a) Promotor(a).` });
                     }
@@ -86,7 +87,7 @@ module.exports =
                     pool.query(`UPDATE servidores SET cargo = "Promotor(a)" WHERE discord_id = ${usuario.id}`);
     
                     // < Adiciona o cargo >
-                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add('1187867220815122472');
+                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add(cargo_promotor);
     
                     // < Informa a finalização depois de 5s >
                     setTimeout(() => {
@@ -96,7 +97,7 @@ module.exports =
                 }
                 else
                 {
-                    if (membro.roles.cache.some(cargo => cargo.id == "1187867084689002576"))
+                    if (membro.roles.cache.some(cargo => cargo.id == cargo_juiz))
                     {
                         return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** **${usuario}** já é um(a) Juiz(a).` });
                     }
@@ -105,7 +106,7 @@ module.exports =
                     pool.query(`UPDATE servidores SET cargo = "Juiz(a)" WHERE discord_id = ${usuario.id}`);
     
                     // < Adiciona o cargo >
-                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add('1187867084689002576');
+                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add(cargo_juiz);
     
                     // < Informa a finalização depois de 5s >
                     setTimeout(() => {
