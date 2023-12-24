@@ -61,7 +61,7 @@ module.exports =
             const advogado = client.users.cache.get(processo[0].advogado);
 
             // < Envia a mensagem ao advogado >
-            advogado.send({ content: `## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nOlá, ${advogado.displayName}. Passando aqui para te informar que o seu processo foi **aprovado** pelo(a) Juiz(a) ${client.users.cache.get(processo[0].juiz)} e a ficha do seu cliente já foi limpa.\n### <:oab_veredito:1187577594472837171> Motivo da aprovação\n${motivo ? motivo : "Não informado pelo(a) juiz(a)."}` })
+            advogado.send({ content: `## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nOlá, ${advogado.displayName}. Passando aqui para te informar que o seu processo foi **aprovado** pelo(a) Juiz(a) ${client.users.cache.get(processo[0].juiz)}.\n### <:oab_veredito:1187577594472837171> Motivo da aprovação\n${motivo ? motivo : "Não informado pelo(a) juiz(a)."}` })
 
             // < Atualiza o status do processo no banco de dados >
             pool.query(`UPDATE ${natureza} SET status = "Fechado" WHERE codigo = ${codigo}`);
