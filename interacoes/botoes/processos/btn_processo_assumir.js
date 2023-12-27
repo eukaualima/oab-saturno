@@ -32,6 +32,10 @@ module.exports =
         {
             natureza = "certidoes";
         }
+        else if (natureza == "adocaos")
+        {
+            natureza = "adocoes";
+        }
         pool.query(`SELECT * FROM ${natureza} WHERE codigo = ${codigo}`, async function (erro, processo)
         {
             if (processo[0].juiz == "Ninguém")
