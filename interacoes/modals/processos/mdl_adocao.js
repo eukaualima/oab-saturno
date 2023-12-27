@@ -80,7 +80,7 @@ module.exports =
                         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
 
                         // < Cria os dados no banco de dados >
-                        pool.query(`INSERT INTO adocoes (advogado, juiz, crianca, adulto, adotado_nome, mae_nome, pai_nome, data_adocao, data_abertura, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", 0, 0, "${crianca}", "${mae}", "${pai}", "${data}", NOW(), "Aberto", "Nenhuma")`);
+                        pool.query(`INSERT INTO adocoes (advogado, juiz, crianca, adulto, adotado, mae, pai, data_adocao, data_abertura, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", 0, 0, "${crianca}", "${mae}", "${pai}", "${data}", NOW(), "Aberto", "Nenhuma")`);
                         
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()

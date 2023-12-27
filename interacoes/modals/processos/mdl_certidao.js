@@ -80,7 +80,7 @@ module.exports =
                         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
 
                         // < Cria os dados no banco de dados >
-                        pool.query(`INSERT INTO certidoes (advogado, juiz, crianca_nome, mae_nome, pai_nome, data_nascimento, data_abertura, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", "${crianca}", "${mae}", "${pai}", "${data}", NOW(), "Aberto", "Nenhuma")`);
+                        pool.query(`INSERT INTO certidoes (advogado, juiz, crianca, mae, pai, data_nascimento, data_abertura, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", "${crianca}", "${mae}", "${pai}", "${data}", NOW(), "Aberto", "Nenhuma")`);
                         
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()

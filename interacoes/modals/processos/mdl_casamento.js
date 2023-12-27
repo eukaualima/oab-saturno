@@ -15,7 +15,7 @@ moment.locale('pt-BR');
 // < Inicia o botão >
 module.exports = 
 {
-	id: "mdl_divorcio",
+	id: "mdl_casamento",
 
     // < Executa o código do botão >
 	async execute(interaction, client) 
@@ -24,12 +24,13 @@ module.exports =
         const { ViewChannel, SendMessages } = PermissionFlagsBits;
 
         // < Coleta as informações passadas no modal >
-        const noiva = interaction.fields.getTextInputValue('divorcio_noiva')
-        const noivo = interaction.fields.getTextInputValue('divorcio_noivo')
-        const testemunhas = interaction.fields.getTextInputValue('divorcio_testemunhas')
+        const noiva = interaction.fields.getTextInputValue('casamento_noiva')
+        const noivo = interaction.fields.getTextInputValue('casamento_noivo')
+        const testemunhas = interaction.fields.getTextInputValue('casamento_testemunhas')
+        const data = interaction.fields.getTextInputValue('casamento_data')
 
         // < Cria o canal do processo >
-        pool.query(`SELECT COUNT(*) AS total_registros FROM divorcios`, async function (erro, divorcios)
+        pool.query(`SELECT COUNT(*) AS total_registros FROM casamentos`, async function (erro, casamentos)
         {
             pool.query(`SELECT * FROM servidores WHERE discord_id = ${interaction.user.id}`, async function (erro, servidores)
             {
@@ -37,13 +38,13 @@ module.exports =
                 {
                     return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Você não faz parte do corpo jurídico.`, ephemeral: true })
                 }
-                // < Coleta o total de processos do tipo divorcios >
-                let total_registros = divorcios[0].total_registros;
+                // < Coleta o total de processos do tipo casamentos >
+                let total_registros = casamentos[0].total_registros;
                 
                 // < Cria um novo canal para o processo >
                 interaction.guild.channels.create(
                     { 
-                        name: `divorcio-${total_registros+1}`,
+                        name: `casamento-${total_registros+1}`,
                         type: ChannelType.GuildText,
                         parent: categoria_certidao,
                         permissionOverwrites: 
@@ -65,20 +66,21 @@ module.exports =
                     {
                         const embed = new EmbedBuilder()
                         .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
-                        .setDescription(`Processo de Divórcio Nº${total_registros+1} aberto com sucesso.\n* Dr(a). ${interaction.user} (Passaporte: ${servidores[0].passaporte})`)
+                        .setDescription(`Processo de Casamento Nº${total_registros+1} aberto com sucesso.\n* Dr(a). ${interaction.user} (Passaporte: ${servidores[0].passaporte})`)
                         .setColor(cor_embed)
                         .addFields([
                             { name: `<:oab_noiva:1189409204834943066> | Noiva`, value: `${noiva}`, inline: true },
                             { name: `<:oab_noivo:1189409201995382805> | Noivo`, value: `${noivo}`, inline: true },
                             { name: `<:oab_testemunhas:1188556234551464026> | Testemunhas`, value: `${testemunhas}`, inline: true },
+                            { name: `<:oab_data:1188268177063424050> | Data do casamento`, value: `${data}` },
                             { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
-                            { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 1.500.000,00`, inline: true },
+                            { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 1.250.000,00`, inline: true },
                         ])
                         .setThumbnail(interaction.user.avatarURL())
                         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
 
                         // < Cria os dados no banco de dados >
-                        pool.query(`INSERT INTO divorcios (advogado, juiz, noiva_nome, noivo_nome, testemunha1_nome, data_abertura, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", "${noiva}", "${noivo}", "${testemunhas}", NOW(), "Aberto", "Nenhuma")`);
+                        pool.query(`INSERT INTO casamentos (advogado, juiz, noiva, noivo, testemunhas, data_casamento, data_abertura, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", "${noiva}", "${noivo}", "${testemunhas}", "${data}", NOW(), "Aberto", "Nenhuma")`);
                         
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()
@@ -104,7 +106,7 @@ module.exports =
 
                         canal.send({ embeds: [embed], components: [botao] });
                         canal.send({ content: `<:oab_aviso:1188557292073918555> **|** ${interaction.user}, envie as prints da transferência bancária feita para o(a) Juiz(a).` });
-                        interaction.reply({ content: `<:oab_check:1187428122988126348> **|** Processo de Divórcio Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        interaction.reply({ content: `<:oab_check:1187428122988126348> **|** Processo de Casamento Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
                     })
             })
         })
