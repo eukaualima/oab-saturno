@@ -93,6 +93,8 @@ module.exports =
                 .setThumbnail(interaction.user.avatarURL({ dynamic: true }))
                 .setFooter({ text: footer, iconURL: client.user.avatarURL() });
                 
+                pool.query(`UPDATE servidores SET casos = ${servidores[0].casos + 1}`)
+
                 // < Envia o caso no canal de casos-dp >
                 client.channels.cache.get(casos_dp).send({ embeds: [embed] });
             })
