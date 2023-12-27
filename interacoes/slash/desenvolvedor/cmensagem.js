@@ -31,31 +31,23 @@ module.exports =
             return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas o **desenvolvedor** do sistema tem acesso a este comando.` })
         }
 
-        mensagem = `# <:oab_balanca:1187577597173960754> Adoção
-1️⃣  Criança:
-        
-🔅 Está sempre atento na hora de solicitar a todos os dados pessoais da criança e dos pais adotivos (pedir print do F11 dos envolvidos e anexar ao ticket aberto da solicitação de adoção)
-🔅 Para adoção de criança serão feitas 2 audiências, mas será cobrada os honorários apenas de 1.
-        
-2️⃣  Adulto:
-        
-🔅 Igual como o da criança, mas terá apenas uma única audiência.
-        
-3️⃣  Honorários (criança e adulto): 
-        
-🔹 Total a ser cobrado ao cliente:** R$ 500mil** (Quinhentos mil) da audiência + R$ **400 mil **(Quatrocentos mil) da certidão = **R$ 900mil (Novecentos mil) **onde,
-🔸 **Juiz - R$ 450.000,00 (Quatrocentos e cinquenta mil)**
-🔸 **Advogado/Promotor - R$ 450.000,00 (Quatrocentos e cinquenta mil)**
+        mensagem = `# <:oab_balanca:1187577597173960754> Carteira Profissional
+
+1️⃣  Por se tratar de um documento, prestar bastante atenção na hora de preencher o formulário do Bot (a grafia de acordo com o que o cliente solicitou)! 
         
 > ***Importante lembrar ao cliente que toda solicitação de documento ele tem um prazo de 24 a 48 horas para ser entregue e publicado no Cartório de Saturno!*** 
         
-🧑‍⚖️ ***Caso tenha troca de nome, fazer a solicitação a parte em*** <#1111399577178882138>
+2️⃣  Honorários: 
         
-3️⃣   Assim que abrir o ticket de solicitação,  buscar o ticket aberto e marcar a <@&1106408610000543834> que irá atender o caso, bem como postar o print da transferência bancária com valor do honorário e o nome da Juíza!`;
+🔹 Total a ser cobrado ao cliente: **R$ 400mil (Quatrocentos mil)** onde,
+🔸 **Juiz - R$ 200.000,00 (Duzentos mil)**
+🔸 **Estagiário/Advogado/Promotor - R$ 200.000,00 (Duzentos mil)**
+        
+3️⃣   Assim que abrir o ticket de solicitação,  buscar o ticket aberto e marcar a <@&1106408610000543834> <@241707361138376704>  (ID: 7) que irá confeccionar o documento, bem como postar o print da transferência bancária com valor do honorário e o nome da Juíza!`;
 
         // < Botão >
         const btn_processo = new ButtonBuilder()
-        .setCustomId('btn_adocoes')
+        .setCustomId('btn_carteira_profissional')
         .setLabel(`Abrir processo`)
         .setStyle(ButtonStyle.Secondary)
         .setEmoji(`1187883019667779617`);
