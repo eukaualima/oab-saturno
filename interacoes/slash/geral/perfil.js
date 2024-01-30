@@ -6,8 +6,11 @@
  */
 
 // < Importação das bibliotecas necessárias >
-const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, EmbedBuilder, SlashCommandBuilder } = require("discord.js");
+const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, EmbedBuilder, SlashCommandBuilder, Embed } = require("discord.js");
 const pool = require('../../../conexao/mysql.js');
+const { footer } = require('../../../config.json');
+const moment = require('moment');
+moment.locale('pt-BR')
 
 // < Inicia o comando >
 module.exports = 
@@ -18,8 +21,34 @@ module.exports =
         .setDescription("Veja as suas informações no sistema da OAB."),
 
     // < Executa o comando >
-	async execute(interaction) 
+	async execute(interaction, client) 
     {
-        await interaction.editReply({ content: `# <:oab_balanca:1187577597173960754>  Comandos atuais\nAbaixo segue a lista com todos os comandos existentes atualmente.\n## <:oab_maleta:1188250462739251220> Recursos Humanos\n* \`/cestagiario\` Cria um novo estagiário. Este comando adiciona o cargo "Estagiário(a)" e registra o usuário no banco de dados do bot.\n* \`/promover\` Promove uma pessoa do corpo jurídico já registrada no banco de dados e que tenha pelo menos o cargo Estagiário(a).\n* \`/demitir\` Faz a demissão e remoção de cargos de qualquer pessoa do corpo jurídico, desde o Estagiário(a) a Juiz(a).\n## <:oab_email:1187883019667779617> Processos\n* \`/gcertidao\` Gera um documento oficial da Certidão de Nascimento com nome do nascido, data de nascimento e pais.\n* \`/casodp\` Faz o registro de um caso atendido no Departamento de Polícia.\n## <:oab_aberto:1187577603515764857> Geral\n* \`/ping\` Verifica o tempo de resposta atual do sistema da OAB.\n* \`/ping\` Verifica todos os comandos do sistema da OAB.`, ephemeral: true });
+        pool.query(`SELECT * FROM servidores WHERE discord_id = ${interaction.user.id}`, async function (erro, servidores)
+        {
+            let processos, casos, registro, passaporte, cargo;
+
+            processos = servidores[0].processos;
+            casos = servidores[0].casos;
+            registro = moment(servidores[0].registro).format('LLLL');
+            passaporte = servidores[0].passaporte;
+            cargo = servidores[0].cargo;
+
+            const embed = new EmbedBuilder()
+            .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
+            .setTitle(`<:oab_adv:1188267318875271168> Perfil Jurídico`)
+            .setDescription(`Abaixo todas as informações sobre o registro de **${interaction.user.displayName}** na OAB.`)
+            .addFields
+            (
+                { name: '<:oab_balanca:1187577597173960754> | Cargo', value: `${cargo}`, inline: true },
+                { name: '<:oab_passaporte:1188496362334072882> | Passaporte', value: `${passaporte}`, inline: true },
+                { name: '<:oab_data:1188268177063424050> | Registrado(a) em', value: `${registro}` },
+                { name: '<:oab_veredito:1187577594472837171> | Processos', value: `\`\`\`js\n${processos.toLocaleString('pt-BR')}\`\`\``, inline: true },
+                { name: '<:oab_algemas:1188269430388559892> | Casos DP', value: `\`\`\`js\n${casos.toLocaleString('pt-BR')}\`\`\``, inline: true },
+            )
+            .setThumbnail(interaction.user.avatarURL({ dynamic: true }))
+            .setFooter({ text: `${footer}`, iconURL: client.user.avatarURL() });
+
+            await interaction.editReply({ embeds: [embed] });
+        })
 	},
 };

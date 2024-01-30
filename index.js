@@ -148,7 +148,7 @@ const comandos_json = [ ...Array.from(client.slashCommands.values()).map((c) => 
         console.log(`${vermelho}((${roxo}SISTEMA${vermelho})) =>${nenhuma} Atualização de comandos iniciada...`);
 
         await rest.put(Routes.applicationGuildCommands(client_id, guild_id), { body: comandos_json } );
-        // await rest.put(Routes.applicationCommands(client_id), { body: comandos_json } );
+        await rest.put(Routes.applicationCommands(client_id), { body: comandos_json } );
 
         console.log(`${vermelho}((${roxo}SISTEMA${vermelho})) =>${nenhuma} Comandos carregados com ${verde}sucesso${nenhuma}!`);
     }
