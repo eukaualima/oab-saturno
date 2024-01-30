@@ -63,7 +63,7 @@ module.exports =
         // < Verifica se o usuário é juiz >
         if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz))
         {
-            return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
         }
 
         // < Cria o esboço da imagem >
@@ -73,7 +73,7 @@ module.exports =
         // < Carrega a imagem de fundo >
         const modelo = await Canvas.loadImage('https://i.imgur.com/yoKYqn7.png');
 
-        interaction.reply({ content: `<a:oab_carregando:1187884300264275968> **|** Gerando a certidão de **${nome}**...` }).then(async () => {
+        interaction.editReply({ content: `<a:oab_carregando:1187884300264275968> **|** Gerando a certidão de **${nome}**...` }).then(async () => {
             // < Desenha a imagem de fundo >
             dimensao.drawImage(modelo, 0, 0, canvas.width, canvas.height);
             

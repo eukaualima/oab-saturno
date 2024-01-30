@@ -50,13 +50,13 @@ module.exports =
         // < Verifica se o usuário é juiz >
         if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz))
         {
-            return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
         }
 
         // < Verifica se ele já possui dados no banco de dados >
         pool.query(`SELECT * FROM servidores WHERE discord_id = ${usuario.id}`, async function (erro, servidores)
         {
-            interaction.reply({ content: `<a:oab_update:1187885557766946946> **|** Atualizando os dados de ${usuario}. Aguarde!` }).then(() =>
+            interaction.editReply({ content: `<a:oab_update:1187885557766946946> **|** Atualizando os dados de ${usuario}. Aguarde!` }).then(() =>
             {
                 // < Verifica a opção que o usuário selecionou >
                 if (cargo == "advogado_promocao")

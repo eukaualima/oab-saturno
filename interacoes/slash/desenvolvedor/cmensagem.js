@@ -35,14 +35,14 @@ module.exports =
 
         if (interaction.user.id != desenvolvedor)
         {
-            return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas o **desenvolvedor** do sistema tem acesso a este comando.` })
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** Apenas o **desenvolvedor** do sistema tem acesso a este comando.` })
         }
 
         mensagem = `# <:oab_balanca:1187577597173960754> Abertura de Processo\nPara abrir o processo, clique no botão abaixo e responda corretamente o formulário.`;
 
         // < Botão >
         const btn_processo = new ButtonBuilder()
-        .setCustomId(`btn_${id}`)
+        .setCustomId(`btn_${id}-${interaction.user.id}`)
         .setLabel(`Abrir processo`)
         .setStyle(ButtonStyle.Secondary)
         .setEmoji(`1187883019667779617`);
@@ -51,7 +51,7 @@ module.exports =
         .addComponents(btn_processo);
 
         // < Envia a mensagem no canal >
-        interaction.reply({ content: `Mensagem enviada com sucesso.`, ephemeral: true })
-        interaction.channel.send({ content: `${mensagem}`, components: [botao] });
+        // interaction.editReply({ content: `Mensagem enviada com sucesso.`, ephemeral: true })
+        interaction.editReply({ content: `${mensagem}`, components: [botao] });
 	},
 };

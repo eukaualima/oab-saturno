@@ -72,7 +72,7 @@ module.exports =
             pool.query(`INSERT INTO casos (advogado, policial, reu_id, reu, prisao, veredito) VALUES ('${interaction.user.id}', '${policial}', ${reu_passaporte}, '${reu_nome}', '${prisao}', '${veredito}')`);
             
             // < Informa que foi registrado >
-            interaction.reply({ content: `<:oab_check:1187428122988126348> **|** Seu **caso** foi registrado com sucesso. Verifique-o no canal <#${casos_dp}>.` });
+            interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Seu **caso** foi registrado com sucesso. Verifique-o no canal <#${casos_dp}>.` });
 
             pool.query(`SELECT * FROM servidores WHERE discord_id = ${interaction.user.id}`, async function (erro, servidores)
             {
@@ -102,7 +102,7 @@ module.exports =
         }
         else
         {
-            return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Você não faz parte do corpo jurídico, portanto, não pode utilizar este comando.` });
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** Você não faz parte do corpo jurídico, portanto, não pode utilizar este comando.` });
         }
 	},
 };

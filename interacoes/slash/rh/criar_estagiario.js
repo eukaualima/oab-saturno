@@ -45,13 +45,13 @@ module.exports =
         // < Verifica se o usuário é juiz >
         if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz))
         {
-            return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
         }
 
         // < Verifica se o usuário já é um estagiário >
         if (membro.roles.cache.some(cargo => cargo.id == cargo_estagiario))
         {
-            return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Estagiário(a).` });
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Estagiário(a).` });
         }
 
         // < Verifica se ele já possui dados no banco de dados >
@@ -59,7 +59,7 @@ module.exports =
         {
             if (servidores.length == 0)
             {
-                interaction.reply({ content: `<a:oab_update:1187885557766946946> **|** Criando os dados de **${usuario}**. Aguarde a finalização, **não** faça mais nenhuma ação.` }).then(() =>
+                interaction.editReply({ content: `<a:oab_update:1187885557766946946> **|** Criando os dados de **${usuario}**. Aguarde a finalização, **não** faça mais nenhuma ação.` }).then(() =>
                 {
                     // < Insere o usuário no banco de dados >
                     pool.query(`INSERT INTO advertencias (motivo, duracao, responsavel, data, advogado) VALUES ("Não há advertências", 0, "Ninguém", 0, ${usuario.id})`);
@@ -78,7 +78,7 @@ module.exports =
             }
             else
             {
-                interaction.reply({ content: `<a:oab_update:1187885557766946946> **|** ${usuario} já possui cadastro. Aguarde enquanto é finalizada a atualização do cargo.` }).then(() =>
+                interaction.editReply({ content: `<a:oab_update:1187885557766946946> **|** ${usuario} já possui cadastro. Aguarde enquanto é finalizada a atualização do cargo.` }).then(() =>
                 {
                     // < Atualiza o cargo do Estagiário >
                     pool.query(`UPDATE servidores SET cargo = "Estagiário(a)" WHERE discord_id = ${usuario.id}`);

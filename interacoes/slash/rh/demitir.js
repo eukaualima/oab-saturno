@@ -44,7 +44,7 @@ module.exports =
         // < Verifica se o usuário é juiz >
         if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz))
         {
-            return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
         }
         
         // < Verifica o cargo >
@@ -60,7 +60,7 @@ module.exports =
             usuario.send(`## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nOlá, ${usuario.displayName}. Sinto em informar que você acaba de ser **desligado(a)** do cargo de **Estagiário(a)** do corpo jurídico da cidade. A decisão foi homologada pelo(a) Juiz(a) ${interaction.user.displayName}.\n### <:oab_veredito:1187577594472837171> Motivo da demissão\n${motivo}`);
 
             // < Retorna a mensagem ao usuário >
-            return interaction.reply({ content: `<:oab_check:1187428122988126348> **|** ${usuario} foi demitido e teve seus cargos removidos.` });
+            return interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** ${usuario} foi demitido e teve seus cargos removidos.` });
         }
         else if (membro.roles.cache.some(cargo => cargo.id == cargo_advogado))
         {
@@ -74,7 +74,7 @@ module.exports =
             pool.query(`UPDATE servidores SET cargo = "Nenhum" WHERE discord_id = ${usuario.id}`);
 
             // < Retorna a mensagem ao usuário >
-            return interaction.reply({ content: `<:oab_check:1187428122988126348> **|** ${usuario} foi demitido e teve seus cargos removidos.` });
+            return interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** ${usuario} foi demitido e teve seus cargos removidos.` });
         }
         else if (membro.roles.cache.some(cargo => cargo.id == cargo_promotor))
         {
@@ -88,7 +88,7 @@ module.exports =
             usuario.send(`## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nOlá, ${usuario.displayName}. Sinto em informar que você acaba de ser **desligado(a)** do cargo de **Promotor(a)** do corpo jurídico da cidade. A decisão foi homologada pelo(a) Juiz(a) ${interaction.user.displayName}.\n### <:oab_veredito:1187577594472837171> Motivo da demissão\n${motivo}`)
 
             // < Retorna a mensagem ao usuário >
-            return interaction.reply({ content: `<:oab_check:1187428122988126348> **|** ${usuario} foi demitido e teve seus cargos removidos.` });
+            return interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** ${usuario} foi demitido e teve seus cargos removidos.` });
         }
         else
         {
@@ -102,7 +102,7 @@ module.exports =
             usuario.send(`## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nOlá, ${usuario.displayName}. Sinto em informar que você acaba de ser **desligado(a)** do cargo de **Juiz(a)** do corpo jurídico da cidade. A decisão foi homologada pelo(a) Juiz(a) ${interaction.user.displayName}.\n### <:oab_veredito:1187577594472837171> Motivo da demissão\n${motivo}`)
 
             // < Retorna a mensagem ao usuário >
-            return interaction.reply({ content: `<:oab_check:1187428122988126348> **|** ${usuario} foi demitido e teve seus cargos removidos.` });
+            return interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** ${usuario} foi demitido e teve seus cargos removidos.` });
         }
 	},
 };

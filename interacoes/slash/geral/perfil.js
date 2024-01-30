@@ -14,8 +14,8 @@ module.exports =
 {
     // < Definições do slash >
 	data: new SlashCommandBuilder()
-        .setName("ajuda")
-        .setDescription("Veja todos os comandos do sistema da OAB."),
+        .setName("perfil")
+        .setDescription("Veja as suas informações no sistema da OAB."),
 
     // < Executa o comando >
 	async execute(interaction) 

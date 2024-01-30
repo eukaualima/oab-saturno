@@ -30,7 +30,7 @@ module.exports =
         {
             console.error(err);
 
-            await interaction.reply({
+            await interaction.editReply({
                 content: `${interaction.user.displayName}, este comando está com erro. Comuniquei o meu desenvolvedor.`,
                 ephemeral: true
             })

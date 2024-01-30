@@ -20,7 +20,7 @@ module.exports =
     // < Executa o comando >
 	async execute(interaction) 
     {
-        const sent = await interaction.reply({ content: '<a:oab_ping:1187579459893739561> **|** Calculando...', fetchReply: true });
+        const sent = await interaction.editReply({ content: '<a:oab_ping:1187579459893739561> **|** Calculando...', fetchReply: true });
         interaction.editReply(`<a:oab_ping:1187579459893739561> **|** Atualmente eu demoro **${sent.createdTimestamp - interaction.createdTimestamp}ms** para responder aos comandos.`);
 	},
 };

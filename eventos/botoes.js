@@ -14,8 +14,11 @@ module.exports =
         const { client } = interaction;
 
         if (!interaction.isButton()) return;
-
-        const botao = client.buttonCommands.get(interaction.customId);
+        
+        // < Cria o filtro do botão >
+        const [botao_nome, id_autor] = interaction.customId.split('-');
+        
+        const botao = client.buttonCommands.get(botao_nome);
 
         if (!botao)
         {
@@ -24,13 +27,20 @@ module.exports =
 
         try
         {
+            // < Verifica se foi o mesmo usuário que criou a mensagem >
+            if (interaction.user.id != id_autor)
+            {
+                return;
+            }
+
+            // < Roda o botão >
             await botao.execute(interaction, client);
         }
         catch (err)
         {
             console.error(err);
 
-            await interaction.reply({
+            await interaction.editReply({
                 content: `${interaction.user.displayName}, este comando está com erro. Comuniquei o meu desenvolvedor.`,
                 ephemeral: true
             })
