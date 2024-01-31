@@ -42,7 +42,7 @@ module.exports =
 
         // < Botão >
         const btn_processo = new ButtonBuilder()
-        .setCustomId(`btn_${id}-${interaction.user.id}`)
+        .setCustomId(`btn_${id}`)
         .setLabel(`Abrir processo`)
         .setStyle(ButtonStyle.Secondary)
         .setEmoji(`1187883019667779617`);

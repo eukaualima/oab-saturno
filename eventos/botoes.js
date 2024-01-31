@@ -18,32 +18,59 @@ module.exports =
         // < Cria o filtro do botão >
         const [botao_nome, id_autor] = interaction.customId.split('-');
         
-        const botao = client.buttonCommands.get(botao_nome);
-
-        if (!botao)
+        if(id_autor)
         {
-            await require("../padroes/padrao_erro_botao");
-        }
+            const botao = client.buttonCommands.get(botao_nome);
 
-        try
-        {
-            // < Verifica se foi o mesmo usuário que criou a mensagem >
-            if (interaction.user.id != id_autor)
+            if (!botao)
             {
-                return;
+                await require("../padroes/padrao_erro_botao");
             }
 
-            // < Roda o botão >
-            await botao.execute(interaction, client);
-        }
-        catch (err)
-        {
-            console.error(err);
+            try
+            {
+                // < Verifica se foi o mesmo usuário que criou a mensagem >
+                if (interaction.user.id != id_autor)
+                {
+                    return;
+                }
 
-            await interaction.editReply({
-                content: `${interaction.user.displayName}, este comando está com erro. Comuniquei o meu desenvolvedor.`,
-                ephemeral: true
-            })
+                // < Roda o botão >
+                await botao.execute(interaction, client);
+            }
+            catch (err)
+            {
+                console.error(err);
+
+                await interaction.editReply({
+                    content: `${interaction.user.displayName}, este comando está com erro. Comuniquei o meu desenvolvedor.`,
+                    ephemeral: true
+                })
+            }
+        }
+        else
+        {
+            const botao = client.buttonCommands.get(botao_nome);
+
+            if (!botao)
+            {
+                await require("../padroes/padrao_erro_botao");
+            }
+
+            try
+            {
+                // < Roda o botão >
+                await botao.execute(interaction, client);
+            }
+            catch (err)
+            {
+                console.error(err);
+
+                await interaction.editReply({
+                    content: `${interaction.user.displayName}, este comando está com erro. Comuniquei o meu desenvolvedor.`,
+                    ephemeral: true
+                })
+            }
         }
     },
 }
