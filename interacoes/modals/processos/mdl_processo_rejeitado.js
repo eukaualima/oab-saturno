@@ -9,7 +9,7 @@
 const { EmbedBuilder, PermissionFlagsBits, PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, ChannelType } = require('discord.js');
 const pool = require('../../../conexao/mysql');
 const moment = require('moment');
-const { cargo_juiz, cargo_everyone, categoria_limpezas, footer } = require('../../../config.json');
+const { categoria_fechados } = require('../../../config.json');
 moment.locale('pt-BR');
 
 function honorarios(meses)
@@ -81,8 +81,9 @@ module.exports =
                     // < Fecha o canal e marca como fechado >
                     await interaction.channel.permissionOverwrites.edit(processo[0].advogado, { ViewChannel: false });
                     await interaction.channel.setName(`fechado-${natureza}-${codigo}`);
+                    await interaction.channel.setParent(categoria_fechados)
                     await interaction.update({ components: [] });
-                    await interaction.channel.send({ content: `## <:oab_juiz:1187577598776193136> Processo rejeitado\nO(a) excelentíssimo(a) Juiz(a) ${client.users.cache.get(processo[0].juiz)} rejeitou o presente processo.\n\n### <:oab_veredito:1187577594472837171> Motivo da Rejeição\n${motivo}`})
+                    await interaction.channel.send({ content: `## <:oab_juiz:1187577598776193136> Processo rejeitado\nO(a) excelentíssimo(a) Juiz(a) ${client.users.cache.get(processo[0].juiz)} rejeitou o presente processo.\n### <:oab_veredito:1187577594472837171> Motivo da Rejeição\n${motivo}`})
                 })
             })
         })

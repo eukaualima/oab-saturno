@@ -21,7 +21,7 @@ module.exports =
 	async execute(interaction, client) 
     {
         // < Permissões dos canais >
-        const { ViewChannel, SendMessages } = PermissionFlagsBits;
+        const { ViewChannel, SendMessages, AttachFiles } = PermissionFlagsBits;
 
         // < Coleta as informações passadas no modal >
         const nome_antigo = interaction.fields.getTextInputValue('mudar_nome_antigo')
@@ -51,18 +51,18 @@ module.exports =
                         [
                             {
                                 id: cargo_juiz,
-                                allow: [ViewChannel, SendMessages]
+                                allow: [ViewChannel, SendMessages, AttachFiles]
                             },
                             {
                                 id: interaction.user.id,
-                                allow: [ViewChannel, SendMessages]
+                                allow: [ViewChannel, SendMessages, AttachFiles]
                             },
                             {
                                 id: cargo_everyone,
-                                deny: [ViewChannel, SendMessages]
+                                deny: [ViewChannel, SendMessages, AttachFiles]
                             }
                         ]
-                    }).then(canal => 
+                    }).then(async canal => 
                     {
                         const embed = new EmbedBuilder()
                         .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
@@ -103,8 +103,9 @@ module.exports =
                         const botao = new ActionRowBuilder()
                         .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
 
-                        canal.send({ embeds: [embed], components: [botao] })
-                        interaction.reply({ content: `<:oab_check:1187428122988126348> **|** Processo de Troca de Nome Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        await canal.send({ embeds: [embed], components: [botao] });
+                        await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexo\n${interaction.user}, envie abaixo o **comprovante da transferência** feita ao(à) Juiz(a) responsável.\n* Ao enviar, marque o cargo Juiz(a) e aguarde o retorno.` });
+                        await interaction.reply({ content: `<:oab_check:1187428122988126348> **|** Processo de Troca de Nome Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
                     })
             })
         })

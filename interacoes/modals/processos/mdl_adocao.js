@@ -21,7 +21,7 @@ module.exports =
 	async execute(interaction, client) 
     {
         // < Permissões dos canais >
-        const { ViewChannel, SendMessages } = PermissionFlagsBits;
+        const { ViewChannel, SendMessages, AttachFiles } = PermissionFlagsBits;
 
         // < Coleta as informações passadas no modal >
         const crianca = interaction.fields.getTextInputValue('adocao_nome')
@@ -51,18 +51,18 @@ module.exports =
                         [
                             {
                                 id: cargo_juiz,
-                                allow: [ViewChannel, SendMessages]
+                                allow: [ViewChannel, SendMessages, AttachFiles]
                             },
                             {
                                 id: interaction.user.id,
-                                allow: [ViewChannel, SendMessages]
+                                allow: [ViewChannel, SendMessages, AttachFiles]
                             },
                             {
                                 id: cargo_everyone,
-                                deny: [ViewChannel, SendMessages]
+                                deny: [ViewChannel, SendMessages, AttachFiles]
                             }
                         ]
-                    }).then(canal => 
+                    }).then(async canal => 
                     {
                         const embed = new EmbedBuilder()
                         .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
@@ -104,11 +104,9 @@ module.exports =
                         const botao = new ActionRowBuilder()
                         .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
 
-                        canal.send({ embeds: [embed], components: [botao] });
-                        canal.send({ content: `<:oab_aviso:1188557292073918555> **|** ${interaction.user}, negocie com o(a) Juiz(a) que assumir o caso a melhor data para acontecer a audiência.` });
-                        canal.send({ content: `<:oab_aviso:1188557292073918555> **|** ${interaction.user}, envie as prints da transferência bancária feita para o(a) Juiz(a).` });
-                        canal.send({ content: `<:oab_aviso:1188557292073918555> **|** ${interaction.user}, informe se o adotado é criança ou adulto para que o(a) Juiz(a) saiba quantas audiências ocorrerão.` });
-                        interaction.reply({ content: `<:oab_check:1187428122988126348> **|** Processo de Adoção Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        await canal.send({ embeds: [embed], components: [botao] });
+                        await canal.send({ content: `### <:oab_aviso:1188557292073918555> Avisos importantes\nPrezado(a) advogado(a), atente-se aos seguintes informes:\n1. Negocie com o(a) Juiz(a) que assumir o caso a **melhor data para acontecer a audiência**;\n2. informe se **o adotado é criança ou adulto **para que o(a) Juiz(a) saiba quantas audiências ocorrerão; e\n3. envie as imagens da **transferência bancária** feita para o(a) Juiz(a).` });
+                        await interaction.reply({ content: `<:oab_check:1187428122988126348> **|** Processo de Adoção Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
                     })
             })
         })
