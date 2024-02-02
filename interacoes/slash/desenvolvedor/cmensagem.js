@@ -52,6 +52,7 @@ module.exports =
 
         // < Envia a mensagem no canal >
         // interaction.editReply({ content: `Mensagem enviada com sucesso.`, ephemeral: true })
-        interaction.editReply({ content: `${mensagem}`, components: [botao] });
+        await interaction.editReply({ content: `Mensagem criada!` }).then(msg => msg.delete());
+        await interaction.channel.send({ content: `${mensagem}`, components: [botao] });
 	},
 };

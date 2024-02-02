@@ -62,28 +62,28 @@ module.exports =
         membro = interaction.guild.members.cache.get(`${usuario.id}`);
 
         // < Verifica se o usuário é juiz >
-        // if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz))
-        // {
-        //     return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
-        // }
+        if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz))
+        {
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
+        }
 
         // < Verifica o cargo do usuário >
-        // if (cargo == "estagiario_cargo" && membro.roles.cache.some(cargo => cargo.id == cargo_estagiario))
-        // {
-        //     return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Estagiário(a).` });
-        // }
-        // if (cargo == "advogado_cargo" && membro.roles.cache.some(cargo => cargo.id == cargo_advogado))
-        // {
-        //     return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Advogado(a).` });
-        // }
-        // if (cargo == "promotor_cargo" && membro.roles.cache.some(cargo => cargo.id == cargo_promotor))
-        // {
-        //     return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Promotor(a).` });
-        // }
-        // if (cargo == "juiz_cargo" && membro.roles.cache.some(cargo => cargo.id == cargo_juiz))
-        // {
-        //     return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Juiz(a).` });
-        // }
+        if (cargo == "estagiario_cargo" && membro.roles.cache.some(cargo => cargo.id == cargo_estagiario))
+        {
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Estagiário(a).` });
+        }
+        if (cargo == "advogado_cargo" && membro.roles.cache.some(cargo => cargo.id == cargo_advogado))
+        {
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Advogado(a).` });
+        }
+        if (cargo == "promotor_cargo" && membro.roles.cache.some(cargo => cargo.id == cargo_promotor))
+        {
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Promotor(a).` });
+        }
+        if (cargo == "juiz_cargo" && membro.roles.cache.some(cargo => cargo.id == cargo_juiz))
+        {
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** ${usuario} já é um(a) Juiz(a).` });
+        }
 
         // < Verifica se ele já possui dados no banco de dados >
         pool.query(`SELECT * FROM servidores WHERE discord_id = ${usuario.id}`, async function (erro, servidores)
@@ -105,7 +105,7 @@ module.exports =
                     // < Informa a atualização depois de 5s >
                     setTimeout(() => {
                         interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Finalizado! **${usuario}** foi registrado(a) e já possui o cargo de ${nome_salvar}.` });
-                        usuario.send(`## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nSeja muito bem-vindo(a) ao nosso corpo jurídico, ${usuario.displayName}! Fico feliz em informar que agora você é um(a) **${nome_salvar}**.`);
+                        usuario.send(`## <:oab_logo:1202096934093852732> OAB - Saturno RP\nSeja muito bem-vindo(a) ao nosso corpo jurídico, ${usuario.displayName}! Fico feliz em informar que agora você é um(a) **${nome_salvar}**.`);
                     }, 5000);
                 });
 
@@ -117,13 +117,16 @@ module.exports =
                     // < Atualiza o cargo do Estagiário >
                     pool.query(`UPDATE servidores SET cargo = "${nome_salvar}" WHERE discord_id = ${usuario.id}`);
 
-                    // < Adiciona o cargo >
-                    interaction.guild.members.cache.get(`${usuario.id}`).roles.add(cargo_estagiario);
+                    // < Adiciona o cargo ao usuário >
+                    if (cargo == "juiz_cargo") interaction.guild.members.cache.get(`${usuario.id}`).roles.add(cargo_juiz);
+                    if (cargo == "promotor_cargo") interaction.guild.members.cache.get(`${usuario.id}`).roles.add(cargo_promotor);
+                    if (cargo == "advogado_cargo") interaction.guild.members.cache.get(`${usuario.id}`).roles.add(cargo_advogado);
+                    if (cargo == "estagiario_cargo") interaction.guild.members.cache.get(`${usuario.id}`).roles.add(cargo_estagiario);
 
                     // < Informa a finalização depois de 5s >
                     setTimeout(() => {
                         interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Finalizado! **${usuario}** agora possui o cargo de ${nome_salvar}.` });
-                        usuario.send(`## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nSeja muito bem-vindo(a) ao nosso corpo jurídico, ${usuario.displayName}! Fico feliz em informar que agora você é um(a) **${nome_salvar}**.`);
+                        usuario.send(`## <:oab_logo:1202096934093852732> OAB - Saturno RP\nSeja muito bem-vindo(a) ao nosso corpo jurídico, ${usuario.displayName}! Fico feliz em informar que agora você é um(a) **${nome_salvar}**.`);
                     }, 5000);
                 });
             }

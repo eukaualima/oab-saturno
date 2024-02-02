@@ -39,14 +39,14 @@ module.exports =
 
         const natureza = new TextInputBuilder()
             .setCustomId('natureza_processo')
-            .setLabel("Natureza do processo:")
+            .setLabel("Natureza do processo (NÃO MODIFICAR):")
             .setValue(`${interaction.channel.name.replace(/[^a-zA-Z]/g,'') + 's'}`)
             .setStyle(TextInputStyle.Short)
             .setRequired(true);
 
         const codigo = new TextInputBuilder()
             .setCustomId('codigo_processo')
-            .setLabel("Código do processo:")
+            .setLabel("Código do processo (NÃO MODIFICAR):")
             .setValue(`${interaction.channel.name.replace(/[^0-9]/g,'')}`)
             .setStyle(TextInputStyle.Short)
             .setRequired(true);
