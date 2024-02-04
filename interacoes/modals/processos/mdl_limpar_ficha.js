@@ -119,7 +119,8 @@ module.exports =
 
                         await canal.send({ embeds: [embed], components: [botao] });
                         await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexos\n${interaction.user}, envie abaixo:\n1. **Comprovante da transferência** feita ao(à) Juiz(a) responsável; e\n2. imagem da **pesquisa no MDT**.\n\n* Ao enviar, **marque o cargo Juiz(a)** e aguarde o retorno.` });
-                        await interaction.reply({ content: `<:oab_check:1187428122988126348> **|** Processo de Limpeza de Ficha Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        await interaction.deferReply({ ephemeral: true });
+                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Limpeza de Ficha Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
                     })
             })
         })

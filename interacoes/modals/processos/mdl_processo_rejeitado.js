@@ -78,24 +78,24 @@ module.exports =
                     pool.query(`UPDATE servidores SET processos = ${advogado_tab[0].processos + 1} WHERE discord_id = ${processo[0].advogado}`)
                     pool.query(`UPDATE servidores SET processos = ${juiz[0].processos + 1} WHERE discord_id = ${processo[0].juiz}`)
                     
+                    await interaction.update({ components: [] });
+
                     // < Fecha o canal e marca como fechado >
-                    let cargo = interaction.guild.roles.cache.get(cargo_juiz);
-                    let everyone = interaction.guild.roles.cache.get(cargo_everyone);
-                    let vereditos = interaction.guild.channels.cache.get(canal_vereditos);
-                    
-                    await interaction.channel.permissionOverwrites.edit(processo[0].advogado, { ViewChannel: false });
+                    let cargo = await interaction.guild.roles.cache.get(cargo_juiz);
+                    let everyone = await interaction.guild.roles.cache.get(cargo_everyone);
+                    let vereditos = await interaction.guild.channels.cache.get(canal_vereditos);
+                    let advogado_user = await interaction.guild.members.fetch(processo[0].advogado);
+
+                    await interaction.channel.permissionOverwrites.edit(advogado_user, { ViewChannel: false });
                     await interaction.channel.setName(`fechado-${natureza}-${codigo}`);
                     await interaction.channel.setParent(categoria_fechados);
                     await interaction.channel.permissionOverwrites.edit(cargo, {
-                        VIEW_CHANNEL: true,
-                        SEND_MESSAGES: true,
+                        ViewChannel: true,
                     });
                     await interaction.channel.permissionOverwrites.edit(everyone, {
-                        VIEW_CHANNEL: false,
-                        SEND_MESSAGES: false,
+                        ViewChannel: false,
                     });
-                    await interaction.update({ components: [] });
-                    await vereditos.send({ content: `## <:oab_veredito:1187577594472837171> Veredito\nO(a) juiz(a) **${interaction.user.displayName}** acaba de **reprovar** o processo de <@${processo[0].advogado}>.\n### <:oab_juiz:1187577598776193136> Motivo\n${motivo ? motivo : "Não informado pelo(a) juiz(a)."}\n\n* O identificador deste processo é *${natureza}#${codigo}*.` });
+                    await vereditos.send({ content: `## <:oab_veredito:1187577594472837171> Veredito\nO(a) juiz(a) **${interaction.user}** acaba de **reprovar** o processo de <@${processo[0].advogado}>.\n### <:oab_juiz:1187577598776193136> Motivo\n${motivo ? motivo : "Não informado pelo(a) juiz(a)."}\n\n* O identificador deste processo é *${natureza}#${codigo}*.` });
                     await interaction.channel.send({ content: `## <:oab_juiz:1187577598776193136> Processo rejeitado\nO(a) excelentíssimo(a) Juiz(a) ${client.users.cache.get(processo[0].juiz)} rejeitou o presente processo.\n### <:oab_veredito:1187577594472837171> Motivo da Rejeição\n${motivo}`})
                 })
             })
