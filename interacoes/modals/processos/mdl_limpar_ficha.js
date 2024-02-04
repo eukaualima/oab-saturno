@@ -95,16 +95,21 @@ module.exports =
                         // < Cria os dados no banco de dados >
                         pool.query(`INSERT INTO limpezas (advogado, juiz, reu, reu_id, meses, orcamento, data, status, observacoes) VALUES ("${interaction.user.id}", "Ninguém", "${reu_nome}", ${reu_id}, ${meses}, ${honorarios_totais}, NOW(), "Aberto", "Nenhuma")`);
 
+                        await interaction.deferReply({ ephemeral: true });
+                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Limpeza de Ficha Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()
                         .setCustomId('btn_processo_aprovado')
                         .setLabel(`Aprovar processo`)
+                        .setDisabled(true)
                         .setStyle(ButtonStyle.Success)
                         .setEmoji(`1187577594472837171`);
 
                         const btn_processo_rejeitado = new ButtonBuilder()
                         .setCustomId('btn_processo_rejeitado')
                         .setLabel(`Rejeitar processo`)
+                        .setDisabled(true)
                         .setStyle(ButtonStyle.Danger)
                         .setEmoji(`1187577594472837171`);
 
@@ -119,8 +124,7 @@ module.exports =
 
                         await canal.send({ embeds: [embed], components: [botao] });
                         await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexos\n${interaction.user}, envie abaixo:\n1. **Comprovante da transferência** feita ao(à) Juiz(a) responsável; e\n2. imagem da **pesquisa no MDT**.\n\n* Ao enviar, **marque o cargo Juiz(a)** e aguarde o retorno.` });
-                        await interaction.deferReply({ ephemeral: true });
-                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Limpeza de Ficha Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        
                     })
             })
         })

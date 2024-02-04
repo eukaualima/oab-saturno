@@ -82,16 +82,21 @@ module.exports =
                         // < Cria os dados no banco de dados >
                         pool.query(`INSERT INTO trocas (advogado, juiz, cliente_nome, cliente_id, novo_nome, motivo, data, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", "${nome_antigo}", ${passaporte}, "${nome_novo}", "${motivo}", NOW(), "Aberto", "Nenhuma")`);
                         
+                        await interaction.deferReply({ ephemeral: true });
+                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Troca de Nome Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()
                         .setCustomId('btn_processo_aprovado')
                         .setLabel(`Aprovar processo`)
+                        .setDisabled(true)
                         .setStyle(ButtonStyle.Success)
                         .setEmoji(`1187577594472837171`);
 
                         const btn_processo_rejeitado = new ButtonBuilder()
                         .setCustomId('btn_processo_rejeitado')
                         .setLabel(`Rejeitar processo`)
+                        .setDisabled(true)
                         .setStyle(ButtonStyle.Danger)
                         .setEmoji(`1187577594472837171`);
 
@@ -106,8 +111,7 @@ module.exports =
 
                         await canal.send({ embeds: [embed], components: [botao] });
                         await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexo\n${interaction.user}, envie abaixo o **comprovante da transferência** feita ao(à) Juiz(a) responsável.\n* Ao enviar, marque o cargo Juiz(a) e aguarde o retorno.` });
-                        await interaction.deferReply({ ephemeral: true });
-                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Troca de Nome Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        
                     })
             })
         })

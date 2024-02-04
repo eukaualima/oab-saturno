@@ -86,12 +86,14 @@ module.exports =
                         const btn_processo_aprovado = new ButtonBuilder()
                         .setCustomId('btn_processo_aprovado')
                         .setLabel(`Aprovar processo`)
+                        .setDisabled(true)
                         .setStyle(ButtonStyle.Success)
                         .setEmoji(`1187577594472837171`);
 
                         const btn_processo_rejeitado = new ButtonBuilder()
                         .setCustomId('btn_processo_rejeitado')
                         .setLabel(`Rejeitar processo`)
+                        .setDisabled(true)
                         .setStyle(ButtonStyle.Danger)
                         .setEmoji(`1187577594472837171`);
 
@@ -105,7 +107,7 @@ module.exports =
                         .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
 
                         await canal.send({ embeds: [embed], components: [botao] });
-                        await canal.send({ content: `### <:oab_aviso:1188557292073918555> Avisos importantes\nPrezado(a) advogado(a), atente-se aos seguintes informes:\n1. Negocie com o(a) Juiz(a) que assumir o caso a **melhor data para acontecer a audiência**;\n2. informe se **o adotado é criança ou adulto **para que o(a) Juiz(a) saiba quantas audiências ocorrerão; e\n3. envie as imagens da **transferência bancária** feita para o(a) Juiz(a).` });
+                        await canal.send({ content: `### <:oab_aviso:1188557292073918555> Avisos importantes\nPrezado(a) advogado(a), atente-se aos seguintes informes:\n1. Negocie com o(a) Juiz(a) que assumir o caso a **melhor data para acontecer a audiência**;\n2. informe se **o adotado é criança ou adulto **para que o(a) Juiz(a) saiba quantas audiências ocorrerão;\n3. envie as imagens da **transferência bancária** feita para o(a) Juiz(a); e\n4. envie as imagens do **F11** do **pai** e da **mãe**.` });
                         await interaction.deferReply({ ephemeral: true });
                         await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Adoção Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
                     })

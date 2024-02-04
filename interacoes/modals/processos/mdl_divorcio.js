@@ -70,7 +70,7 @@ module.exports =
                         .addFields([
                             { name: `<:oab_noiva:1189409204834943066> | Noiva`, value: `${noiva}`, inline: true },
                             { name: `<:oab_noivo:1189409201995382805> | Noivo`, value: `${noivo}`, inline: true },
-                            { name: `<:oab_testemunhas:1188556234551464026> | Testemunhas`, value: `${testemunhas}`, inline: true },
+                            { name: `<:oab_testemunhas:1188556234551464026> | Testemunhas`, value: `${testemunhas}` },
                             { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 1.500.000,00`, inline: true },
                         ])
@@ -78,18 +78,23 @@ module.exports =
                         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
 
                         // < Cria os dados no banco de dados >
-                        pool.query(`INSERT INTO divorcios (advogado, juiz, noiva_nome, noivo_nome, testemunha1_nome, data_abertura, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", "${noiva}", "${noivo}", "${testemunhas}", NOW(), "Aberto", "Nenhuma")`);
+                        pool.query(`INSERT INTO divorcios (advogado, juiz, noiva, noivo, testemunhas, data_abertura, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", "${noiva}", "${noivo}", "${testemunhas}", NOW(), "Aberto", "Nenhuma")`);
+                        
+                        await interaction.deferReply({ ephemeral: true });
+                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Divórcio Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
                         
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()
                         .setCustomId('btn_processo_aprovado')
                         .setLabel(`Aprovar processo`)
+                        .setDisabled(true)
                         .setStyle(ButtonStyle.Success)
                         .setEmoji(`1187577594472837171`);
 
                         const btn_processo_rejeitado = new ButtonBuilder()
                         .setCustomId('btn_processo_rejeitado')
                         .setLabel(`Rejeitar processo`)
+                        .setDisabled(true)
                         .setStyle(ButtonStyle.Danger)
                         .setEmoji(`1187577594472837171`);
 
@@ -104,8 +109,6 @@ module.exports =
 
                         await canal.send({ embeds: [embed], components: [botao] });
                         await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexos\n${interaction.user}, envie abaixo:\n1. **Comprovante da transferência** feita ao(à) Juiz(a) responsável; e\n2. imagem da **Certidão de Casamento**.\n\n* Ao enviar, **marque o cargo Juiz(a)** e aguarde o retorno.` });
-                        await interaction.deferReply({ ephemeral: true });
-                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Divórcio Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
                     })
             })
         })

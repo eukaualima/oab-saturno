@@ -44,11 +44,31 @@ module.exports =
 
                 // client.users.cache.get(processo[0].advogado).send({ content: `## <:oab_juiz:1187577598776193136> Status do processo\nO(a) excelentíssimo(a) Juiz(a) ${interaction.user} acabou de assumir seu processo.` })
 
-                return interaction.reply({ content: `<:oab_juiz:1187577598776193136> **|** O(a) Juiz(a) ${interaction.user} acabou de assumir o processo.` });
-            }
-            else
-            {
-                return interaction.reply({ content: `<:oab_juiz:1187577598776193136> **|** O(a) Juiz(a) ${client.users.cache.get(processo[0].juiz)} já está como responsável deste processo.`, ephemeral: true });
+                // < Instancia os botões >
+                const btn_processo_aprovado = new ButtonBuilder()
+                .setCustomId('btn_processo_aprovado')
+                .setLabel(`Aprovar processo`)
+                .setStyle(ButtonStyle.Success)
+                .setEmoji(`1187577594472837171`);
+
+                const btn_processo_rejeitado = new ButtonBuilder()
+                .setCustomId('btn_processo_rejeitado')
+                .setLabel(`Rejeitar processo`)
+                .setStyle(ButtonStyle.Danger)
+                .setEmoji(`1187577594472837171`);
+
+                const btn_processo_assumir = new ButtonBuilder()
+                .setCustomId('btn_processo_assumir')
+                .setLabel(`${interaction.member.nickname}`)
+                .setDisabled(true)
+                .setStyle(ButtonStyle.Primary)
+                .setEmoji(`1187577598776193136`);
+                
+                const botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
+
+                await interaction.update({ components: [botoes] });
+                
+                return interaction.channel.send({ content: `<:oab_juiz:1187577598776193136> **|** O(a) Juiz(a) **${interaction.member.nickname}** acabou de assumir o processo.` });
             }
         })
     },

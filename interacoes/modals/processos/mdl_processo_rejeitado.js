@@ -9,7 +9,7 @@
 const { EmbedBuilder, PermissionFlagsBits, PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, ChannelType } = require('discord.js');
 const pool = require('../../../conexao/mysql');
 const moment = require('moment');
-const { categoria_fechados, canal_vereditos, cargo_juiz, cargo_everyone } = require('../../../config.json');
+const { categoria_fechados, canal_vereditos, cargo_juiz, cargo_everyone, footer, cor_embed } = require('../../../config.json');
 moment.locale('pt-BR');
 
 function honorarios(meses)
@@ -95,7 +95,22 @@ module.exports =
                     await interaction.channel.permissionOverwrites.edit(everyone, {
                         ViewChannel: false,
                     });
-                    await vereditos.send({ content: `## <:oab_veredito:1187577594472837171> Veredito\nO(a) juiz(a) **${interaction.user}** acaba de **reprovar** o processo de <@${processo[0].advogado}>.\n### <:oab_juiz:1187577598776193136> Motivo\n${motivo ? motivo : "Não informado pelo(a) juiz(a)."}\n\n* O identificador deste processo é *${natureza}#${codigo}*.` });
+
+                   // < Sistema de "Vereditos" >
+                    const veredito_embed = new EmbedBuilder()
+                    .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
+                    .setDescription(`Processo ***${natureza}#${codigo}*** encerrado.\n* Dr(a). ${advogado_user}`)
+                    .setColor(cor_embed)
+                    .addFields([
+                        { name: `<:oab_veredito:1187577594472837171> | Veredito`, value: `Processo **reprovado** pelo(a) excelentíssimo(a) Juiz(a) **${interaction.member.nickname}**.` },
+                        { name: `<:oab_escrita:1188542389179133992> | Motivo`, value: `${motivo ? motivo : "Não informado pelo(a) Juiz(a)."}` },
+                        { name: `<:oab_data:1188268177063424050> | Data de fechamento`, value: `${moment().format('LLLL')}` },
+                    ])
+                    .setThumbnail(client.user.avatarURL({ size: 1024 }))
+                    .setFooter({ text: footer, iconURL: client.user.avatarURL() });
+                    
+                    // await vereditos.send({ content: `## <:oab_veredito:1187577594472837171> Veredito\nO(a) juiz(a) **${interaction.user}** acaba de **aprovar** o processo de <@${processo[0].advogado}>.\n### <:oab_juiz:1187577598776193136> Observações\n${motivo ? motivo : "Nenhuma."}\n\n* O identificador deste processo é *${natureza}#${codigo}*.` });
+                    await vereditos.send({ embeds: [veredito_embed] });
                     await interaction.channel.send({ content: `## <:oab_juiz:1187577598776193136> Processo rejeitado\nO(a) excelentíssimo(a) Juiz(a) ${client.users.cache.get(processo[0].juiz)} rejeitou o presente processo.\n### <:oab_veredito:1187577594472837171> Motivo da Rejeição\n${motivo}`})
                 })
             })

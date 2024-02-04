@@ -84,12 +84,14 @@ module.exports =
                         const btn_processo_aprovado = new ButtonBuilder()
                         .setCustomId('btn_processo_aprovado')
                         .setLabel(`Aprovar processo`)
+                        .setDisabled(true)
                         .setStyle(ButtonStyle.Success)
                         .setEmoji(`1187577594472837171`);
 
                         const btn_processo_rejeitado = new ButtonBuilder()
                         .setCustomId('btn_processo_rejeitado')
                         .setLabel(`Rejeitar processo`)
+                        .setDisabled(true)
                         .setStyle(ButtonStyle.Danger)
                         .setEmoji(`1187577594472837171`);
 
