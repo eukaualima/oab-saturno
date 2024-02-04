@@ -71,7 +71,7 @@ module.exports =
                         .addFields([
                             { name: `<:oab_noiva:1189409204834943066> | Noiva`, value: `${noiva}`, inline: true },
                             { name: `<:oab_noivo:1189409201995382805> | Noivo`, value: `${noivo}`, inline: true },
-                            { name: `<:oab_testemunhas:1188556234551464026> | Testemunhas`, value: `${testemunhas}`, inline: true },
+                            { name: `<:oab_testemunhas:1188556234551464026> | Testemunhas`, value: `${testemunhas}` },
                             { name: `<:oab_data:1188268177063424050> | Data do casamento`, value: `${data}` },
                             { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 1.250.000,00`, inline: true },
