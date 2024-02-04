@@ -5,6 +5,8 @@
  * @version OABSRP-0.1
  */
 
+const { logs_erros } = require("../config.json");
+
 module.exports =
 {
     name: "interactionCreate",
@@ -26,10 +28,10 @@ module.exports =
         }
         catch (err)
         {
-            console.error(err);
+            console.log(err);
 
             await interaction.editReply({
-                content: `${interaction.user.displayName}, este comando está com erro. Comuniquei o meu desenvolvedor.`,
+                content: `### <:oab_error:1187428311014576208> Erro ao executar\n${interaction.user}, este comando está com erro.`,
                 ephemeral: true
             })
         }

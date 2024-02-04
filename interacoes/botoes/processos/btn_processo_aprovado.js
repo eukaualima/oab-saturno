@@ -32,8 +32,8 @@ module.exports =
         // < Cria os campos >
         const motivo = new TextInputBuilder()
             .setCustomId('motivo_aprovacao')
-            .setLabel("Motivo (opcional):")
-            .setPlaceholder("Por que o processo foi aprovado?")
+            .setLabel("Observações (opcional):")
+            .setPlaceholder("Ex.: Verificar se foi efetuado.")
             .setStyle(TextInputStyle.Paragraph)
             .setRequired(false);
 

@@ -69,8 +69,9 @@ module.exports =
                         .setDescription(`Processo de Troca de Nome Nº${total_registros+1} aberto com sucesso.\n* Dr(a). ${interaction.user} (Passaporte: ${servidores[0].passaporte})`)
                         .setColor(cor_embed)
                         .addFields([
-                            { name: `<:oab_cliente:1188541685572051054> | Cliente`, value: `${nome_antigo}`, inline: true },
-                            { name: `<:oab_passaporte:1188496362334072882> | Passaporte`, value: `${nome_novo}`, inline: true },
+                            { name: `<:oab_cliente:1188541685572051054> | Nome antigo`, value: `${nome_antigo}`, inline: true },
+                            { name: `✨ | Novo nome`, value: `${nome_novo}`, inline: true },
+                            { name: `<:oab_passaporte:1188496362334072882> | Passaporte`, value: `${passaporte}` },
                             { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
                             { name: `<:oab_escrita:1188542389179133992> | Motivo`, value: `${motivo}`, inline: true },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 500.000,00`, inline: true },

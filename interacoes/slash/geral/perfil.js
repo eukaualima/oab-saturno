@@ -70,6 +70,11 @@ module.exports =
         {
             pool.query(`SELECT * FROM servidores WHERE discord_id = ${interaction.user.id}`, async function (erro, servidores)
             {
+                if (servidores.length == 0)
+                {
+                    return await interaction.editReply({ content: `<:oab_error:1187428311014576208> | Você **não faz parte** do corpo jurídico!` });
+                }
+
                 let processos, casos, registro, passaporte, cargo;
     
                 processos = servidores[0].processos;

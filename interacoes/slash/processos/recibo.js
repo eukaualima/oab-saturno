@@ -70,10 +70,10 @@ module.exports =
 
         // < Coleta os nomes enviados pelo comando >
         nome = interaction.options.getString("cliente");
-        advogado = interaction.options.getNumber("advogado").toLocaleString("pt-BR") + ",00";
-        juiz = interaction.options.getNumber("juiz").toLocaleString("pt-BR") + ",00";
+        advogado = interaction.options.getNumber("advogado_recebeu").toLocaleString("pt-BR") + ",00";
+        juiz = interaction.options.getNumber("juiz_recebeu").toLocaleString("pt-BR") + ",00";
         total = interaction.options.getNumber("total").toLocaleString("pt-BR") + ",00";
-        assinatura = interaction.options.getString("assinatura");
+        assinatura = interaction.options.getString("sua_assinatura");
         
         // < Cria o esboço da imagem >
         const canvas = Canvas.createCanvas(1080, 1920);

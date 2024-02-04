@@ -5,6 +5,8 @@
  * @version OABSRP-0.1
  */
 
+const { ActivityType } = require("discord.js");
+
 module.exports =
 {
     name: "ready",
@@ -12,6 +14,10 @@ module.exports =
     
     execute (client)
     {
+        // < Alterar o status >
+        client.user.setPresence({ activities: [{ name: '🧑‍⚖️ Jurídico Saturno RP' }], type: ActivityType.Playing });
+        client.user.setStatus('online');
+
         // < Cores para o terminal >
         let vermelho = '\x1b[31m';
         let azul = '\x1b[34m';
