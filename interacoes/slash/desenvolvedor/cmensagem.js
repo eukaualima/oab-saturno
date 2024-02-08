@@ -38,14 +38,15 @@ module.exports =
             return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** Apenas o **desenvolvedor** do sistema tem acesso a este comando.` })
         }
 
-        mensagem = `# <:oab_balanca:1187577597173960754> Abertura de Processo\nPara abrir o processo, clique no botão abaixo e responda corretamente o formulário.`;
+        // mensagem = `# <:oab_balanca:1187577597173960754> Abertura de Processo\nPara abrir o processo, clique no botão abaixo e responda corretamente o formulário.`;
+        mensagem = `## <:oab_logo:1202096934093852732> Prova da OAB\nAbaixo, inscreva-se para fazer parte do **Corpo Jurídico** da cidade Saturno RP.\n* Antes de iniciar a prova, saiba:\n * Você tem **30 minutos** para responder cada questão, portanto, responda com paciência;\n * Envie sua resposta em **apenas uma mensagem**;\n * Provas que contenham **as mesmas respostas de outras pessoas** serão anuladas;\n * Você **será respondido(a) **sobre a aprovação/reprovação **em até 24h**.`;
 
         // < Botão >
         const btn_processo = new ButtonBuilder()
         .setCustomId(`btn_${id}`)
-        .setLabel(`Abrir processo`)
-        .setStyle(ButtonStyle.Secondary)
-        .setEmoji(`1187883019667779617`);
+        .setLabel(`Iniciar prova`)
+        .setStyle(ButtonStyle.Success)
+        .setEmoji(`1202096934093852732`);
 
         const botao = new ActionRowBuilder()
         .addComponents(btn_processo);

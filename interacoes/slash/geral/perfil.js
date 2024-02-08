@@ -60,7 +60,7 @@ module.exports =
                     { name: '<:oab_veredito:1187577594472837171> | Processos', value: `\`\`\`js\n${processos.toLocaleString('pt-BR')}\`\`\``, inline: true },
                     { name: '<:oab_algemas:1188269430388559892> | Casos DP', value: `\`\`\`js\n${casos.toLocaleString('pt-BR')}\`\`\``, inline: true },
                 )
-                .setThumbnail(interaction.user.avatarURL({ dynamic: true }))
+                .setThumbnail(usuario.avatarURL({ dynamic: true }))
                 .setFooter({ text: `${footer}`, iconURL: client.user.avatarURL() });
 
                 await interaction.editReply({ embeds: [embed] });
