@@ -25,9 +25,6 @@ module.exports =
         if (interaction.values[0] == "prova_lei_de_miranda_verdade") resposta = "Verdadeiro";
         if (interaction.values[0] == "prova_lei_de_miranda_falso") resposta = "Falso";
 
-        // < Retira as opções da resposta anterior e salva a resposta do usuário >
-        interaction.update({ content: `## <:oab_questao:1204999334853214260> Questão 2.6\n> A polícia não é obrigada a citar a Lei de Miranda.\n> **Resposta:** ${resposta}.`, components: [] });
-
         // < Registra a última resposta >
         pool.query(`UPDATE provas SET resposta_12 = '${resposta}'`);
 
@@ -60,13 +57,6 @@ module.exports =
 		const row = new ActionRowBuilder()
 			.addComponents(select);
 
-        // < Informe >
-        await interaction.channel.send({ content: `<:oab_relogio:1204997699586236436> **|** ${interaction.member}, questão 2.7 em **5 segundos**...` });
-
-        // < Pergunta #1 >
-        setTimeout(async () => {
-            // < Pergunta #1 >
-            await interaction.channel.send({ content: `## <:oab_questao:1204999334853214260> Questão 2.7\n> Referente à confidencialidade do réu com seu advogado(a), assinale a alternativa correta:`, components: [row] });
-        }, 5000);
+        await interaction.update({ content: `## <:oab_questao:1204999334853214260> Questão 2.7\n> Referente à confidencialidade do réu com seu advogado(a), assinale a alternativa correta:`, components: [row] });
     },
 };

@@ -26,9 +26,6 @@ module.exports =
         if (interaction.values[0] == "prova_matar_nao") resposta = "Não";
         if (interaction.values[0] == "prova_matar_talvez") resposta = "Talvez";
 
-        // < Retira as opções da resposta anterior e salva a resposta do usuário >
-        interaction.update({ content: `## <:oab_questao:1204999334853214260> Questão 2.2\n> É permitido assaltar / sequestrar / roubar / sacar arma / matar / abordar em áreas safes?\n> **Resposta:** ${resposta}.`, components: [] });
-
         // < Registra a última resposta >
         pool.query(`UPDATE provas SET resposta_8 = '${resposta}'`);
 
@@ -54,13 +51,6 @@ module.exports =
 		const row = new ActionRowBuilder()
 			.addComponents(select);
 
-        // < Informe >
-        await interaction.channel.send({ content: `<:oab_relogio:1204997699586236436> **|** ${interaction.member}, questão 2.3 em **5 segundos**...` });
-
-        // < Pergunta #1 >
-        setTimeout(async () => {
-            // < Pergunta #1 >
-            await interaction.channel.send({ content: `## <:oab_questao:1204999334853214260> Questão 2.3\n> O réu tem garantia de defesa independente do crime cometido?`, components: [row] });
-        }, 5000);
+        await interaction.update({ content: `# <:oab_livro:1204999345544372264> Parte 2 - Regras da Cidade\n## <:oab_questao:1204999334853214260> Questão 2.3\n> O réu tem garantia de defesa independente do crime cometido?`, components: [row] });
     },
 };

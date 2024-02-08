@@ -115,19 +115,7 @@ module.exports =
             .addComponents(btn_prova_experiencia_sim, btn_prova_experiencia_nao);
 
             // < Informe >
-            await canal.send({ content: `# <:oab_livro:1204999345544372264> Parte 1 - Questões pessoais\n<:oab_relogio:1204997699586236436> **|** ${interaction.member} sua prova será iniciada em **10 segundos**...` })
-
-            // < Pergunta #1 >
-            setTimeout(async () => {
-                // < Pergunta #1 >
-                await canal.send({ content: `<:oab_relogio:1204997699586236436> **|** ${interaction.member} sua prova será iniciada em **5 segundos**...` });
-            }, 5000);
-
-            // < Pergunta #1 >
-            setTimeout(async () => {
-                // < Pergunta #1 >
-                await canal.send({ content: `## <:oab_questao:1204999334853214260> Questão 1.0\n> Tem **experiência** como **advogado(a)** em RP?`, components: [botoes] });
-            }, 10000);
+            await canal.send({ content: `# <:oab_livro:1204999345544372264> Parte 1 - Questões pessoais\n## <:oab_questao:1204999334853214260> Questão 1.0\n> Tem **experiência** como **advogado(a)** em RP?`, components: [botoes] });
         })
     },
 };

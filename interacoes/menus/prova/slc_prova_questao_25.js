@@ -27,9 +27,6 @@ module.exports =
         if (interaction.values[0] == "prova_lei_de_miranda_familiares") resposta = "Somente pode falar com familiares";
         if (interaction.values[0] == "prova_lei_de_miranda_dizer") resposta = "Tudo que ele disser, não será levado como prova";
 
-        // < Retira as opções da resposta anterior e salva a resposta do usuário >
-        interaction.update({ content: `## <:oab_questao:1204999334853214260> Questão 2.5\n> Sobre a Lei de Miranda, o réu:\n> **Resposta:** ${resposta}.`, components: [] });
-
         // < Registra a última resposta >
         pool.query(`UPDATE provas SET resposta_11 = '${resposta}'`);
 
@@ -51,13 +48,6 @@ module.exports =
 		const row = new ActionRowBuilder()
 			.addComponents(select);
 
-        // < Informe >
-        await interaction.channel.send({ content: `<:oab_relogio:1204997699586236436> **|** ${interaction.member}, questão 2.6 em **5 segundos**...` });
-
-        // < Pergunta #1 >
-        setTimeout(async () => {
-            // < Pergunta #1 >
-            await interaction.channel.send({ content: `## <:oab_questao:1204999334853214260> Questão 2.6\n> A polícia não é obrigada a citar a Lei de Miranda.`, components: [row] });
-        }, 5000);
+        await interaction.update({ content: `## <:oab_questao:1204999334853214260> Questão 2.6\n> A polícia não é obrigada a citar a Lei de Miranda.`, components: [row] });
     },
 };

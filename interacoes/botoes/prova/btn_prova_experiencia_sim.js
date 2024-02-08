@@ -20,9 +20,6 @@ module.exports =
     // < Executa o código do botão >
 	async execute(interaction, client) 
     {
-        // < Retira as opções da resposta anterior e salva a resposta do usuário >
-        interaction.update({ content: `## <:oab_questao:1204999334853214260> Questão 1.0\n> Tem **experiência** como **advogado(a)** em RP?\n> **Resposta:** Sim.`, components: [] });
-
         // < Registra a última resposta >
         pool.query(`UPDATE provas SET resposta_1 = 'Sim'`);
 
@@ -48,13 +45,6 @@ module.exports =
         const botoes = new ActionRowBuilder()
         .addComponents(btn_prova_manha, btn_prova_tarde, btn_prova_noite);
 
-        // < Informe >
-        await interaction.channel.send({ content: `<:oab_relogio:1204997699586236436> **|** ${interaction.member}, questão 1.1 em **5 segundos**...` });
-
-        // < Pergunta #1 >
-        setTimeout(async () => {
-            // < Pergunta #1 >
-            await interaction.channel.send({ content: `## <:oab_questao:1204999334853214260> Questão 1.1\n> Qual o horário que você irá trabalhar caso seja contratado?`, components: [botoes] });
-        }, 5000);
+        await interaction.update({ content: `# <:oab_livro:1204999345544372264> Parte 1 - Questões pessoais\n## <:oab_questao:1204999334853214260> Questão 1.1\n> Qual o horário que você irá trabalhar caso seja contratado?`, components: [botoes] });
     },
 };

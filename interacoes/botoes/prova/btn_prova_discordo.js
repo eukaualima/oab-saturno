@@ -20,9 +20,6 @@ module.exports =
     // < Executa o código do botão >
 	async execute(interaction, client) 
     {
-        // < Retira as opções da resposta anterior e salva a resposta do usuário >
-        interaction.update({ content: `## <:oab_questao:1204999334853214260> Questão 1.2\n> Você começará sendo estagiário (a) por uma semana!\n> **Resposta:** Discordo.`, components: [] });
-
         // < Registra a última resposta >
         pool.query(`UPDATE provas SET resposta_3 = 'Discordo'`);
 
@@ -42,13 +39,6 @@ module.exports =
         const botoes = new ActionRowBuilder()
         .addComponents(btn_prova_concordo, btn_prova_discordo);
 
-        // < Informe >
-        await interaction.channel.send({ content: `<:oab_relogio:1204997699586236436> **|** ${interaction.member}, questão 1.3 em **5 segundos**...` });
-
-        // < Pergunta #1 >
-        setTimeout(async () => {
-            // < Pergunta #1 >
-            await interaction.channel.send({ content: `## <:oab_questao:1204999334853214260> Questão 1.3\n> Você leu as regras de Saturno e concorda com elas?`, components: [botoes] });
-        }, 5000);
+        await interaction.update({ content: `# <:oab_livro:1204999345544372264> Parte 1 - Questões pessoais\n## <:oab_questao:1204999334853214260> Questão 1.3\n> Você leu as regras de Saturno e concorda com elas?`, components: [botoes] });
     },
 };

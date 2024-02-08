@@ -20,9 +20,6 @@ module.exports =
     // < Executa o código do botão >
 	async execute(interaction, client) 
     {
-        // < Retira as opções da resposta anterior e salva a resposta do usuário >
-        interaction.update({ content: `## <:oab_questao:1204999334853214260> Questão 1.3\n> Você leu as regras de Saturno e concorda com elas?\n> **Resposta:** Li e concordo com as regras.`, components: [] });
-
         // < Registra a última resposta >
         pool.query(`UPDATE provas SET resposta_4 = 'Li e concordo com as regras'`);
 
@@ -42,13 +39,6 @@ module.exports =
         const botoes = new ActionRowBuilder()
         .addComponents(btn_prova_continuar, btn_prova_link);
 
-        // < Informe >
-        await interaction.channel.send({ content: `<:oab_relogio:1204997699586236436> **|** ${interaction.member}, encerramento da Parte 1 em **5 segundos**...` });
-
-        // < Pergunta #1 >
-        setTimeout(async () => {
-            // < Pergunta #1 >
-            await interaction.channel.send({ content: `## <:oab_fechado:1187577601489903728> Fim da Parte 1\n> Próxima etapa será um pequeno teste sobre as **regras básicas de Saturno**. Por gentileza, **leia as regras básicas da cidade** (encontram-se no item 3 da regra geral - clique no botão de link)!`, components: [botoes] });
-        }, 5000);
+        await interaction.update({ content: `# <:oab_livro:1204999345544372264> Parte 1 - Questões pessoais\n## <:oab_fechado:1187577601489903728> Fim da Parte 1\n> Próxima etapa será um pequeno teste sobre as **regras básicas de Saturno**. Por gentileza, **leia as regras básicas da cidade** (encontram-se no item 3 da regra geral - clique no botão de link)!`, components: [botoes] });
     },
 };
