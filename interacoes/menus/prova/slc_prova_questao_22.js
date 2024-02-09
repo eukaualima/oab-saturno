@@ -21,10 +21,26 @@ module.exports =
 	async execute(interaction, client) 
     {
         let resposta;
+        
         // < Verifica a entrada >
-        if (interaction.values[0] == "prova_matar_permitido") resposta = "Sim";
-        if (interaction.values[0] == "prova_matar_nao") resposta = "Não";
-        if (interaction.values[0] == "prova_matar_talvez") resposta = "Talvez";
+        if (interaction.values[0] == "prova_matar_permitido")
+        {
+            resposta = "Sim";
+        }
+        else if (interaction.values[0] == "prova_matar_nao") 
+        {
+            resposta = "Não";
+            
+            // < Registra os pontos >
+            pool.query(`SELECT * FROM provas WHERE discord_id = ${interaction.user.id}`, async function (erro, provas)
+            {
+                pool.query(`UPDATE provas SET pontos = (${provas[0].pontos} + 1)`);
+            })
+        }
+        else if (interaction.values[0] == "prova_matar_talvez") 
+        {
+            resposta = "Talvez";
+        }
 
         // < Registra a última resposta >
         pool.query(`UPDATE provas SET resposta_8 = '${resposta}'`);

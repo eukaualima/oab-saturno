@@ -23,6 +23,12 @@ module.exports =
         // < Registra a última resposta >
         pool.query(`UPDATE provas SET resposta_2 = 'Noite'`);
 
+        // < Registra os pontos >
+        pool.query(`SELECT * FROM provas WHERE discord_id = ${interaction.user.id}`, async function (erro, provas)
+        {
+            pool.query(`UPDATE provas SET pontos = (${provas[0].pontos} + 1)`);
+        })
+
         // < Respostas >
         const btn_prova_concordo = new ButtonBuilder()
         .setCustomId('btn_prova_concordo')

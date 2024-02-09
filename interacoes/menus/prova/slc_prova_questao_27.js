@@ -21,11 +21,30 @@ module.exports =
 	async execute(interaction, client) 
     {
         let resposta;
+
         // < Verifica a entrada >
-        if (interaction.values[0] == "prova_adv_respeitar") resposta = "O advogado somente terá que respeitar a confidencialidade após o pagamento";
-        if (interaction.values[0] == "prova_adv_preso") resposta = "O advogado poderá revelar a confissão do réu caso esteja errado e mereça ser preso";
-        if (interaction.values[0] == "prova_adv_amigos") resposta = "O advogado não pode revelar a confissão do réu";
-        if (interaction.values[0] == "prova_adv_confissao") resposta = "O advogado não pode revelar a confissão do réu à polícia, apenas a parentes e amigos";
+        if (interaction.values[0] == "prova_adv_respeitar")
+        {
+            resposta = "O advogado somente terá que respeitar a confidencialidade após o pagamento";
+        }
+        else if (interaction.values[0] == "prova_adv_preso")
+        {
+            resposta = "O advogado poderá revelar a confissão do réu caso esteja errado e mereça ser preso";
+        }
+        else if (interaction.values[0] == "prova_adv_amigos")
+        {
+            resposta = "O advogado não pode revelar a confissão do réu";
+
+            // < Registra os pontos >
+            pool.query(`SELECT * FROM provas WHERE discord_id = ${interaction.user.id}`, async function (erro, provas)
+            {
+                pool.query(`UPDATE provas SET pontos = (${provas[0].pontos} + 1)`);
+            })
+        }
+        else if (interaction.values[0] == "prova_adv_confissao")
+        {
+            resposta = "O advogado não pode revelar a confissão do réu à polícia, apenas a parentes e amigos";
+        }
 
         // < Registra a última resposta >
         pool.query(`UPDATE provas SET resposta_13 = '${resposta}'`);

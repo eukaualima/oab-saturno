@@ -22,6 +22,12 @@ module.exports =
     {
         // < Registra a última resposta >
         pool.query(`UPDATE provas SET resposta_1 = 'Não'`);
+        
+        // < Registra os pontos >
+        pool.query(`SELECT * FROM provas WHERE discord_id = ${interaction.user.id}`, async function (erro, provas)
+        {
+            pool.query(`UPDATE provas SET pontos = (${provas[0].pontos} + 1)`);
+        })
 
         // < Respostas >
         const btn_prova_manha = new ButtonBuilder()

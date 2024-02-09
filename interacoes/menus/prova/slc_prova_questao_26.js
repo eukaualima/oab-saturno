@@ -21,9 +21,22 @@ module.exports =
 	async execute(interaction, client) 
     {
         let resposta;
+        
         // < Verifica a entrada >
-        if (interaction.values[0] == "prova_lei_de_miranda_verdade") resposta = "Verdadeiro";
-        if (interaction.values[0] == "prova_lei_de_miranda_falso") resposta = "Falso";
+        if (interaction.values[0] == "prova_lei_de_miranda_verdade")
+        {
+            resposta = "Verdadeiro";
+        }
+        else if (interaction.values[0] == "prova_lei_de_miranda_falso")
+        {
+            resposta = "Falso";
+
+            // < Registra os pontos >
+            pool.query(`SELECT * FROM provas WHERE discord_id = ${interaction.user.id}`, async function (erro, provas)
+            {
+                pool.query(`UPDATE provas SET pontos = (${provas[0].pontos} + 1)`);
+            })
+        }
 
         // < Registra a última resposta >
         pool.query(`UPDATE provas SET resposta_12 = '${resposta}'`);

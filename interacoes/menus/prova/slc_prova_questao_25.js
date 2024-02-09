@@ -21,11 +21,30 @@ module.exports =
 	async execute(interaction, client) 
     {
         let resposta;
+        
         // < Verifica a entrada >
-        if (interaction.values[0] == "prova_lei_de_miranda_calado") resposta = "É obrigado a ficar calado";
-        if (interaction.values[0] == "prova_lei_de_miranda_ligacao") resposta = "Pode realizar uma única ligação para o advogado";
-        if (interaction.values[0] == "prova_lei_de_miranda_familiares") resposta = "Somente pode falar com familiares";
-        if (interaction.values[0] == "prova_lei_de_miranda_dizer") resposta = "Tudo que ele disser, não será levado como prova";
+        if (interaction.values[0] == "prova_lei_de_miranda_calado")
+        {
+            resposta = "É obrigado a ficar calado";
+        }
+        else if (interaction.values[0] == "prova_lei_de_miranda_ligacao")
+        {
+            resposta = "Pode realizar uma única ligação para o advogado";
+
+            // < Registra os pontos >
+            pool.query(`SELECT * FROM provas WHERE discord_id = ${interaction.user.id}`, async function (erro, provas)
+            {
+                pool.query(`UPDATE provas SET pontos = (${provas[0].pontos} + 1)`);
+            })
+        }
+        else if (interaction.values[0] == "prova_lei_de_miranda_familiares") 
+        {
+            resposta = "Somente pode falar com familiares";
+        }
+        else if (interaction.values[0] == "prova_lei_de_miranda_dizer")
+        {
+            resposta = "Tudo que ele disser, não será levado como prova";
+        }
 
         // < Registra a última resposta >
         pool.query(`UPDATE provas SET resposta_11 = '${resposta}'`);
