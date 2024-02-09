@@ -8,7 +8,7 @@
 // < Importação das bibliotecas necessárias >
 const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, EmbedBuilder, SlashCommandBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const pool = require('../../../conexao/mysql.js');
-const { footer } = require('../../../config.json');
+const { canal_resultados, footer } = require('../../../config.json');
 
 // < Inicia o comando >
 module.exports = 
@@ -39,8 +39,7 @@ module.exports =
         }
 
         // mensagem = `# <:oab_balanca:1187577597173960754> Abertura de Processo\nPara abrir o processo, clique no botão abaixo e responda corretamente o formulário.`;
-        mensagem = `## <:oab_logo:1202096934093852732> Prova da OAB\nAbaixo, inscreva-se para fazer parte do **Corpo Jurídico** da cidade Saturno RP.\n* Antes de iniciar a prova, saiba:\n * Você tem **30 minutos** para responder cada questão, portanto, responda com paciência;\n * Envie sua resposta em **apenas uma mensagem**;\n * Provas que contenham **as mesmas respostas de outras pessoas** serão anuladas;\n * Você **será respondido(a) **sobre a aprovação/reprovação **em até 24h**.`;
-
+        mensagem = `# <:oab_logo:1202096934093852732> Prova da OAB\nAbaixo, inscreva-se para fazer parte do **Corpo Jurídico** da cidade Saturno RP.\n* Antes de iniciar a prova, saiba:\n * **Não há tempo limite**, portanto, responda com **paciência**;\n * Leia com atenção e selecione a opção que você julga ser **correta**;\n * São **14 questões** ao todo e apenas **12** são avaliativas;\n * Você **será respondido(a) **sobre a aprovação/reprovação **em até 24h** no canal <#${canal_resultados}>.`;
         // < Botão >
         const btn_processo = new ButtonBuilder()
         .setCustomId(`btn_${id}`)

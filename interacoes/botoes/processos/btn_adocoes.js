@@ -20,7 +20,7 @@ module.exports =
         // < Cria o modal >
         const modal = new ModalBuilder()
         .setCustomId("mdl_adocao")
-        .setTitle('Audiência criminal/trabalhista')
+        .setTitle('Audiência de Adoção')
 
         // < Cria os campos >
         const crianca = new TextInputBuilder()
@@ -46,13 +46,20 @@ module.exports =
             .setPlaceholder("Ex.: 26 de dezembro de 2023")
             .setStyle(TextInputStyle.Short);
         
+        const disponibilidade = new TextInputBuilder()
+            .setCustomId('adocao_disponibilidade')
+            .setLabel("Disponibilidade de horário dos pais:")
+            .setPlaceholder("Ex.: A partir das 22h, quartas e quintas")
+            .setStyle(TextInputStyle.Short);
+        
         const crianca_campo = new ActionRowBuilder().addComponents(crianca);
         const mae_campo = new ActionRowBuilder().addComponents(mae);
         const pai_campo = new ActionRowBuilder().addComponents(pai);
         const data_campo = new ActionRowBuilder().addComponents(data);
+        const disponibilidade_campo = new ActionRowBuilder().addComponents(disponibilidade);
 
         // < Adiciona os campos ao modal >
-        modal.addComponents(crianca_campo, mae_campo, pai_campo, data_campo);
+        modal.addComponents(crianca_campo, mae_campo, pai_campo, data_campo, disponibilidade_campo);
         
         // < Mostra o modal >
         interaction.showModal(modal);

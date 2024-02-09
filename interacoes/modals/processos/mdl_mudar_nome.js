@@ -110,7 +110,7 @@ module.exports =
                         .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
 
                         await canal.send({ embeds: [embed], components: [botao] });
-                        await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexo\n${interaction.user}, envie abaixo o **comprovante da transferência** feita ao(à) Juiz(a) responsável.\n* Ao enviar, marque o cargo Juiz(a) e aguarde o retorno.` });
+                        await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexos\n${interaction.user}, envie abaixo:\n1. **Comprovante da transferência** feita ao(à) Juiz(a) responsável; e\n2. imagem da **pesquisa no MDT**.\n\n* Ao enviar, **marque o cargo Juiz(a)** e aguarde o retorno.` });
                         
                     })
             })

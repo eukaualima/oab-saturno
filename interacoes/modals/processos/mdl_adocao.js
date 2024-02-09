@@ -28,6 +28,7 @@ module.exports =
         const mae = interaction.fields.getTextInputValue('adocao_mae')
         const pai = interaction.fields.getTextInputValue('adocao_pai')
         const data = interaction.fields.getTextInputValue('adocao_data')
+        const disponibilidade = interaction.fields.getTextInputValue('adocao_disponibilidade')
 
         // < Cria o canal do processo >
         pool.query(`SELECT COUNT(*) AS total_registros FROM adocoes`, async function (erro, adocoes)
@@ -74,6 +75,7 @@ module.exports =
                             { name: `<:oab_pai:1188548184780329051> | Pai`, value: `${pai}` },
                             { name: `<:oab_data:1188268177063424050> | Data da adoção`, value: `${data}` },
                             { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
+                            { name: `<:oab_data:1188268177063424050> | Disponibildiade de horário`, value: `${disponibilidade}` },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 900.000,00` },
                         ])
                         .setThumbnail(interaction.user.avatarURL())
