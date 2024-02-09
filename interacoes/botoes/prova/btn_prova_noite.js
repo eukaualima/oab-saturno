@@ -21,12 +21,12 @@ module.exports =
 	async execute(interaction, client) 
     {
         // < Registra a última resposta >
-        pool.query(`UPDATE provas SET resposta_2 = 'Noite'`);
+        pool.query(`UPDATE provas SET resposta_2 = 'Noite' WHERE discord_id = ${interaction.user.id}`);
 
         // < Registra os pontos >
         pool.query(`SELECT * FROM provas WHERE discord_id = ${interaction.user.id}`, async function (erro, provas)
         {
-            pool.query(`UPDATE provas SET pontos = (${provas[0].pontos} + 1)`);
+            pool.query(`UPDATE provas SET pontos = (${provas[0].pontos} + 1) WHERE discord_id = ${interaction.user.id}`);
         })
 
         // < Respostas >

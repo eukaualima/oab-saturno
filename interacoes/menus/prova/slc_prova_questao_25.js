@@ -34,7 +34,7 @@ module.exports =
             // < Registra os pontos >
             pool.query(`SELECT * FROM provas WHERE discord_id = ${interaction.user.id}`, async function (erro, provas)
             {
-                pool.query(`UPDATE provas SET pontos = (${provas[0].pontos} + 1)`);
+                pool.query(`UPDATE provas SET pontos = (${provas[0].pontos} + 1) WHERE discord_id = ${interaction.user.id}`);
             })
         }
         else if (interaction.values[0] == "prova_lei_de_miranda_familiares") 
@@ -47,7 +47,7 @@ module.exports =
         }
 
         // < Registra a última resposta >
-        pool.query(`UPDATE provas SET resposta_11 = '${resposta}'`);
+        pool.query(`UPDATE provas SET resposta_11 = '${resposta}' WHERE discord_id = ${interaction.user.id}`);
 
         // < Respostas >
         const select = new StringSelectMenuBuilder()

@@ -32,7 +32,7 @@ module.exports =
             // < Registra os pontos >
             pool.query(`SELECT * FROM provas WHERE discord_id = ${interaction.user.id}`, async function (erro, provas)
             {
-                pool.query(`UPDATE provas SET pontos = (${provas[0].pontos} + 1)`);
+                pool.query(`UPDATE provas SET pontos = (${provas[0].pontos} + 1) WHERE discord_id = ${interaction.user.id}`);
             })
         } 
         else if (interaction.values[0] == "prova_policia_falso")
@@ -41,7 +41,7 @@ module.exports =
         }
 
         // < Registra a última resposta >
-        pool.query(`UPDATE provas SET resposta_14 = '${resposta}'`);
+        pool.query(`UPDATE provas SET resposta_14 = '${resposta}' WHERE discord_id = ${interaction.user.id}`);
 
         // < Informe >
         await interaction.update({ content: `# <a:oab_carregando:1187884300264275968> Salvando a prova...\n* Aguarde enquanto eu registro suas respostas.`, components: [] })
@@ -83,7 +83,7 @@ module.exports =
                             .setEmoji(`1187577594472837171`);
 
                             const btn_prova_rejeitada = new ButtonBuilder()
-                            .setCustomId('btn_prova_rejeitado')
+                            .setCustomId('btn_prova_reprovado')
                             .setLabel(`Rejeitar candidato(a)`)
                             .setStyle(ButtonStyle.Danger)
                             .setEmoji(`1187577594472837171`);

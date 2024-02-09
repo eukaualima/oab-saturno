@@ -21,7 +21,7 @@ module.exports =
 	async execute(interaction, client) 
     {
         // < Registra a última resposta >
-        pool.query(`UPDATE provas SET resposta_5 = 'Continuou a prova'`);
+        pool.query(`UPDATE provas SET resposta_5 = 'Continuou a prova' WHERE discord_id = ${interaction.user.id}`);
 
         // < Respostas >
         const select = new StringSelectMenuBuilder()

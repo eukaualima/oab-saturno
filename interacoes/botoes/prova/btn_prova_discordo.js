@@ -21,7 +21,7 @@ module.exports =
 	async execute(interaction, client) 
     {
         // < Registra a última resposta >
-        pool.query(`UPDATE provas SET resposta_3 = 'Discordo'`);
+        pool.query(`UPDATE provas SET resposta_3 = 'Discordo' WHERE discord_id = ${interaction.user.id}`);
 
         // < Respostas >
         const btn_prova_concordo = new ButtonBuilder()
