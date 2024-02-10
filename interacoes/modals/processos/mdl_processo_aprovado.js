@@ -111,7 +111,7 @@ module.exports =
                     
                     // await vereditos.send({ content: `## <:oab_veredito:1187577594472837171> Veredito\nO(a) juiz(a) **${interaction.user}** acaba de **aprovar** o processo de <@${processo[0].advogado}>.\n### <:oab_juiz:1187577598776193136> Observações\n${motivo ? motivo : "Nenhuma."}\n\n* O identificador deste processo é *${natureza}#${codigo}*.` });
                     await vereditos.send({ embeds: [veredito_embed] });
-                    await interaction.channel.send({ content: `## <:oab_juiz:1187577598776193136> Processo aprovado\nO(a) excelentíssimo(a) Juiz(a) ${client.users.cache.get(processo[0].juiz)} aprovou o presente processo.\n### <:oab_veredito:1187577594472837171> Motivo da aprovação\n${motivo ? motivo : "Não informado pelo(a) juiz(a)."}`})
+                    await interaction.channel.send({ content: `# <:oab_logo:1202096934093852732> Atualização do Processo\nProcesso **fechado** e **arquivado**, só poderá ser visto por juízes.\n## <:oab_juiz:1187577598776193136> Juiz(a) responsável\n${client.users.cache.get(processo[0].juiz)}\n## <:oab_email:1187883019667779617> Observações\n${motivo ? motivo : "Nenhuma."}\n### <:oab_anuncio:1202084582992924692> Veredito publicado\n<#${canal_vereditos}>`})
                 })
             })
         })

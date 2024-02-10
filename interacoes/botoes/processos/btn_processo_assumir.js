@@ -68,7 +68,7 @@ module.exports =
 
                 await interaction.update({ components: [botoes] });
                 
-                return interaction.channel.send({ content: `<:oab_juiz:1187577598776193136> **|** O(a) Juiz(a) **${interaction.member.nickname}** acabou de assumir o processo.` });
+                return interaction.channel.send({ content: `# <:oab_logo:1202096934093852732> Atualização do Processo\n<@${processo[0].advogado}>, o(a) Excelentíssima(o) Juiz(a) **${interaction.member.nickname}** acaba de **assumir** seu processo.` });
             }
         })
     },

@@ -43,7 +43,7 @@ module.exports =
                 // < Cria um novo canal para o processo >
                 interaction.guild.channels.create(
                     { 
-                        name: `carteira-oab-${total_registros+1}`,
+                        name: `carteira-${total_registros+1}`,
                         type: ChannelType.GuildText,
                         parent: categoria_carteiras,
                         permissionOverwrites: 
@@ -79,7 +79,10 @@ module.exports =
 
                         // < Cria os dados no banco de dados >
                         pool.query(`INSERT INTO carteiras (advogado, juiz, cliente_nome, cliente_id, profissao, rg, data, status, observacoes) VALUES ("${interaction.user.id}", "Ninguém", "${nome}", "${id}", "Advogado(a)", "${rg}", NOW(), "Aberto", "Nenhuma")`);
-
+                        
+                        await interaction.deferReply({ ephemeral: true });
+                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Carteira OAB Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()
                         .setCustomId('btn_processo_aprovado')
@@ -106,8 +109,6 @@ module.exports =
 
                         await canal.send({ embeds: [embed], components: [botao] })
                         await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexos\n${interaction.user} marque o cargo Juiz(a) e aguarde o retorno.` });
-                        await interaction.deferReply({ ephemeral: true });
-                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Carteira OAB Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
                     })
             })
         })
