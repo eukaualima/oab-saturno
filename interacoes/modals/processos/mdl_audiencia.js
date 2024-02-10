@@ -25,8 +25,10 @@ module.exports =
 
         // < Coleta as informações passadas no modal >
         const assunto = interaction.fields.getTextInputValue('audiencia_assunto')
-        const partes = interaction.fields.getTextInputValue('audiencia_partes')
+        const requerente = interaction.fields.getTextInputValue('audiencia_cliente')
         const testemunhas = interaction.fields.getTextInputValue('audiencia_testemunhas')
+        const acusados = interaction.fields.getTextInputValue('audiencia_acusados')
+        const provas = interaction.fields.getTextInputValue('audiencia_provas')
 
         // < Cria o canal do processo >
         pool.query(`SELECT COUNT(*) AS total_registros FROM audiencias`, async function (erro, audiencias)
@@ -69,8 +71,10 @@ module.exports =
                         .setColor(cor_embed)
                         .addFields([
                             { name: `<:oab_escrita:1188542389179133992> | Assunto`, value: `${assunto}` },
-                            { name: `<:oab_partes:1188556237911109764> | Partes`, value: `${partes}` },
+                            { name: `<:oab_cliente:1188541685572051054> | Requerente`, value: `${requerente}` },
+                            { name: `<:oab_partes:1188556237911109764> | Acusados`, value: `${acusados}` },
                             { name: `<:oab_testemunhas:1188556234551464026> | Testemunhas`, value: `${testemunhas}` },
+                            { name: `<:oab_arquivo:1203930183199887410> | Existem provas?`, value: `${provas}` },
                             { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 500.000,00` },
                         ])
@@ -78,7 +82,7 @@ module.exports =
                         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
 
                         // < Cria os dados no banco de dados >
-                        pool.query(`INSERT INTO audiencias (advogado, juiz, assunto, partes, testemunhas, data, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", "${assunto}", "${partes}", "${testemunhas}", NOW(), "Aberto", "Nenhuma")`);
+                        pool.query(`INSERT INTO audiencias (advogado, juiz, assunto, partes, testemunhas, data, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", "${assunto}", "${requerente}, ${acusados}", "${testemunhas}", NOW(), "Aberto", "Nenhuma")`);
                         
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()
