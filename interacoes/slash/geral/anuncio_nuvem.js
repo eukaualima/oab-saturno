@@ -29,7 +29,7 @@ module.exports =
         const texto = interaction.options.getString("texto");
 
         const embed = new EmbedBuilder()
-        .setAuthor({ name: 'Sugerido por: ' + interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
+        .setAuthor({ name: 'Sugerido por: ' + interaction.member.nickname, iconURL: interaction.user.avatarURL({ dynamic: true }) })
         .setTitle(`<:oab_anuncio:1202084582992924692> Anúncio`)
         .setDescription(`Abaixo uma sugestão de anúncio para ser usado dentro da cidade e encontrar clientes!\n**__💡 Dica:__** no computador, passe o mouse sobre a caixa abaixo e depois clique no botão de cópia!\n\`\`\`txt\n${texto}\`\`\``)
         .setColor(cor_embed)

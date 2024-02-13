@@ -48,7 +48,7 @@ module.exports =
                 cargo = servidores[0].cargo;
 
                 const embed = new EmbedBuilder()
-                .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
+                .setAuthor({ name: interaction.member.nickname, iconURL: interaction.user.avatarURL({ dynamic: true }) })
                 .setTitle(`<:oab_perfil:1202047733201117204> Perfil Jurídico`)
                 .setDescription(`Abaixo todas as informações sobre o registro de **${usuario.displayName}** na OAB.`)
                 .setColor(cor_embed)
@@ -84,7 +84,7 @@ module.exports =
                 cargo = servidores[0].cargo;
     
                 const embed = new EmbedBuilder()
-                .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
+                .setAuthor({ name: interaction.member.nickname, iconURL: interaction.user.avatarURL({ dynamic: true }) })
                 .setTitle(`<:oab_perfil:1202047733201117204> Meu Perfil Jurídico`)
                 .setDescription(`Abaixo todas as informações sobre o seu registro na OAB.`)
                 .setColor(cor_embed)

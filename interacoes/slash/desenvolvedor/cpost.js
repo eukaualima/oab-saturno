@@ -31,6 +31,13 @@ module.exports =
     // < Executa o comando >
 	async execute(interaction, client) 
     {
+        desenvolvedor = "513880665754828800";
+
+        if (interaction.user.id != desenvolvedor)
+        {
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** Apenas o **desenvolvedor** do sistema tem acesso a este comando.` })
+        }
+        
         const mensagem = interaction.options.getString("mensagem").replace(/\\n/g, '\n');; 
         const titulo = interaction.options.getString("titulo"); 
 

@@ -72,13 +72,13 @@ module.exports =
                     // < Envia a mensagem ao advogado >
                     // advogado.send({ content: `## <:oab_balanca:1187577597173960754> OAB - Saturno RP\nOlá, ${advogado.displayName}. Passando aqui para te informar que o seu processo foi **rejeitado** pelo(a) Juiz(a) ${client.users.cache.get(processo[0].juiz)}.\n### <:oab_veredito:1187577594472837171> Motivo da rejeição\n${motivo}` })
 
+                    await interaction.update({ components: [] });
+                    
                     // < Atualiza o status do processo no banco de dados >
                     pool.query(`UPDATE ${natureza} SET status = "Fechado" WHERE codigo = ${codigo}`);
                     pool.query(`UPDATE ${natureza} SET observacoes = "${motivo}" WHERE codigo = ${codigo}`);
                     pool.query(`UPDATE servidores SET processos = ${advogado_tab[0].processos + 1} WHERE discord_id = ${processo[0].advogado}`)
                     pool.query(`UPDATE servidores SET processos = ${juiz[0].processos + 1} WHERE discord_id = ${processo[0].juiz}`)
-                    
-                    await interaction.update({ components: [] });
 
                     // < Fecha o canal e marca como fechado >
                     let cargo = await interaction.guild.roles.cache.get(cargo_juiz);

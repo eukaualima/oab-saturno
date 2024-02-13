@@ -24,7 +24,7 @@ module.exports =
 
         try
         {
-            await menu.execute(interaction);
+            await menu.execute(interaction, client);
         }
         catch (err)
         {

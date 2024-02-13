@@ -24,6 +24,7 @@
     "discord-api-types": "^0.37.66",
     "discord.js": "^14.14.1",
     "fs": "^0.0.1-security",
+    "jimp": "^0.22.10",
     "moment": "^2.29.4",
     "mysql": "^2.18.1",
     "os-utils": "^0.0.14"

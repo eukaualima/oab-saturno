@@ -71,11 +71,10 @@ module.exports =
                         .setColor(cor_embed)
                         .addFields([
                             { name: `<:oab_crianca:1188547935579938936> | Criança/Adulto`, value: `${crianca}` },
-                            { name: `<:oab_cliente:1188541685572051054> | Mãe`, value: `${mae}` },
-                            { name: `<:oab_pai:1188548184780329051> | Pai`, value: `${pai}` },
+                            { name: `<:oab_cliente:1188541685572051054> | Mãe`, value: `${mae}`, inline: true },
+                            { name: `<:oab_pai:1188548184780329051> | Pai`, value: `${pai}`, inline: true },
                             { name: `<:oab_data:1188268177063424050> | Data da adoção`, value: `${data}` },
-                            { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
-                            { name: `<:oab_data:1188268177063424050> | Disponibildiade de horário`, value: `${disponibilidade}` },
+                            { name: `<:oab_relogio:1204997699586236436> | Disponibilidade`, value: `${disponibilidade}` },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 900.000,00` },
                         ])
                         .setThumbnail(interaction.user.avatarURL())
