@@ -28,6 +28,10 @@ module.exports =
         const id = interaction.fields.getTextInputValue('carteira_passaporte')
         const rg = interaction.fields.getTextInputValue('carteira_rg')
 
+        // < Responde o usuário >
+        await interaction.deferReply({ ephemeral: true });
+        await interaction.editReply({ content: `## <a:oab_carregando:1187884300264275968> Aguarde...\nEstou criando o **canal** do processo!`, ephemeral: true });
+
         // < Cria o canal do processo >
         pool.query(`SELECT COUNT(*) AS total_registros FROM carteiras`, async function (erro, carteiras)
         {
@@ -80,8 +84,7 @@ module.exports =
                         // < Cria os dados no banco de dados >
                         pool.query(`INSERT INTO carteiras (advogado, juiz, cliente_nome, cliente_id, profissao, rg, data, status, observacoes) VALUES ("${interaction.user.id}", "Ninguém", "${nome}", "${id}", "Advogado(a)", "${rg}", NOW(), "Aberto", "Nenhuma")`);
                         
-                        await interaction.deferReply({ ephemeral: true });
-                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Carteira OAB Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        await interaction.editReply({ content: `## <:oab_check:1187428122988126348> Sucesso!\n${interaction.user}, seu processo de **Carteira OAB** (ID: ${total_registros+1}) foi aberto com sucesso no canal <#${canal.id}>.`, ephemeral: true });
                         
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()

@@ -29,6 +29,10 @@ module.exports =
         const profissao = interaction.fields.getTextInputValue('carteira_profissao')
         const rg = interaction.fields.getTextInputValue('carteira_rg')
 
+        // < Responde o usuário >
+        await interaction.deferReply({ ephemeral: true });
+        await interaction.editReply({ content: `## <a:oab_carregando:1187884300264275968> Aguarde...\nEstou criando o **canal** do processo!`, ephemeral: true });
+
         // < Cria o canal do processo >
         pool.query(`SELECT COUNT(*) AS total_registros FROM carteiras`, async function (erro, carteiras)
         {
@@ -108,8 +112,7 @@ module.exports =
 
                         await canal.send({ embeds: [embed], components: [botao] })
                         await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexo\n${interaction.user}, envie abaixo o **comprovante da transferência** feita ao(à) Juiz(a) responsável.\n* Ao enviar, marque o cargo Juiz(a) e aguarde o retorno.` });
-                        await interaction.deferReply({ ephemeral: true });
-                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Carteira Profissional Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        await interaction.editReply({ content: `## <:oab_check:1187428122988126348> Sucesso!\n${interaction.user}, seu processo de **Carteira Profissional** (ID: ${total_registros+1}) foi aberto com sucesso no canal <#${canal.id}>.`, ephemeral: true });
                     })
             })
         })

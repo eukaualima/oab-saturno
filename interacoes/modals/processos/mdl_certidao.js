@@ -29,6 +29,10 @@ module.exports =
         const mae = interaction.fields.getTextInputValue('certidao_mae')
         const data = interaction.fields.getTextInputValue('certidao_data')
 
+        // < Responde o usuário >
+        await interaction.deferReply({ ephemeral: true });
+        await interaction.editReply({ content: `## <a:oab_carregando:1187884300264275968> Aguarde...\nEstou criando o **canal** do processo!`, ephemeral: true });
+
         // < Cria o canal do processo >
         pool.query(`SELECT COUNT(*) AS total_registros FROM certidoes`, async function (erro, certidoes)
         {
@@ -82,8 +86,7 @@ module.exports =
                         // < Cria os dados no banco de dados >
                         pool.query(`INSERT INTO certidoes (advogado, juiz, crianca, mae, pai, data_nascimento, data_abertura, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", "${crianca}", "${mae}", "${pai}", "${data}", NOW(), "Aberto", "Nenhuma")`);
                         
-                        await interaction.deferReply({ ephemeral: true });
-                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Certidão de Nascimento Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        await interaction.editReply({ content: `## <:oab_check:1187428122988126348> Sucesso!\n${interaction.user}, seu processo de **Certidão de Nascimento** (ID: ${total_registros+1}) foi aberto com sucesso no canal <#${canal.id}>.`, ephemeral: true });
                         
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()

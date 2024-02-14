@@ -43,6 +43,10 @@ module.exports =
         // < Calcula os honorários >
         const honorarios_totais = honorarios(meses);
 
+        // < Responde o usuário >
+        await interaction.deferReply({ ephemeral: true });
+        await interaction.editReply({ content: `## <a:oab_carregando:1187884300264275968> Aguarde...\nEstou criando o **canal** do processo!`, ephemeral: true });
+
         // < Cria o canal do processo >
         pool.query(`SELECT COUNT(*) AS total_registros FROM limpezas`, async function (erro, limpezas)
         {
@@ -95,8 +99,7 @@ module.exports =
                         // < Cria os dados no banco de dados >
                         pool.query(`INSERT INTO limpezas (advogado, juiz, reu, reu_id, meses, orcamento, data, status, observacoes) VALUES ("${interaction.user.id}", "Ninguém", "${reu_nome}", ${reu_id}, ${meses}, ${honorarios_totais}, NOW(), "Aberto", "Nenhuma")`);
 
-                        await interaction.deferReply({ ephemeral: true });
-                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Limpeza de Ficha Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        await interaction.editReply({ content: `## <:oab_check:1187428122988126348> Sucesso!\n${interaction.user}, seu processo de **Limpeza de Ficha** (ID: ${total_registros+1}) foi aberto com sucesso no canal <#${canal.id}>.`, ephemeral: true });
                         
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()

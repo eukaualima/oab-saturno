@@ -28,6 +28,10 @@ module.exports =
         const noivo = interaction.fields.getTextInputValue('divorcio_noivo')
         const testemunhas = interaction.fields.getTextInputValue('divorcio_testemunhas')
 
+        // < Responde o usuário >
+        await interaction.deferReply({ ephemeral: true });
+        await interaction.editReply({ content: `## <a:oab_carregando:1187884300264275968> Aguarde...\nEstou criando o **canal** do processo!`, ephemeral: true });
+
         // < Cria o canal do processo >
         pool.query(`SELECT COUNT(*) AS total_registros FROM divorcios`, async function (erro, divorcios)
         {
@@ -80,8 +84,7 @@ module.exports =
                         // < Cria os dados no banco de dados >
                         pool.query(`INSERT INTO divorcios (advogado, juiz, noiva, noivo, testemunhas, data_abertura, status, observacoes) VALUES (${interaction.user.id}, "Ninguém", "${noiva}", "${noivo}", "${testemunhas}", NOW(), "Aberto", "Nenhuma")`);
                         
-                        await interaction.deferReply({ ephemeral: true });
-                        await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Processo de Divórcio Nº${total_registros+1} aberto com sucesso! Acesso-o no canal <#${canal.id}>.`, ephemeral: true });
+                        await interaction.editReply({ content: `## <:oab_check:1187428122988126348> Sucesso!\n${interaction.user}, seu processo de **Divórcio** (ID: ${total_registros+1}) foi aberto com sucesso no canal <#${canal.id}>.`, ephemeral: true });
                         
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()

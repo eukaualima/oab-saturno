@@ -499,7 +499,7 @@ module.exports =
             modal.addComponents(crianca_campo, mae_campo, pai_campo);
             
             // < Mostra o modal >
-            interaction.showModal(modal);
+            await interaction.showModal(modal);
         }
     },
 };
