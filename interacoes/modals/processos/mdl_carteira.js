@@ -111,7 +111,7 @@ module.exports =
                         .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
 
                         await canal.send({ embeds: [embed], components: [botao] })
-                        await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexos\n${interaction.user} marque o cargo Juiz(a) e aguarde o retorno.` });
+                        await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexos\n${interaction.user}, atente-se:\n* Envie uma foto do(a) Advogado(a);\n* Marque o cargo Juiz(a) e aguarde o retorno.` });
                     })
             })
         })
