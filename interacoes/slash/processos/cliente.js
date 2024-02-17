@@ -76,7 +76,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${adocoes.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_crianca:1188547935579938936> ${adocoes[i].adotado}\n* Mãe: ${adocoes[i].mae}\n* Pai: ${adocoes[i].pai}\n* Data de abertura: ${moment(adocoes[i].data_abertura).format('LL')}\n* Status: ${adocoes[i].status}\n* Observações: ${adocoes[i].observacoes}.`;
+                            mensagem += `### <:oab_crianca:1188547935579938936> ${adocoes[i].adotado}\n* Mãe: ${adocoes[i].mae}\n* Pai: ${adocoes[i].pai}\n* Data de abertura: ${moment(adocoes[i].data_abertura).format('LL')}\n* Status: ${adocoes[i].status}\n* Observações: ${adocoes[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -237,7 +237,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${trocas.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_editar:1205643996806910064> ${trocas[i].cliente_nome} (Passaporte: ${trocas[i].cliente_id})\n* Novo nome: ${trocas[i].novo_nome}\n* Motivo: R$ ${(trocas[i].motivo).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(trocas[i].data).format('LL')}\n* Status: ${trocas[i].status}\n* Observações: ${trocas[i].observacoes}.\n`;
+                            mensagem += `### <:oab_editar:1205643996806910064> ${trocas[i].cliente_nome} (Passaporte: ${trocas[i].cliente_id})\n* Novo nome: ${trocas[i].novo_nome}\n* Motivo: ${(trocas[i].motivo).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(trocas[i].data).format('LL')}\n* Status: ${trocas[i].status}\n* Observações: ${trocas[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -263,7 +263,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${adocoes.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_crianca:1188547935579938936> ${adocoes[i].adotado}\n* Mãe: ${adocoes[i].mae}\n* Pai: ${adocoes[i].pai}\n* Data de abertura: ${moment(adocoes[i].data_abertura).format('LL')}\n* Status: ${adocoes[i].status}\n* Observações: ${adocoes[i].observacoes}.`;
+                            mensagem += `### <:oab_crianca:1188547935579938936> ${adocoes[i].adotado}\n* Mãe: ${adocoes[i].mae}\n* Pai: ${adocoes[i].pai}\n* Data de abertura: ${moment(adocoes[i].data_abertura).format('LL')}\n* Status: ${adocoes[i].status}\n* Observações: ${adocoes[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -424,7 +424,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${trocas.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_editar:1205643996806910064> ${trocas[i].cliente_nome} (Passaporte: ${trocas[i].cliente_id})\n* Novo nome: ${trocas[i].novo_nome}\n* Motivo: R$ ${(trocas[i].motivo).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(trocas[i].data).format('LL')}\n* Status: ${trocas[i].status}\n* Observações: ${trocas[i].observacoes}.\n`;
+                            mensagem += `### <:oab_editar:1205643996806910064> ${trocas[i].cliente_nome} (Passaporte: ${trocas[i].cliente_id})\n* Novo nome: ${trocas[i].novo_nome}\n* Motivo: ${(trocas[i].motivo).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(trocas[i].data).format('LL')}\n* Status: ${trocas[i].status}\n* Observações: ${trocas[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -450,7 +450,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${adocoes.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_crianca:1188547935579938936> ${adocoes[i].adotado}\n* Mãe: ${adocoes[i].mae}\n* Pai: ${adocoes[i].pai}\n* Data de abertura: ${moment(adocoes[i].data_abertura).format('LL')}\n* Status: ${adocoes[i].status}\n* Observações: ${adocoes[i].observacoes}.`;
+                            mensagem += `### <:oab_crianca:1188547935579938936> ${adocoes[i].adotado}\n* Mãe: ${adocoes[i].mae}\n* Pai: ${adocoes[i].pai}\n* Data de abertura: ${moment(adocoes[i].data_abertura).format('LL')}\n* Status: ${adocoes[i].status}\n* Observações: ${adocoes[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -611,7 +611,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${trocas.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_editar:1205643996806910064> ${trocas[i].cliente_nome} (Passaporte: ${trocas[i].cliente_id})\n* Novo nome: ${trocas[i].novo_nome}\n* Motivo: R$ ${(trocas[i].motivo).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(trocas[i].data).format('LL')}\n* Status: ${trocas[i].status}\n* Observações: ${trocas[i].observacoes}.\n`;
+                            mensagem += `### <:oab_editar:1205643996806910064> ${trocas[i].cliente_nome} (Passaporte: ${trocas[i].cliente_id})\n* Novo nome: ${trocas[i].novo_nome}\n* Motivo: ${(trocas[i].motivo).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(trocas[i].data).format('LL')}\n* Status: ${trocas[i].status}\n* Observações: ${trocas[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
