@@ -75,7 +75,7 @@ module.exports =
                     await interaction.update({ components: [] });
                     
                     // < Atualiza o status do processo no banco de dados >
-                    pool.query(`UPDATE ${natureza} SET status = "Fechado" WHERE codigo = ${codigo}`);
+                    pool.query(`UPDATE ${natureza} SET status = "Indeferido" WHERE codigo = ${codigo}`);
                     pool.query(`UPDATE ${natureza} SET observacoes = "${motivo}" WHERE codigo = ${codigo}`);
                     pool.query(`UPDATE servidores SET processos = ${advogado_tab[0].processos + 1} WHERE discord_id = ${processo[0].advogado}`)
                     pool.query(`UPDATE servidores SET processos = ${juiz[0].processos + 1} WHERE discord_id = ${processo[0].juiz}`)
@@ -99,18 +99,19 @@ module.exports =
                    // < Sistema de "Vereditos" >
                     const veredito_embed = new EmbedBuilder()
                     .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
-                    .setDescription(`Processo ***${natureza}#${codigo}*** encerrado.\n* Dr(a). ${advogado_user}`)
+                    .setDescription(`* **Identificação do processo:** ${natureza}#${codigo}\n* **Advogado(a):** Dr(a). ${advogado_user}\n* **Juiz(a):** Exmo(a). <@${juiz[0].discord_id}>`)
                     .setColor(cor_embed)
                     .addFields([
-                        { name: `<:oab_veredito:1187577594472837171> | Veredito`, value: `Processo **reprovado** pelo(a) excelentíssimo(a) Juiz(a) **${interaction.member.nickname}**.` },
+                        { name: `<:oab_veredito:1187577594472837171> | Veredito`, value: `Processo **INDEFERIDO**.` },
                         { name: `<:oab_escrita:1188542389179133992> | Motivo`, value: `${motivo ? motivo : "Não informado pelo(a) Juiz(a)."}` },
                         { name: `<:oab_data:1188268177063424050> | Data de fechamento`, value: `${moment().format('LLLL')}` },
                     ])
                     .setThumbnail(client.user.avatarURL({ size: 1024 }))
+                    .setImage('https://i.imgur.com/qTzpZts.png')
                     .setFooter({ text: footer, iconURL: client.user.avatarURL() });
                     
                     // await vereditos.send({ content: `## <:oab_veredito:1187577594472837171> Veredito\nO(a) juiz(a) **${interaction.user}** acaba de **aprovar** o processo de <@${processo[0].advogado}>.\n### <:oab_juiz:1187577598776193136> Observações\n${motivo ? motivo : "Nenhuma."}\n\n* O identificador deste processo é *${natureza}#${codigo}*.` });
-                    await vereditos.send({ embeds: [veredito_embed] });
+                    await vereditos.send({ content: `${advogado_user}`, embeds: [veredito_embed] });
                     await interaction.channel.send({ content: `# <:oab_logo:1202096934093852732> Atualização do Processo\nProcesso **fechado** e **arquivado**, só poderá ser visto por juízes.\n## <:oab_juiz:1187577598776193136> Juiz(a) responsável\n${client.users.cache.get(processo[0].juiz)}\n## <:oab_veredito:1187577594472837171> Veredito\n${motivo ? motivo : "Não informado pelo(a) juiz(a)."}\n### <:oab_anuncio:1202084582992924692> Veredito publicado\n<#${canal_vereditos}>`})
                 })
             })

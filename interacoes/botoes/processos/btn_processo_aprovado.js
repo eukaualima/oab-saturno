@@ -33,7 +33,7 @@ module.exports =
         const motivo = new TextInputBuilder()
             .setCustomId('motivo_aprovacao')
             .setLabel("Observações (opcional):")
-            .setPlaceholder("Ex.: Verificar se foi efetuado.")
+            .setPlaceholder("Verificar se foi efetuado.")
             .setStyle(TextInputStyle.Paragraph)
             .setRequired(false);
 

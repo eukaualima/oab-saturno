@@ -47,13 +47,13 @@ module.exports =
                 // < Instancia os botões >
                 const btn_processo_aprovado = new ButtonBuilder()
                 .setCustomId('btn_processo_aprovado')
-                .setLabel(`Aprovar processo`)
+                .setLabel(`Deferir processo`)
                 .setStyle(ButtonStyle.Success)
                 .setEmoji(`1187577594472837171`);
 
                 const btn_processo_rejeitado = new ButtonBuilder()
                 .setCustomId('btn_processo_rejeitado')
-                .setLabel(`Rejeitar processo`)
+                .setLabel(`Indeferir processo`)
                 .setStyle(ButtonStyle.Danger)
                 .setEmoji(`1187577594472837171`);
 
@@ -68,7 +68,7 @@ module.exports =
 
                 await interaction.update({ components: [botoes] });
                 
-                return interaction.channel.send({ content: `# <:oab_logo:1202096934093852732> Atualização do Processo\n<@${processo[0].advogado}>, o(a) Excelentíssima(o) Juiz(a) **${interaction.member.nickname}** acaba de **assumir** seu processo.` });
+                return interaction.channel.send({ content: `# <:oab_logo:1202096934093852732> Atualização do Processo\n<@${processo[0].advogado}>, o(a) Exmo(a). Sr(a). Dr(a). **${interaction.member.nickname}**, Juiz(a), acaba de **avocar** o processo.` });
             }
         })
     },

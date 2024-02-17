@@ -33,7 +33,7 @@ module.exports =
         const motivo = new TextInputBuilder()
             .setCustomId('motivo_rejeicao')
             .setLabel("Motivo:")
-            .setPlaceholder("Por que o processo foi rejeitado?")
+            .setPlaceholder("Por que o processo foi indeferido?")
             .setStyle(TextInputStyle.Paragraph)
             .setRequired(true);
 

@@ -91,21 +91,21 @@ module.exports =
                         // < Cria os botões >
                         const btn_processo_aprovado = new ButtonBuilder()
                         .setCustomId('btn_processo_aprovado')
-                        .setLabel(`Aprovar processo`)
+                        .setLabel(`Deferir processo`)
                         .setDisabled(true)
                         .setStyle(ButtonStyle.Success)
                         .setEmoji(`1187577594472837171`);
 
                         const btn_processo_rejeitado = new ButtonBuilder()
                         .setCustomId('btn_processo_rejeitado')
-                        .setLabel(`Rejeitar processo`)
+                        .setLabel(`Indeferir processo`)
                         .setDisabled(true)
                         .setStyle(ButtonStyle.Danger)
                         .setEmoji(`1187577594472837171`);
 
                         const btn_processo_assumir = new ButtonBuilder()
                         .setCustomId('btn_processo_assumir')
-                        .setLabel(`Assumir processo`)
+                        .setLabel(`Avocar processo`)
                         .setStyle(ButtonStyle.Primary)
                         .setEmoji(`1187577598776193136`);
 
