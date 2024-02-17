@@ -27,7 +27,7 @@ module.exports =
         // < Cria o modal de rejeição do processo >
         const modal = new ModalBuilder()
         .setCustomId("mdl_processo_rejeitado")
-        .setTitle('Rejeição de Processo')
+        .setTitle('Indeferir processo')
 
         // < Cria os campos >
         const motivo = new TextInputBuilder()
