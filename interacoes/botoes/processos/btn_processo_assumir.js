@@ -57,6 +57,18 @@ module.exports =
                 .setStyle(ButtonStyle.Danger)
                 .setEmoji(`1187577594472837171`);
 
+                const btn_processo_laudo = new ButtonBuilder()
+                .setCustomId('btn_processo_laudo')
+                .setLabel(`Pendente Laudo Médico`)
+                .setStyle(ButtonStyle.Primary)
+                .setEmoji(`1208873105368555571`);
+                        
+                const btn_processo_testemunhas = new ButtonBuilder()
+                .setCustomId('btn_processo_testemunhas')
+                .setLabel(`Agendar nova audiência`)
+                .setStyle(ButtonStyle.Primary)
+                .setEmoji(`1208873103908929607`);
+
                 const btn_processo_assumir = new ButtonBuilder()
                 .setCustomId('btn_processo_assumir')
                 .setLabel(`${interaction.member.nickname}`)
@@ -64,7 +76,16 @@ module.exports =
                 .setStyle(ButtonStyle.Primary)
                 .setEmoji(`1187577598776193136`);
                 
-                const botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
+                let botoes;
+
+                if (natureza == "adocoes")
+                {
+                    botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado, btn_processo_laudo, btn_processo_testemunhas);
+                }
+                else
+                {
+                    botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
+                }
 
                 await interaction.update({ components: [botoes] });
                 

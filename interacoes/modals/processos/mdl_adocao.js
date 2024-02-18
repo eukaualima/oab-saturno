@@ -102,6 +102,20 @@ module.exports =
                         .setStyle(ButtonStyle.Danger)
                         .setEmoji(`1187577594472837171`);
 
+                        const btn_processo_laudo = new ButtonBuilder()
+                        .setCustomId('btn_processo_laudo')
+                        .setLabel(`Pendente Laudo Médico`)
+                        .setDisabled(true)
+                        .setStyle(ButtonStyle.Primary)
+                        .setEmoji(`1208873105368555571`);
+                        
+                        const btn_processo_testemunhas = new ButtonBuilder()
+                        .setCustomId('btn_processo_testemunhas')
+                        .setLabel(`Agendar nova audiência`)
+                        .setDisabled(true)
+                        .setStyle(ButtonStyle.Primary)
+                        .setEmoji(`1208873103908929607`);
+
                         const btn_processo_assumir = new ButtonBuilder()
                         .setCustomId('btn_processo_assumir')
                         .setLabel(`Avocar processo`)
@@ -109,7 +123,7 @@ module.exports =
                         .setEmoji(`1187577598776193136`);
 
                         const botao = new ActionRowBuilder()
-                        .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
+                        .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado, btn_processo_laudo, btn_processo_testemunhas);
 
                         await canal.send({ embeds: [embed], components: [botao] });
                         await canal.send({ content: `## <:oab_aviso:1188557292073918555> Informes\nPrezado(a) ${interaction.user}, atente-se aos seguintes informes:\n1. Negocie com o(a) Juiz(a) que assumir o caso a **melhor data para acontecer a audiência**;\n2. informe se **o adotado é criança ou adulto **para que o(a) Juiz(a) saiba quantas audiências ocorrerão;\n3. envie as imagens da **transferência bancária** feita para o(a) Juiz(a); e\n4. envie as imagens do **F11** do **pai** e da **mãe**.` });

@@ -1,0 +1,19 @@
+{
+  "nome": "Bruce Turing",
+  "passaporte": "6258",
+  "idade": "20",
+  "numero": "837-788",
+  "Tem experiência como advogado(a) em RP?": "Sim",
+  "Qual o horário que você irá trabalhar caso seja contratado?": "Noite",
+  "Você começará sendo estagiário(a) por uma semana!": "Concordo",
+  "Você leu as regras de Saturno e concorda com elas?": "Li e concordo com as regras",
+  "Matar alguém sem motivo aparente, sem rp prévio ou simplesmente por prazer é permitido em Saturno?": "Não",
+  "O advogado(a) pode ter condutas desrespeitosas como LGBTfobia, Racismo ou Xenofobia com um cliente ou outro colega de trabalho (ou quaisquer players)?": "Não",
+  "É permitido assaltar / sequestrar / roubar / sacar arma / matar / abordar em áreas safes?": "Não",
+  "O réu tem garantia de defesa independente do crime cometido?": "Sim",
+  "Na advocacia, é permitido o uso ou comercialização de itens ilegais?": "Não",
+  "Sobre a Lei de Miranda, o réu:": "Pode realizar uma única ligação para o advogado",
+  "A polícia não é obrigada a citar a Lei de Miranda.": "Falso",
+  "Referente à confidencialidade do réu com seu advogado(a), assinale a alternativa correta:": "O advogado não pode revelar a confissão do réu à polícia, apenas a parentes e amigos",
+  "A polícia é obrigada a negociar a pena do réu que solicitou advogado?": "Verdadeiro"
+}

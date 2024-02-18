@@ -34,6 +34,10 @@ module.exports =
                 const numero = interaction.fields.getTextInputValue('prova_numero');
                 const idade = interaction.fields.getTextInputValue('prova_idade');
 
+                // < Avisa a criação do canal >
+                await interaction.deferReply({ ephemeral: true });
+                await interaction.editReply({ content: `## <a:oab_carregando:1187884300264275968> Aguarde...\nEstou criando o **canal** da prova!`, ephemeral: true });
+
                 // < Abre o canal da prova >
                 await interaction.guild.channels.create(
                 { 
@@ -60,8 +64,7 @@ module.exports =
                 {
                     // < Cria os dados no banco de dados >
                     pool.query(`INSERT INTO provas (discord_id, nome, passaporte, numero, idade, resposta_1, resposta_2, resposta_3, resposta_4, resposta_5, resposta_6, resposta_7, resposta_8, resposta_9, resposta_10, resposta_11, resposta_12, resposta_13, resposta_14, resultado, juiz, canal, pontos) VALUES (${interaction.user.id}, "${nome}", "${passaporte}", "${numero}", "${idade}", "Nada consta.", "Nada consta.", "Nada consta.", "Nada consta.", "Nada consta.", "Nada consta.", "Nada consta.", "Nada consta.", "Nada consta.", "Nada consta.", "Nada consta.", "Nada consta.", "Nada consta.", "Nada consta.", "Em análise", "Ninguém", "${canal.id}", 0)`);
-                    
-                    await interaction.deferReply({ ephemeral: true });
+
                     await interaction.editReply({ content: `<:oab_check:1187428122988126348> **|** Prova iniciada com sucesso! Acesse-a no canal <#${canal.id}>.`, ephemeral: true });
 
                     // < A prova >

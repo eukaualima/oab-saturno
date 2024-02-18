@@ -6,11 +6,12 @@
  */
 
 // < Importação das bibliotecas necessárias >
-const { StringSelectMenuOptionBuilder, StringSelectMenuBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, ChannelType, PermissionsBitField, PermissionFlagsBits } = require('discord.js');
+const { StringSelectMenuOptionBuilder, AttachmentBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, ChannelType, PermissionsBitField, PermissionFlagsBits } = require('discord.js');
 const pool = require('../../../conexao/mysql');
 const moment = require('moment');
 const { categoria_prova, cargo_juiz, cargo_everyone, canal_resultados, footer, cor_embed } = require('../../../config.json');
 moment.locale('pt-BR');
+const fs = require('fs');
 
 // < Inicia o botão >
 module.exports = 
@@ -91,7 +92,33 @@ module.exports =
                             const botao = new ActionRowBuilder()
                             .addComponents(btn_prova_aprovada, btn_prova_rejeitada);
 
-                            await canal.send({ content: `# <:oab_livro:1204999345544372264> Prova de ${provas[0].nome}\n<:oab_passaporte:1188496362334072882> Passaporte: ${provas[0].passaporte}\n<:oab_celular:1204990954277445643> Contato: ${provas[0].numero}\n<:oab_idade:1204991690151165962> Idade em Nárnia: ${provas[0].idade}\n<:oab_logo:1202096934093852732> Respostas corretas: **${provas[0].pontos}**/12\n\n<@&1106408610000543834>`, components: [botao] })
+                            let respostas = {
+                                nome: `${provas[0].nome}`,
+                                passaporte: `${provas[0].passaporte}`,
+                                idade: `${provas[0].idade}`,
+                                numero: `${provas[0].numero}`,
+                                "Tem experiência como advogado(a) em RP?": `${provas[0].resposta_1}`,
+                                "Qual o horário que você irá trabalhar caso seja contratado?": `${provas[0].resposta_2}`,
+                                "Você começará sendo estagiário(a) por uma semana!": `${provas[0].resposta_3}`,
+                                "Você leu as regras de Saturno e concorda com elas?": `${provas[0].resposta_4}`,
+                                "Matar alguém sem motivo aparente, sem rp prévio ou simplesmente por prazer é permitido em Saturno?": `${provas[0].resposta_6}`,
+                                "O advogado(a) pode ter condutas desrespeitosas como LGBTfobia, Racismo ou Xenofobia com um cliente ou outro colega de trabalho (ou quaisquer players)?": `${provas[0].resposta_7}`,
+                                "É permitido assaltar / sequestrar / roubar / sacar arma / matar / abordar em áreas safes?": `${provas[0].resposta_8}`,
+                                "O réu tem garantia de defesa independente do crime cometido?": `${provas[0].resposta_9}`,
+                                "Na advocacia, é permitido o uso ou comercialização de itens ilegais?": `${provas[0].resposta_10}`,
+                                "Sobre a Lei de Miranda, o réu:": `${provas[0].resposta_11}`,
+                                "A polícia não é obrigada a citar a Lei de Miranda.": `${provas[0].resposta_12}`,
+                                "Referente à confidencialidade do réu com seu advogado(a), assinale a alternativa correta:": `${provas[0].resposta_13}`,
+                                "A polícia é obrigada a negociar a pena do réu que solicitou advogado?": `${provas[0].resposta_14}`,
+                            }
+
+                            let cartao_resposta = JSON.stringify(respostas, null, 2);
+
+                            fs.writeFileSync('prova_oab.json', cartao_resposta);
+
+                            let attachment = new AttachmentBuilder('prova_oab.json');
+
+                            await canal.send({ content: `# <:oab_livro:1204999345544372264> Prova de ${provas[0].nome}\n<:oab_passaporte:1188496362334072882> Passaporte: ${provas[0].passaporte}\n<:oab_celular:1204990954277445643> Contato: ${provas[0].numero}\n<:oab_idade:1204991690151165962> Idade em Nárnia: ${provas[0].idade}\n<:oab_logo:1202096934093852732> Respostas corretas: **${provas[0].pontos}**/12\n\n<@&1106408610000543834>`, components: [botao], files: [attachment] })
                         })
                     })
             })

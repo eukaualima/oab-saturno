@@ -111,7 +111,7 @@ module.exports =
                         .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
 
                         await canal.send({ embeds: [embed], components: [botao] })
-                        await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexo\n${interaction.user}, envie abaixo o **comprovante da transferência** feita ao(à) Juiz(a) responsável.\n* Ao enviar, marque o cargo Juiz(a) e aguarde o retorno.` });
+                        await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexo\n${interaction.user}, envie abaixo:\n1. O **comprovante da transferência** feita ao(à) Juiz(a) responsável; e\n2. **uma foto** do(a) seu/sua cliente para a carteira.\n* Ao enviar, marque o cargo Juiz(a) e aguarde o retorno.` });
                         await interaction.editReply({ content: `## <:oab_check:1187428122988126348> Sucesso!\n${interaction.user}, seu processo de **Carteira Profissional** (ID: ${total_registros+1}) foi aberto com sucesso no canal <#${canal.id}>.`, ephemeral: true });
                     })
             })
