@@ -35,8 +35,18 @@ module.exports =
             await canal.send({ content: `# <:oab_logo:1202096934093852732> Resultado: Prova OAB\n<@${provas[0].discord_id}> acaba de ser **reprovado(a)**.\n* **Motivo da reprovação:** ${motivo}\n* É possível **refazer** a prova quantas vezes quiser.` });
             
             await client.channels.cache.get(`${provas[0].canal}`).delete();
-            await interaction.reply({ content: `Reprovado.` })
-            await interaction.channel.delete();
+            
+            // < Cria o botãos >
+            const btn_processo_excluir = new ButtonBuilder()
+            .setCustomId('btn_processo_excluir')
+            .setLabel(`Excluir`)
+            .setStyle(ButtonStyle.Danger)
+            .setEmoji(`1208285382634897491`);
+
+            const botao = new ActionRowBuilder()
+            .addComponents(btn_processo_excluir);
+
+            await interaction.reply({ content: `Resultado postado no canal <#${canal_resultados}>!`, components: [botao] })
         });
     },
 };

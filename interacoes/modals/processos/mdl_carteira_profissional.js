@@ -101,6 +101,13 @@ module.exports =
                         .setStyle(ButtonStyle.Danger)
                         .setEmoji(`1187577594472837171`);
 
+                        const btn_processo_foto = new ButtonBuilder()
+                        .setCustomId('btn_processo_foto')
+                        .setDisabled(true)
+                        .setLabel(`Solicitar foto`)
+                        .setStyle(ButtonStyle.Primary)
+                        .setEmoji(`📸`);
+
                         const btn_processo_assumir = new ButtonBuilder()
                         .setCustomId('btn_processo_assumir')
                         .setLabel(`Avocar processo`)
@@ -108,7 +115,7 @@ module.exports =
                         .setEmoji(`1187577598776193136`);
 
                         const botao = new ActionRowBuilder()
-                        .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
+                        .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado, btn_processo_foto);
 
                         await canal.send({ embeds: [embed], components: [botao] })
                         await canal.send({ content: `### <:oab_aviso:1188557292073918555> Anexo\n${interaction.user}, envie abaixo:\n1. O **comprovante da transferência** feita ao(à) Juiz(a) responsável; e\n2. **uma foto** do(a) seu/sua cliente para a carteira.\n* Ao enviar, marque o cargo Juiz(a) e aguarde o retorno.` });

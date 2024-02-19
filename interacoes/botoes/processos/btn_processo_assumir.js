@@ -36,6 +36,7 @@ module.exports =
         {
             natureza = "adocoes";
         }
+
         pool.query(`SELECT * FROM ${natureza} WHERE codigo = ${codigo}`, async function (erro, processo)
         {
             if (processo[0].juiz == "Ninguém")
@@ -69,27 +70,43 @@ module.exports =
                 .setStyle(ButtonStyle.Primary)
                 .setEmoji(`1208873103908929607`);
 
+                const btn_processo_foto = new ButtonBuilder()
+                .setCustomId('btn_processo_foto')
+                .setLabel(`Solicitar foto`)
+                .setStyle(ButtonStyle.Primary)
+                .setEmoji(`📸`);
+
                 const btn_processo_assumir = new ButtonBuilder()
                 .setCustomId('btn_processo_assumir')
                 .setLabel(`${interaction.member.nickname}`)
                 .setDisabled(true)
                 .setStyle(ButtonStyle.Primary)
                 .setEmoji(`1187577598776193136`);
-                
-                let botoes;
 
                 if (natureza == "adocoes")
                 {
-                    botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado, btn_processo_laudo, btn_processo_testemunhas);
+                    const botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado, btn_processo_laudo, btn_processo_testemunhas);
+                    
+                    await interaction.update({ components: [botoes] });
+                    
+                    return interaction.channel.send({ content: `# <:oab_logo:1202096934093852732> Atualização do Processo\n<@${processo[0].advogado}>, o(a) Exmo(a). Sr(a). Dr(a). **${interaction.member.nickname}**, Juiz(a), acaba de **avocar** o processo.` });
+                }
+                else if (natureza == "carteiras")
+                {
+                    const botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado, btn_processo_foto);
+                    
+                    await interaction.update({ components: [botoes] });
+                    
+                    return interaction.channel.send({ content: `# <:oab_logo:1202096934093852732> Atualização do Processo\n<@${processo[0].advogado}>, o(a) Exmo(a). Sr(a). Dr(a). **${interaction.member.nickname}**, Juiz(a), acaba de **avocar** o processo.` });
                 }
                 else
                 {
-                    botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
+                    const botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
+                    
+                    await interaction.update({ components: [botoes] });
+                    
+                    return interaction.channel.send({ content: `# <:oab_logo:1202096934093852732> Atualização do Processo\n<@${processo[0].advogado}>, o(a) Exmo(a). Sr(a). Dr(a). **${interaction.member.nickname}**, Juiz(a), acaba de **avocar** o processo.` });
                 }
-
-                await interaction.update({ components: [botoes] });
-                
-                return interaction.channel.send({ content: `# <:oab_logo:1202096934093852732> Atualização do Processo\n<@${processo[0].advogado}>, o(a) Exmo(a). Sr(a). Dr(a). **${interaction.member.nickname}**, Juiz(a), acaba de **avocar** o processo.` });
             }
         })
     },
