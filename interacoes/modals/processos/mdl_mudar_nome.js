@@ -47,27 +47,42 @@ module.exports =
                 
                 // < Cria um novo canal para o processo >
                 interaction.guild.channels.create(
-                    { 
-                        name: `troca-${total_registros+1}`,
-                        type: ChannelType.GuildText,
-                        parent: categoria_trocas,
-                        permissionOverwrites: 
-                        [
-                            {
-                                id: cargo_juiz,
-                                allow: [ViewChannel, SendMessages, AttachFiles]
-                            },
-                            {
-                                id: interaction.user.id,
-                                allow: [ViewChannel, SendMessages, AttachFiles]
-                            },
-                            {
-                                id: cargo_everyone,
-                                deny: [ViewChannel, SendMessages, AttachFiles]
-                            }
-                        ]
-                    }).then(async canal => 
+                { 
+                    name: `troca-${total_registros+1}`,
+                    type: ChannelType.GuildText,
+                    parent: categoria_trocas,
+                    permissionOverwrites: 
+                    [
+                        {
+                            id: cargo_juiz,
+                            allow: [ViewChannel, SendMessages, AttachFiles]
+                        },
+                        {
+                            id: interaction.user.id,
+                            allow: [ViewChannel, SendMessages, AttachFiles]
+                        },
+                        {
+                            id: cargo_everyone,
+                            deny: [ViewChannel, SendMessages, AttachFiles]
+                        }
+                    ]
+                }).then(async canal => 
+                {
+                    let honorarios, extra;
+
+                    pool.query(`SELECT * FROM isentos WHERE passaporte = ${passaporte}`, async function (erro, isentos)
                     {
+                        if (isentos.length == 0)
+                        {
+                            honorarios = "R$ 500.000,00";
+                            extra = `# <:oab_aviso:1188557292073918555> Anexos\n${interaction.user}, envie abaixo:\n1. **Comprovante da transferência** feita ao(à) Juiz(a) responsável; e\n2. imagem da **pesquisa no MDT**.\n\n* Ao enviar, **marque o cargo Juiz(a)** e aguarde o retorno.`
+                        }
+                        else
+                        {
+                            honorarios = "R$ 250.000,00";
+                            extra = `# <:oab_aviso:1188557292073918555> Anexos\n${interaction.user}, envie abaixo:\n1. imagem da **pesquisa no MDT**.\n\n* Este(a) é um(a) policial investigativo(a), **apenas você recebe os honorários**.\n* Ao enviar, **marque o cargo Juiz(a)** e aguarde o retorno.`;
+                        }
+
                         const embed = new EmbedBuilder()
                         .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
                         .setDescription(`Processo de Troca de Nome Nº${total_registros+1} aberto com sucesso.\n* Dr(a). ${interaction.user} (Passaporte: ${servidores[0].passaporte})`)
@@ -77,7 +92,7 @@ module.exports =
                             { name: `<:oab_editar:1205643996806910064> | Novo nome`, value: `${nome_novo}`, inline: true },
                             { name: `<:oab_passaporte:1188496362334072882> | Passaporte`, value: `${passaporte}` },
                             { name: `<:oab_escrita:1188542389179133992> | Motivo`, value: `${motivo}` },
-                            { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 500.000,00`, inline: true },
+                            { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `${honorarios}`, inline: true },
                         ])
                         .setThumbnail(interaction.user.avatarURL())
                         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
@@ -112,10 +127,10 @@ module.exports =
                         .addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
 
                         await canal.send({ embeds: [embed], components: [botao] });
-                        await canal.send({ content: `# <:oab_aviso:1188557292073918555> Anexos\n${interaction.user}, envie abaixo:\n1. **Comprovante da transferência** feita ao(à) Juiz(a) responsável; e\n2. imagem da **pesquisa no MDT**.\n\n* Ao enviar, **marque o cargo Juiz(a)** e aguarde o retorno.` });
-                        
-                    })
-            })
-        })
+                        await canal.send({ content: `${extra}` });
+                    });
+                });
+            });
+        });
     },
 };

@@ -9,7 +9,7 @@
 const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 const pool = require('../../../conexao/mysql.js');
 const moment = require('moment-timezone');
-const { footer, casos_dp, cor_embed, cargo_advogado, cargo_estagiario, cargo_juiz, cargo_promotor } = require("../../../config.json");
+const { footer, casos_dp, cor_embed, cargo_advogado, cargo_estagiario, cargo_juiz, cargo_adm } = require("../../../config.json");
 
 moment.tz('America/Sao_Paulo')
 
@@ -90,10 +90,10 @@ module.exports =
         let data_formatada = data.toISOString().slice(0, 19).replace('T', ' ');
 
         // < Verifica se o usuário é juiz >
-        // if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz))
-        // {
-        //     return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
-        // }
+        if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_adm))
+        {
+            return interaction.editReply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem utilizar este comando.` });
+        }
 
         // < Lógica do comando >
         if (processo == "marcar_adocoes")
