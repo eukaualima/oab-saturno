@@ -73,10 +73,10 @@ module.exports =
                         .setDescription(`Processo de Certidão de Nascimento Nº${total_registros+1} aberto com sucesso.\n* Dr(a). ${interaction.user} (Passaporte: ${servidores[0].passaporte})`)
                         .setColor(cor_embed)
                         .addFields([
-                            { name: `<:oab_crianca:1188547935579938936> | Criança`, value: `${crianca}`, inline: true },
-                            { name: `<:oab_cliente:1188541685572051054> | Mãe`, value: `${mae}`, inline: true },
-                            { name: `<:oab_pai:1188548184780329051> | Pai`, value: `${pai}`, inline: true },
-                            { name: `<:oab_data:1188268177063424050> | Data de nascimento`, value: `${data}` },
+                            { name: `<:oab_crianca:1188547935579938936> | Criança`, value: `\`\`\`txt\n${crianca}\`\`\``, inline: true },
+                            { name: `<:oab_cliente:1188541685572051054> | Mãe`, value: `\`\`\`txt\n${mae}\`\`\``, inline: true },
+                            { name: `<:oab_pai:1188548184780329051> | Pai`, value: `\`\`\`txt\n${pai}\`\`\``, inline: true },
+                            { name: `<:oab_data:1188268177063424050> | Data de nascimento`, value: `\`\`\`txt\n${data}\`\`\`` },
                             { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 400.000,00`, inline: true },
                         ])

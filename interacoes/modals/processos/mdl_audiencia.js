@@ -75,9 +75,9 @@ module.exports =
                         .setColor(cor_embed)
                         .addFields([
                             { name: `<:oab_escrita:1188542389179133992> | Assunto`, value: `${assunto}` },
-                            { name: `<:oab_cliente:1188541685572051054> | Requerente`, value: `${requerente}` },
-                            { name: `<:oab_partes:1188556237911109764> | Acusados`, value: `${acusados}` },
-                            { name: `<:oab_testemunhas:1188556234551464026> | Testemunhas`, value: `${testemunhas}` },
+                            { name: `<:oab_cliente:1188541685572051054> | Requerente`, value: `\`\`\`txt\n${requerente}\`\`\`` },
+                            { name: `<:oab_partes:1188556237911109764> | Acusados`, value: `\`\`\`txt\n${acusados}\`\`\`` },
+                            { name: `<:oab_testemunhas:1188556234551464026> | Testemunhas`, value: `\`\`\`txt\n${testemunhas}\`\`\`` },
                             { name: `<:oab_arquivo:1203930183199887410> | Existem provas?`, value: `${provas}` },
                             { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 500.000,00` },

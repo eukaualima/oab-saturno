@@ -84,17 +84,17 @@ module.exports =
                         }
 
                         const embed = new EmbedBuilder()
-                        .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
-                        .setDescription(`Processo de Troca de Nome Nº${total_registros+1} aberto com sucesso.\n* Dr(a). ${interaction.user} (Passaporte: ${servidores[0].passaporte})`)
+                        .setAuthor({ name: interaction.member.nickname, iconURL: interaction.user.avatarURL({ dynamic: true }) })
+                        .setDescription(`Processo de **Troca de Nome Nº${total_registros+1}**.\n* Dr(a). ${interaction.user} (OAB: ${servidores[0].passaporte})`)
                         .setColor(cor_embed)
                         .addFields([
-                            { name: `<:oab_cliente:1188541685572051054> | Nome antigo`, value: `${nome_antigo}`, inline: true },
-                            { name: `<:oab_editar:1205643996806910064> | Novo nome`, value: `${nome_novo}`, inline: true },
-                            { name: `<:oab_passaporte:1188496362334072882> | Passaporte`, value: `${passaporte}` },
+                            { name: `<:oab_cliente:1188541685572051054> | Nome antigo`, value: `\`\`\`txt\n${nome_antigo}\`\`\``, inline: true },
+                            { name: `<:oab_editar:1205643996806910064> | Novo nome`, value: `\`\`\`txt\n${nome_novo}\`\`\``, inline: true },
+                            { name: `<:oab_passaporte:1188496362334072882> | Passaporte`, value: `\`\`\`js\n${passaporte}\`\`\`` },
                             { name: `<:oab_escrita:1188542389179133992> | Motivo`, value: `${motivo}` },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `${honorarios}`, inline: true },
                         ])
-                        .setThumbnail(interaction.user.avatarURL())
+                        .setThumbnail(interaction.user.avatarURL({ size: 2048, dynamic: true }))
                         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
 
                         // < Cria os dados no banco de dados >

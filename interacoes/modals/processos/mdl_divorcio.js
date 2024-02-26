@@ -68,17 +68,17 @@ module.exports =
                     }).then(async canal => 
                     {
                         const embed = new EmbedBuilder()
-                        .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
-                        .setDescription(`Processo de Divórcio Nº${total_registros+1} aberto com sucesso.\n* Dr(a). ${interaction.user} (Passaporte: ${servidores[0].passaporte})`)
+                        .setAuthor({ name: interaction.member.nickname, iconURL: interaction.user.avatarURL({ dynamic: true }) })
+                        .setDescription(`Processo de **Divórcio Nº${total_registros+1}**.\n* Dr(a). ${interaction.user} (OAB: ${servidores[0].passaporte})`)
                         .setColor(cor_embed)
                         .addFields([
-                            { name: `<:oab_noiva:1189409204834943066> | Noiva`, value: `${noiva}`, inline: true },
-                            { name: `<:oab_noivo:1189409201995382805> | Noivo`, value: `${noivo}`, inline: true },
-                            { name: `<:oab_testemunhas:1188556234551464026> | Testemunhas`, value: `${testemunhas}` },
+                            { name: `<:oab_noiva:1189409204834943066> | Noiva`, value: `\`\`\`txt\n${noiva}\`\`\``, inline: true },
+                            { name: `<:oab_noivo:1189409201995382805> | Noivo`, value: `\`\`\`txt\n${noivo}\`\`\``, inline: true },
+                            { name: `<:oab_testemunhas:1188556234551464026> | Testemunhas`, value: `\`\`\`txt\n${testemunhas}\`\`\`` },
                             { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 1.500.000,00`, inline: true },
                         ])
-                        .setThumbnail(interaction.user.avatarURL())
+                        .setThumbnail(interaction.user.avatarURL({ size: 2048, dynamic: true }))
                         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
 
                         // < Cria os dados no banco de dados >

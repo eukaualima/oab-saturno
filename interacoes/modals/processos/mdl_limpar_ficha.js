@@ -83,17 +83,17 @@ module.exports =
                     }).then(async canal => 
                     {
                         const embed = new EmbedBuilder()
-                        .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
-                        .setDescription(`Processo de Limpeza de Ficha Nº${total_registros+1} aberto com sucesso.\n* Dr(a). ${interaction.user} (Passaporte: ${servidores[0].passaporte})`)
+                        .setAuthor({ name: interaction.member.nickname, iconURL: interaction.user.avatarURL({ dynamic: true }) })
+                        .setDescription(`Processo de **Limpeza de Ficha Criminal Nº${total_registros+1}**.\n* Dr(a). ${interaction.user} (OAB: ${servidores[0].passaporte})`)
                         .setColor(cor_embed)
                         .addFields([
-                            { name: `<:oab_reu:1187577589448060989> | Réu`, value: `${reu_nome}`, inline: true },
-                            { name: `<:oab_passaporte:1188496362334072882> | Passaporte`, value: `${reu_id}`, inline: true },
+                            { name: `<:oab_reu:1187577589448060989> | Réu`, value: `\`\`\`txt\n${reu_nome}\`\`\``, inline: true },
+                            { name: `<:oab_passaporte:1188496362334072882> | Passaporte`, value: `\`\`\`js\n${reu_id}\`\`\``, inline: true },
                             { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
                             { name: `<:oab_algemas:1188269430388559892> | Meses`, value: `${meses}`, inline: true },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ ${honorarios_totais.toLocaleString('pt-BR')},00`, inline: true },
                         ])
-                        .setThumbnail(interaction.user.avatarURL())
+                        .setThumbnail(interaction.user.avatarURL({ size: 2048, dynamic: true }))
                         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
 
                         // < Cria os dados no banco de dados >

@@ -72,9 +72,9 @@ module.exports =
                         .setDescription(`Processo de Carteira OAB Nº${total_registros+1} aberto com sucesso.\n* Dr(a). ${interaction.user} (Passaporte: ${servidores[0].passaporte})`)
                         .setColor(cor_embed)
                         .addFields([
-                            { name: `<:oab_adv:1188267318875271168> | Advogado(a)`, value: `${nome}`, inline: true },
-                            { name: `<:oab_passaporte:1188496362334072882> | Passaporte`, value: `${id}`, inline: true },
-                            { name: `<:oab_id:1189405031515029615> | RG`, value: `${rg}` },
+                            { name: `<:oab_adv:1188267318875271168> | Advogado(a)`, value: `\`\`\`txt\n${nome}\`\`\``, inline: true },
+                            { name: `<:oab_passaporte:1188496362334072882> | Passaporte`, value: `\`\`\`js\n${id}\`\`\``, inline: true },
+                            { name: `<:oab_id:1189405031515029615> | RG`, value: `\`\`\`txt\n${rg}\`\`\`` },
                             { name: `<:oab_data:1188268177063424050> | Data de abertura`, value: `${moment().format('LLLL')}` },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 400.000,00`, inline: true },
                         ])

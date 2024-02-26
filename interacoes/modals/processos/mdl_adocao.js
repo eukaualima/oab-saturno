@@ -70,18 +70,18 @@ module.exports =
                     }).then(async canal => 
                     {
                         const embed = new EmbedBuilder()
-                        .setAuthor({ name: interaction.user.displayName, iconURL: interaction.user.avatarURL({ dynamic: true }) })
-                        .setDescription(`Processo de Adoção Nº${total_registros+1} aberto com sucesso.\n* Dr(a). ${interaction.user} (Passaporte: ${servidores[0].passaporte})`)
+                        .setAuthor({ name: interaction.member.nickname, iconURL: interaction.user.avatarURL({ dynamic: true }) })
+                        .setDescription(`Processo de **Adoção Nº${total_registros+1}**.\n* Dr(a). ${interaction.user} (OAB: ${servidores[0].passaporte})`)
                         .setColor(cor_embed)
                         .addFields([
-                            { name: `<:oab_crianca:1188547935579938936> | Criança/Adulto`, value: `${crianca}` },
-                            { name: `<:oab_cliente:1188541685572051054> | Mãe`, value: `${mae}`, inline: true },
-                            { name: `<:oab_pai:1188548184780329051> | Pai`, value: `${pai}`, inline: true },
-                            { name: `<:oab_data:1188268177063424050> | Data da adoção`, value: `${data}` },
+                            { name: `<:oab_crianca:1188547935579938936> | Criança/Adulto`, value: `\`\`\`txt\n${crianca}\`\`\`` },
+                            { name: `<:oab_cliente:1188541685572051054> | Mãe`, value: `\`\`\`txt\n${mae}\`\`\``, inline: true },
+                            { name: `<:oab_pai:1188548184780329051> | Pai`, value: `\`\`\`txt\n${pai}\`\`\``, inline: true },
+                            { name: `<:oab_data:1188268177063424050> | Data da adoção`, value: `\`\`\`txt\n${data}\`\`\`` },
                             { name: `<:oab_relogio:1204997699586236436> | Disponibilidade`, value: `${disponibilidade}` },
                             { name: `<:oab_honorarios:1188497416173924444> | Honorários`, value: `R$ 900.000,00` },
                         ])
-                        .setThumbnail(interaction.user.avatarURL())
+                        .setThumbnail(interaction.user.avatarURL({ size: 2048, dynamic: true }))
                         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
 
                         // < Cria os dados no banco de dados >
