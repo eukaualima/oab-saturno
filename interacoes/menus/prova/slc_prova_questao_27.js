@@ -67,6 +67,6 @@ module.exports =
 		const row = new ActionRowBuilder()
 			.addComponents(select);
 
-        await interaction.update({ content: `## <:oab_questao:1204999334853214260> Questão 2.8\n> A polícia é obrigada a negociar a pena do réu que solicitou advogado?`, components: [row] });
+        await interaction.update({ content: `# <:oab_livro:1204999345544372264> Parte 2 - Regras da Cidade\n## <:oab_questao:1204999334853214260> Questão 2.8\n> A polícia é obrigada a negociar a pena do réu que solicitou advogado?`, components: [row] });
     },
 };

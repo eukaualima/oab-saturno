@@ -70,6 +70,6 @@ module.exports =
 		const row = new ActionRowBuilder()
 			.addComponents(select);
 
-        await interaction.update({ content: `## <:oab_questao:1204999334853214260> Questão 2.7\n> Referente à confidencialidade do réu com seu advogado(a), assinale a alternativa correta:`, components: [row] });
+        await interaction.update({ content: `# <:oab_livro:1204999345544372264> Parte 2 - Regras da Cidade\n## <:oab_questao:1204999334853214260> Questão 2.7\n> Referente à confidencialidade do réu com seu advogado(a), assinale a alternativa correta:`, components: [row] });
     },
 };
