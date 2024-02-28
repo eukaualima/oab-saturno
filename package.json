@@ -24,6 +24,7 @@
     "discord-api-types": "^0.37.66",
     "discord.js": "^14.14.1",
     "fs": "^0.0.1-security",
+    "imgur": "^2.4.2",
     "jimp": "^0.22.10",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.45",

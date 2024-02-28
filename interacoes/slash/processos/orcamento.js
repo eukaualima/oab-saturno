@@ -49,7 +49,7 @@ module.exports =
         let valor = honorarios(meses);
 
         // < Retorna o valor >
-        return interaction.editReply({ content: `**<:oab_honorarios2:1205644366899847228> | Honorários:** R$ ${valor.toLocaleString('pt-BR')},00` });
+        return interaction.editReply({ content: `# <:oab_limpeza:1205396901575270411> Limpeza de Ficha Criminal\n* **Honorários:** R$ ${valor.toLocaleString('pt-BR')},00\n* **Juiz(a) recebe:** R$ ${(valor / 2).toLocaleString('pt-BR')},00 (**Pix: 1282**)` });
 
 	},
 };

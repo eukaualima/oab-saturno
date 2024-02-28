@@ -76,7 +76,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${adocoes.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_crianca:1188547935579938936> ${adocoes[i].adotado}\n* Mãe: ${adocoes[i].mae}\n* Pai: ${adocoes[i].pai}\n* Data de abertura: ${moment(adocoes[i].data_abertura).format('LL')}\n* Status: ${adocoes[i].status}\n* Observações: ${adocoes[i].observacoes}.\n`;
+                            mensagem += `### <:oab_crianca:1188547935579938936> ${adocoes[i].adotado} (Processo: adocoes#${adocoes[i].codigo})\n* Mãe: ${adocoes[i].mae}\n* Pai: ${adocoes[i].pai}\n* Data de abertura: ${moment(adocoes[i].data_abertura).format('LL')}\n* Status: ${adocoes[i].status}\n* Observações: ${adocoes[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -99,7 +99,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${audiencias.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_partes:1188556237911109764> ${audiencias[i].assunto}\n* Partes: ${audiencias[i].partes}\n* Testemunhas: ${audiencias[i].testemunhas}\n* Data de abertura: ${moment(audiencias[i].data).format('LL')}\n* Status: ${audiencias[i].status}\n* Observações: ${audiencias[i].observacoes}.\n`;
+                            mensagem += `### <:oab_partes:1188556237911109764> ${audiencias[i].assunto} (Processo: audiencias#${audiencias[i].codigo})\n* Partes: ${audiencias[i].partes}\n* Testemunhas: ${audiencias[i].testemunhas}\n* Data de abertura: ${moment(audiencias[i].data).format('LL')}\n* Status: ${audiencias[i].status}\n* Observações: ${audiencias[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -122,7 +122,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${carteiras.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_id:1189405031515029615> ${carteiras[i].cliente_nome} (Passaporte: ${carteiras[i].cliente_id})\n* Profissão: ${carteiras[i].profissao}\n* RG: ${carteiras[i].rg}\n* Data de abertura: ${moment(carteiras[i].data).format('LL')}\n* Status: ${carteiras[i].status}\n* Observações: ${carteiras[i].observacoes}.\n`;
+                            mensagem += `### <:oab_id:1189405031515029615> ${carteiras[i].cliente_nome} (Passaporte: ${carteiras[i].cliente_id}) (Processo: carteiras#${carteiras[i].codigo})\n* Profissão: ${carteiras[i].profissao}\n* RG: ${carteiras[i].rg}\n* Data de abertura: ${moment(carteiras[i].data).format('LL')}\n* Status: ${carteiras[i].status}\n* Observações: ${carteiras[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -145,7 +145,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${casamentos.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_noiva:1189409204834943066> ${casamentos[i].noiva} & ${casamentos[i].noivo}\n* Testemunhas: ${casamentos[i].testemunhas}\n* Data de abertura: ${moment(casamentos[i].data).format('LL')}\n* Status: ${casamentos[i].status}\n* Observações: ${casamentos[i].observacoes}.\n`;
+                            mensagem += `### <:oab_noiva:1189409204834943066> ${casamentos[i].noiva} & ${casamentos[i].noivo} (Processo: casamentos#${casamentos[i].codigo})\n* Testemunhas: ${casamentos[i].testemunhas}\n* Data de abertura: ${moment(casamentos[i].data).format('LL')}\n* Status: ${casamentos[i].status}\n* Observações: ${casamentos[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -168,7 +168,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${certidoes.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_documento:1202100213485928528> ${certidoes[i].crianca}\n* Mãe: ${certidoes[i].mae}\n* Pai: ${certidoes[i].pai}\n* Data de abertura: ${moment(certidoes[i].data).format('LL')}\n* Status: ${certidoes[i].status}\n* Observações: ${certidoes[i].observacoes}.\n`;
+                            mensagem += `### <:oab_documento:1202100213485928528> ${certidoes[i].crianca} (Processo: certidoes#${certidoes[i].codigo})\n* Mãe: ${certidoes[i].mae}\n* Pai: ${certidoes[i].pai}\n* Data de abertura: ${moment(certidoes[i].data).format('LL')}\n* Status: ${certidoes[i].status}\n* Observações: ${certidoes[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -191,7 +191,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${divorcios.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_divorcio:1205396904020811776> ${divorcios[i].noiva} & ${divorcios[0].noivo}\n* Testemunhas: ${divorcios[i].testemunhas}\n* Data de abertura: ${moment(divorcios[i].data).format('LL')}\n* Status: ${divorcios[i].status}\n* Observações: ${divorcios[i].observacoes}.\n`;
+                            mensagem += `### <:oab_divorcio:1205396904020811776> ${divorcios[i].noiva} & ${divorcios[0].noivo} (Processo: divorcios#${divorcios[i].codigo})\n* Testemunhas: ${divorcios[i].testemunhas}\n* Data de abertura: ${moment(divorcios[i].data).format('LL')}\n* Status: ${divorcios[i].status}\n* Observações: ${divorcios[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -214,7 +214,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${limpezas.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_limpeza:1205396901575270411> ${limpezas[i].reu} (Passaporte: ${limpezas[i].reu_id})\n* Meses: ${limpezas[i].meses}\n* Orçamento: R$ ${(limpezas[i].orcamento).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(limpezas[i].data).format('LL')}\n* Status: ${limpezas[i].status}\n* Observações: ${limpezas[i].observacoes}.\n`;
+                            mensagem += `### <:oab_limpeza:1205396901575270411> ${limpezas[i].reu} (Passaporte: ${limpezas[i].reu_id}) (Processo: limpezas#${limpezas[i].codigo})\n* Meses: ${limpezas[i].meses}\n* Orçamento: R$ ${(limpezas[i].orcamento).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(limpezas[i].data).format('LL')}\n* Status: ${limpezas[i].status}\n* Observações: ${limpezas[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -237,7 +237,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${trocas.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_editar:1205643996806910064> ${trocas[i].cliente_nome} (Passaporte: ${trocas[i].cliente_id})\n* Novo nome: ${trocas[i].novo_nome}\n* Motivo: ${(trocas[i].motivo).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(trocas[i].data).format('LL')}\n* Status: ${trocas[i].status}\n* Observações: ${trocas[i].observacoes}.\n`;
+                            mensagem += `### <:oab_editar:1205643996806910064> ${trocas[i].cliente_nome} (Passaporte: ${trocas[i].cliente_id}) (Processo: trocas#${trocas[i].codigo})\n* Novo nome: ${trocas[i].novo_nome}\n* Motivo: ${(trocas[i].motivo).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(trocas[i].data).format('LL')}\n* Status: ${trocas[i].status}\n* Observações: ${trocas[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -263,7 +263,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${adocoes.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_crianca:1188547935579938936> ${adocoes[i].adotado}\n* Mãe: ${adocoes[i].mae}\n* Pai: ${adocoes[i].pai}\n* Data de abertura: ${moment(adocoes[i].data_abertura).format('LL')}\n* Status: ${adocoes[i].status}\n* Observações: ${adocoes[i].observacoes}.\n`;
+                            mensagem += `### <:oab_crianca:1188547935579938936> ${adocoes[i].adotado} (Processo: adocoes#${adocoes[i].codigo})\n* Mãe: ${adocoes[i].mae}\n* Pai: ${adocoes[i].pai}\n* Data de abertura: ${moment(adocoes[i].data_abertura).format('LL')}\n* Status: ${adocoes[i].status}\n* Observações: ${adocoes[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -286,7 +286,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${audiencias.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_partes:1188556237911109764> ${audiencias[i].assunto}\n* Partes: ${audiencias[i].partes}\n* Testemunhas: ${audiencias[i].testemunhas}\n* Data de abertura: ${moment(audiencias[i].data).format('LL')}\n* Status: ${audiencias[i].status}\n* Observações: ${audiencias[i].observacoes}.\n`;
+                            mensagem += `### <:oab_partes:1188556237911109764> ${audiencias[i].assunto} (Processo: audiencias#${audiencias[i].codigo})\n* Partes: ${audiencias[i].partes}\n* Testemunhas: ${audiencias[i].testemunhas}\n* Data de abertura: ${moment(audiencias[i].data).format('LL')}\n* Status: ${audiencias[i].status}\n* Observações: ${audiencias[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -309,7 +309,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${carteiras.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_id:1189405031515029615> ${carteiras[i].cliente_nome} (Passaporte: ${carteiras[i].cliente_id})\n* Profissão: ${carteiras[i].profissao}\n* RG: ${carteiras[i].rg}\n* Data de abertura: ${moment(carteiras[i].data).format('LL')}\n* Status: ${carteiras[i].status}\n* Observações: ${carteiras[i].observacoes}.\n`;
+                            mensagem += `### <:oab_id:1189405031515029615> ${carteiras[i].cliente_nome} (Passaporte: ${carteiras[i].cliente_id}) (Processo: carteiras#${carteiras[i].codigo})\n* Profissão: ${carteiras[i].profissao}\n* RG: ${carteiras[i].rg}\n* Data de abertura: ${moment(carteiras[i].data).format('LL')}\n* Status: ${carteiras[i].status}\n* Observações: ${carteiras[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -332,7 +332,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${casamentos.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_noiva:1189409204834943066> ${casamentos[i].noiva} & ${casamentos[i].noivo}\n* Testemunhas: ${casamentos[i].testemunhas}\n* Data de abertura: ${moment(casamentos[i].data).format('LL')}\n* Status: ${casamentos[i].status}\n* Observações: ${casamentos[i].observacoes}.\n`;
+                            mensagem += `### <:oab_noiva:1189409204834943066> ${casamentos[i].noiva} & ${casamentos[i].noivo} (Processo: casamentos#${casamentos[i].codigo})\n* Testemunhas: ${casamentos[i].testemunhas}\n* Data de abertura: ${moment(casamentos[i].data).format('LL')}\n* Status: ${casamentos[i].status}\n* Observações: ${casamentos[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -355,7 +355,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${certidoes.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_documento:1202100213485928528> ${certidoes[i].crianca}\n* Mãe: ${certidoes[i].mae}\n* Pai: ${certidoes[i].pai}\n* Data de abertura: ${moment(certidoes[i].data).format('LL')}\n* Status: ${certidoes[i].status}\n* Observações: ${certidoes[i].observacoes}.\n`;
+                            mensagem += `### <:oab_documento:1202100213485928528> ${certidoes[i].crianca} (Processo: casamentos#${casamentos[i].codigo})\n* Mãe: ${certidoes[i].mae}\n* Pai: ${certidoes[i].pai}\n* Data de abertura: ${moment(certidoes[i].data).format('LL')}\n* Status: ${certidoes[i].status}\n* Observações: ${certidoes[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -378,7 +378,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${divorcios.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_divorcio:1205396904020811776> ${divorcios[i].noiva} & ${divorcios[0].noivo}\n* Testemunhas: ${divorcios[i].testemunhas}\n* Data de abertura: ${moment(divorcios[i].data).format('LL')}\n* Status: ${divorcios[i].status}\n* Observações: ${divorcios[i].observacoes}.\n`;
+                            mensagem += `### <:oab_divorcio:1205396904020811776> ${divorcios[i].noiva} & ${divorcios[0].noivo} (Processo: casamentos#${casamentos[i].codigo})\n* Testemunhas: ${divorcios[i].testemunhas}\n* Data de abertura: ${moment(divorcios[i].data).format('LL')}\n* Status: ${divorcios[i].status}\n* Observações: ${divorcios[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -401,7 +401,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${limpezas.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_limpeza:1205396901575270411> ${limpezas[i].reu} (Passaporte: ${limpezas[i].reu_id})\n* Meses: ${limpezas[i].meses}\n* Orçamento: R$ ${(limpezas[i].orcamento).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(limpezas[i].data).format('LL')}\n* Status: ${limpezas[i].status}\n* Observações: ${limpezas[i].observacoes}.\n`;
+                            mensagem += `### <:oab_limpeza:1205396901575270411> ${limpezas[i].reu} (Passaporte: ${limpezas[i].reu_id}) (Processo: limpezas#${limpezas[i].codigo})\n* Meses: ${limpezas[i].meses}\n* Orçamento: R$ ${(limpezas[i].orcamento).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(limpezas[i].data).format('LL')}\n* Status: ${limpezas[i].status}\n* Observações: ${limpezas[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -424,7 +424,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${trocas.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_editar:1205643996806910064> ${trocas[i].cliente_nome} (Passaporte: ${trocas[i].cliente_id})\n* Novo nome: ${trocas[i].novo_nome}\n* Motivo: ${(trocas[i].motivo).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(trocas[i].data).format('LL')}\n* Status: ${trocas[i].status}\n* Observações: ${trocas[i].observacoes}.\n`;
+                            mensagem += `### <:oab_editar:1205643996806910064> ${trocas[i].cliente_nome} (Passaporte: ${trocas[i].cliente_id}) (Processo: trocas#${trocas[i].codigo})\n* Novo nome: ${trocas[i].novo_nome}\n* Motivo: ${(trocas[i].motivo).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(trocas[i].data).format('LL')}\n* Status: ${trocas[i].status}\n* Observações: ${trocas[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -450,7 +450,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${adocoes.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_crianca:1188547935579938936> ${adocoes[i].adotado}\n* Mãe: ${adocoes[i].mae}\n* Pai: ${adocoes[i].pai}\n* Data de abertura: ${moment(adocoes[i].data_abertura).format('LL')}\n* Status: ${adocoes[i].status}\n* Observações: ${adocoes[i].observacoes}.\n`;
+                            mensagem += `### <:oab_crianca:1188547935579938936> ${adocoes[i].adotado} (Processo: adocoes#${adocoes[i].codigo})\n* Mãe: ${adocoes[i].mae}\n* Pai: ${adocoes[i].pai}\n* Data de abertura: ${moment(adocoes[i].data_abertura).format('LL')}\n* Status: ${adocoes[i].status}\n* Observações: ${adocoes[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -473,7 +473,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${audiencias.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_partes:1188556237911109764> ${audiencias[i].assunto}\n* Partes: ${audiencias[i].partes}\n* Testemunhas: ${audiencias[i].testemunhas}\n* Data de abertura: ${moment(audiencias[i].data).format('LL')}\n* Status: ${audiencias[i].status}\n* Observações: ${audiencias[i].observacoes}.\n`;
+                            mensagem += `### <:oab_partes:1188556237911109764> ${audiencias[i].assunto} (Processo: audiencias#${audiencias[i].codigo})\n* Partes: ${audiencias[i].partes}\n* Testemunhas: ${audiencias[i].testemunhas}\n* Data de abertura: ${moment(audiencias[i].data).format('LL')}\n* Status: ${audiencias[i].status}\n* Observações: ${audiencias[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -496,7 +496,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${carteiras.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_id:1189405031515029615> ${carteiras[i].cliente_nome} (Passaporte: ${carteiras[i].cliente_id})\n* Profissão: ${carteiras[i].profissao}\n* RG: ${carteiras[i].rg}\n* Data de abertura: ${moment(carteiras[i].data).format('LL')}\n* Status: ${carteiras[i].status}\n* Observações: ${carteiras[i].observacoes}.\n`;
+                            mensagem += `### <:oab_id:1189405031515029615> ${carteiras[i].cliente_nome} (Passaporte: ${carteiras[i].cliente_id}) (Processo: carteiras#${carteiras[i].codigo})\n* Profissão: ${carteiras[i].profissao}\n* RG: ${carteiras[i].rg}\n* Data de abertura: ${moment(carteiras[i].data).format('LL')}\n* Status: ${carteiras[i].status}\n* Observações: ${carteiras[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -519,7 +519,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${casamentos.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_noiva:1189409204834943066> ${casamentos[i].noiva} & ${casamentos[i].noivo}\n* Testemunhas: ${casamentos[i].testemunhas}\n* Data de abertura: ${moment(casamentos[i].data).format('LL')}\n* Status: ${casamentos[i].status}\n* Observações: ${casamentos[i].observacoes}.\n`;
+                            mensagem += `### <:oab_noiva:1189409204834943066> ${casamentos[i].noiva} & ${casamentos[i].noivo} (Processo: casamentos#${casamentos[i].codigo})\n* Testemunhas: ${casamentos[i].testemunhas}\n* Data de abertura: ${moment(casamentos[i].data).format('LL')}\n* Status: ${casamentos[i].status}\n* Observações: ${casamentos[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -542,7 +542,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${certidoes.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_documento:1202100213485928528> ${certidoes[i].crianca}\n* Mãe: ${certidoes[i].mae}\n* Pai: ${certidoes[i].pai}\n* Data de abertura: ${moment(certidoes[i].data).format('LL')}\n* Status: ${certidoes[i].status}\n* Observações: ${certidoes[i].observacoes}.\n`;
+                            mensagem += `### <:oab_documento:1202100213485928528> ${certidoes[i].crianca} (Processo: certidoes#${certidoes[i].codigo})\n* Mãe: ${certidoes[i].mae}\n* Pai: ${certidoes[i].pai}\n* Data de abertura: ${moment(certidoes[i].data).format('LL')}\n* Status: ${certidoes[i].status}\n* Observações: ${certidoes[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -565,7 +565,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${divorcios.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_divorcio:1205396904020811776> ${divorcios[i].noiva} & ${divorcios[0].noivo}\n* Testemunhas: ${divorcios[i].testemunhas}\n* Data de abertura: ${moment(divorcios[i].data).format('LL')}\n* Status: ${divorcios[i].status}\n* Observações: ${divorcios[i].observacoes}.\n`;
+                            mensagem += `### <:oab_divorcio:1205396904020811776> ${divorcios[i].noiva} & ${divorcios[0].noivo} (Processo: divorcios#${divorcios[i].codigo})\n* Testemunhas: ${divorcios[i].testemunhas}\n* Data de abertura: ${moment(divorcios[i].data).format('LL')}\n* Status: ${divorcios[i].status}\n* Observações: ${divorcios[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -588,7 +588,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${limpezas.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_limpeza:1205396901575270411> ${limpezas[i].reu} (Passaporte: ${limpezas[i].reu_id})\n* Meses: ${limpezas[i].meses}\n* Orçamento: R$ ${(limpezas[i].orcamento).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(limpezas[i].data).format('LL')}\n* Status: ${limpezas[i].status}\n* Observações: ${limpezas[i].observacoes}.\n`;
+                            mensagem += `### <:oab_limpeza:1205396901575270411> ${limpezas[i].reu} (Passaporte: ${limpezas[i].reu_id}) (Processo: limpezas#${limpezas[i].codigo})\n* Meses: ${limpezas[i].meses}\n* Orçamento: R$ ${(limpezas[i].orcamento).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(limpezas[i].data).format('LL')}\n* Status: ${limpezas[i].status}\n* Observações: ${limpezas[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
@@ -611,7 +611,7 @@ module.exports =
                             {
                                 mensagem += `## <:oab_livro:1204999345544372264> ${trocas.length.toLocaleString('pt-BR')} processo(s) encontrados:\n`;
                             }
-                            mensagem += `### <:oab_editar:1205643996806910064> ${trocas[i].cliente_nome} (Passaporte: ${trocas[i].cliente_id})\n* Novo nome: ${trocas[i].novo_nome}\n* Motivo: ${(trocas[i].motivo).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(trocas[i].data).format('LL')}\n* Status: ${trocas[i].status}\n* Observações: ${trocas[i].observacoes}.\n`;
+                            mensagem += `### <:oab_editar:1205643996806910064> ${trocas[i].cliente_nome} (Passaporte: ${trocas[i].cliente_id}) (Processo: trocas#${trocas[i].codigo})\n* Novo nome: ${trocas[i].novo_nome}\n* Motivo: ${(trocas[i].motivo).toLocaleString('pt-BR')}\n* Data de abertura: ${moment(trocas[i].data).format('LL')}\n* Status: ${trocas[i].status}\n* Observações: ${trocas[i].observacoes}.\n`;
                         }
 
                         return await interaction.editReply({ content: `${mensagem}` });
