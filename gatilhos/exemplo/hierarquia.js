@@ -9,7 +9,7 @@
  * @type {import('../../typings').TriggerCommand}
  */
 module.exports = {
-	name: ["hieoabjurid"],
+	name: ["hieoabjur2id"],
 
 	execute(message, args) {
 		if (message.author.id == "513880665754828800")

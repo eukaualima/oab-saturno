@@ -83,9 +83,15 @@ module.exports =
                 .setStyle(ButtonStyle.Primary)
                 .setEmoji(`1187577598776193136`);
 
+                const btn_processo_advogado = new ButtonBuilder()
+                .setCustomId('btn_processo_advogado')
+                .setLabel(`Alterar advogado(a)`)
+                .setStyle(ButtonStyle.Secondary)
+                .setEmoji(`1215170641863512074`);
+
                 if (natureza == "adocoes")
                 {
-                    const botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado, btn_processo_laudo, btn_processo_testemunhas);
+                    const botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado, btn_processo_laudo, btn_processo_testemunhas, btn_processo_advogado);
                     
                     await interaction.update({ components: [botoes] });
                     
@@ -93,7 +99,7 @@ module.exports =
                 }
                 else if (natureza == "carteiras")
                 {
-                    const botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado, btn_processo_foto);
+                    const botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado, btn_processo_foto, btn_processo_advogado);
                     
                     await interaction.update({ components: [botoes] });
                     
@@ -101,7 +107,7 @@ module.exports =
                 }
                 else
                 {
-                    const botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
+                    const botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado, btn_processo_advogado);
                     
                     await interaction.update({ components: [botoes] });
                     
