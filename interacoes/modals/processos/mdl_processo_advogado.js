@@ -28,13 +28,25 @@ module.exports =
         let natureza = interaction.fields.getTextInputValue('natureza_processo');
         const codigo = interaction.fields.getTextInputValue('codigo_processo');
 
-        if (natureza == "certidaos")
+        if (natureza == "Certidão")
         {
             natureza = "certidoes";
         }
-        else if (natureza == "adocaos")
+        else if (natureza == "Adoção")
         {
             natureza = "adocoes";
+        }
+        else if (natureza == "Audiência")
+        {
+            natureza = "audiencias";
+        }
+        else if (natureza == "Divórcio")
+        {
+            natureza = "divorcios";
+        }
+        else
+        {
+            natureza = natureza.toLowerCase() + 's';
         }
 
         await interaction.reply({ content: `## <a:oab_carregando:1187884300264275968> Aguarde...\nEstou adicionando o(a) novo(a) advogado(a) ao processo!` });

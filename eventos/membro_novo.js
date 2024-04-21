@@ -25,7 +25,7 @@ module.exports =
             { name: `<:oab_questao:1204999334853214260> | Dúvidas?`, value: `Qualquer dúvida, entre em contato através do canal <#1106279181106544775>.` },
         ])
         .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-        .setImage('https://i.imgur.com/dvIWHDW.png')
+        .setImage('https://i.imgur.com/rUnb8ot.png')
         .setFooter({ text: footer, iconURL: client.user.avatarURL() });
 
         // < Seta o cargo do usuário >

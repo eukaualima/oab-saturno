@@ -8,54 +8,47 @@
 // < Importação das bibliotecas necessárias >
 const { EmbedBuilder, Collection, PermissionsBitField, TextInputStyle, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder } = require('discord.js');
 const pool = require('../../../conexao/mysql');
-const { cargo_juiz } = require('../../../config.json');
+const { cargo_juiz, cargo_juiz_mandado } = require('../../../config.json');
 
 // < Inicia o botão >
 module.exports = 
 {
-	id: "btn_processo_aprovado",
+	id: "btn_mandado_aprovado",
 
     // < Executa o código do botão >
 	async execute(interaction, client) 
     {
         // < Verifica se o usuário é um juiz >
-        if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz))
+        if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz_mandado))
         {
-            return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem avaliar e dar o veredito sobre o caso.`, ephemeral: true })
+            return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem avaliar e dar o veredito sobre o mandado.`, ephemeral: true })
         }
 
         // < Cria o modal de rejeição do processo >
         const modal = new ModalBuilder()
-        .setCustomId("mdl_processo_aprovado")
-        .setTitle('Deferir processo')
+        .setCustomId("mdl_mandado_aprovado")
+        .setTitle('Deferir Mandado')
 
         // < Cria os campos >
         const motivo = new TextInputBuilder()
             .setCustomId('motivo_aprovacao')
             .setLabel("Observações (opcional):")
-            .setPlaceholder("Verificar se foi efetuado.")
+            .setPlaceholder("(Exemplo) Adicionar a data de hoje.")
             .setStyle(TextInputStyle.Paragraph)
             .setRequired(false);
 
-        const natureza = new TextInputBuilder()
-            .setCustomId('natureza_processo')
-            .setLabel("Natureza do processo (NÃO MODIFICAR):")
-            .setValue(`${interaction.channel.name.split(" ")[0]}`)
-            .setStyle(TextInputStyle.Short)
-            .setRequired(true);
         const codigo = new TextInputBuilder()
-            .setCustomId('codigo_processo')
-            .setLabel("Código do processo (NÃO MODIFICAR):")
+            .setCustomId('codigo_mandado')
+            .setLabel("Código do mandado (NÃO MODIFICAR):")
             .setValue(`${interaction.channel.name.split(" ")[2]}`)
             .setStyle(TextInputStyle.Short)
             .setRequired(true);
 
         const motivo_campo = new ActionRowBuilder().addComponents(motivo);
         const codigo_campo = new ActionRowBuilder().addComponents(codigo);
-        const natureza_campo = new ActionRowBuilder().addComponents(natureza);
 
         // < Adiciona os campos ao modal >
-        modal.addComponents(motivo_campo, natureza_campo, codigo_campo);
+        modal.addComponents(motivo_campo, codigo_campo);
         
         // < Mostra o modal >
         interaction.showModal(modal);

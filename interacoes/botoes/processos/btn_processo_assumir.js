@@ -19,8 +19,8 @@ module.exports =
 	async execute(interaction, client) 
     {
         // < Coleta os dados do processo >
-        let natureza = interaction.channel.name.replace(/[^a-zA-Z]/g,'') + 's';
-        const codigo = interaction.channel.name.replace(/[^0-9]/g,'');
+        let natureza = interaction.channel.name.split(" ")[0];
+        const codigo = interaction.channel.name.split(" ")[2];
 
         // < Verifica se o usuário é um juiz >
         if (!interaction.member.roles.cache.some(cargo => cargo.id == cargo_juiz))
@@ -28,13 +28,25 @@ module.exports =
             return interaction.reply({ content: `<:oab_error:1187428311014576208> **|** Apenas **juízes** podem avaliar e dar o veredito sobre o caso.`, ephemeral: true })
         }
 
-        if (natureza == "certidaos")
+        if (natureza == "Certidão")
         {
             natureza = "certidoes";
         }
-        else if (natureza == "adocaos")
+        else if (natureza == "Adoção")
         {
             natureza = "adocoes";
+        }
+        else if (natureza == "Audiência")
+        {
+            natureza = "audiencias";
+        }
+        else if (natureza == "Divórcio")
+        {
+            natureza = "divorcios";
+        }
+        else
+        {
+            natureza = natureza.toLowerCase() + 's';
         }
 
         pool.query(`SELECT * FROM ${natureza} WHERE codigo = ${codigo}`, async function (erro, processo)
@@ -42,8 +54,6 @@ module.exports =
             if (processo[0].juiz == "Ninguém")
             {
                 pool.query(`UPDATE ${natureza} SET juiz = ${interaction.user.id} WHERE codigo = ${codigo}`);
-
-                // client.users.cache.get(processo[0].advogado).send({ content: `## <:oab_juiz:1187577598776193136> Status do processo\nO(a) excelentíssimo(a) Juiz(a) ${interaction.user} acabou de assumir seu processo.` })
 
                 // < Instancia os botões >
                 const btn_processo_aprovado = new ButtonBuilder()
@@ -91,9 +101,10 @@ module.exports =
 
                 if (natureza == "adocoes")
                 {
-                    const botoes = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado, btn_processo_laudo, btn_processo_testemunhas, btn_processo_advogado);
-                    
-                    await interaction.update({ components: [botoes] });
+                    const botoesLinha1 = new ActionRowBuilder().addComponents(btn_processo_assumir, btn_processo_aprovado, btn_processo_rejeitado);
+                    const botoesLinha2 = new ActionRowBuilder().addComponents(btn_processo_laudo, btn_processo_testemunhas, btn_processo_advogado);
+
+                    interaction.update({ components: [botoesLinha1, botoesLinha2] });
                     
                     return interaction.channel.send({ content: `# <:oab_logo:1202096934093852732> Atualização do Processo\n<@${processo[0].advogado}>, o(a) Exmo(a). Sr(a). Dr(a). **${interaction.member.nickname}**, Juiz(a), acaba de **avocar** o processo.` });
                 }

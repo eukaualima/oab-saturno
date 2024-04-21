@@ -37,13 +37,25 @@ module.exports =
         const codigo = interaction.fields.getTextInputValue('codigo_processo')
         let natureza = interaction.fields.getTextInputValue('natureza_processo')
 
-        if (natureza == "certidaos")
+        if (natureza == "Certidão")
         {
             natureza = "certidoes";
         }
-        else if (natureza == "adocaos")
+        else if (natureza == "Adoção")
         {
             natureza = "adocoes";
+        }
+        else if (natureza == "Audiência")
+        {
+            natureza = "audiencias";
+        }
+        else if (natureza == "Divórcio")
+        {
+            natureza = "divorcios";
+        }
+        else
+        {
+            natureza = natureza.toLowerCase() + 's';
         }
         
         // < Busca o processo marcado >
@@ -81,20 +93,11 @@ module.exports =
                     pool.query(`UPDATE servidores SET processos = ${juiz[0].processos + 1} WHERE discord_id = ${processo[0].juiz}`)
 
                     // < Fecha o canal e marca como fechado >
-                    let cargo = await interaction.guild.roles.cache.get(cargo_juiz);
-                    let everyone = await interaction.guild.roles.cache.get(cargo_everyone);
                     let vereditos = await interaction.guild.channels.cache.get(canal_vereditos);
                     let advogado_user = await interaction.guild.members.fetch(processo[0].advogado);
 
-                    await interaction.channel.permissionOverwrites.edit(advogado_user, { ViewChannel: false });
-                    await interaction.channel.setName(`fechado-${natureza}-${codigo}`);
-                    await interaction.channel.setParent(categoria_fechados);
-                    await interaction.channel.permissionOverwrites.edit(cargo, {
-                        ViewChannel: true,
-                    });
-                    await interaction.channel.permissionOverwrites.edit(everyone, {
-                        ViewChannel: false,
-                    });
+                    await interaction.channel.edit({ name: `[Fechado][Indeferido] ${natureza}#${codigo}` });
+                    await interaction.channel.setLocked(true);
 
                    // < Sistema de "Vereditos" >
                     const veredito_embed = new EmbedBuilder()
@@ -107,12 +110,13 @@ module.exports =
                         { name: `<:oab_data:1188268177063424050> | Data de fechamento`, value: `${moment().format('LLLL')}` },
                     ])
                     .setThumbnail(client.user.avatarURL({ size: 1024 }))
-                    .setImage('https://i.imgur.com/qTzpZts.png')
+                    .setImage('https://i.imgur.com/QbA1Byq.png')
                     .setFooter({ text: footer, iconURL: client.user.avatarURL() });
                     
                     // await vereditos.send({ content: `## <:oab_veredito:1187577594472837171> Veredito\nO(a) juiz(a) **${interaction.user}** acaba de **aprovar** o processo de <@${processo[0].advogado}>.\n### <:oab_juiz:1187577598776193136> Observações\n${motivo ? motivo : "Nenhuma."}\n\n* O identificador deste processo é *${natureza}#${codigo}*.` });
                     await vereditos.send({ content: `${advogado_user}`, embeds: [veredito_embed] });
                     await interaction.channel.send({ content: `# <:oab_logo:1202096934093852732> Atualização do Processo\nProcesso **fechado** e **arquivado**, só poderá ser visto por juízes.\n## <:oab_juiz:1187577598776193136> Juiz(a) responsável\n${client.users.cache.get(processo[0].juiz)}\n## <:oab_veredito:1187577594472837171> Veredito\n${motivo ? motivo : "Não informado pelo(a) juiz(a)."}\n### <:oab_anuncio:1202084582992924692> Veredito publicado\n<#${canal_vereditos}>`})
+                    await interaction.channel.setArchived(true)
                 })
             })
         })
